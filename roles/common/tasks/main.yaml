@@ -1,2 +1,3 @@
 ---
+- include: firewall.yaml
 - include: motd.yaml

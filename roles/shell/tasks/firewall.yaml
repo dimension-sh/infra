@@ -1,0 +1,7 @@
+---
+- name: Add firewall rule for smtp
+  firewalld:
+    zone: public
+    service: smtp
+    permanent: yes
+    state: enabled

@@ -1,0 +1,7 @@
+---
+- name: Add firewall rule for ssh
+  firewalld:
+    zone: public
+    service: ssh
+    permanent: yes
+    state: enabled
