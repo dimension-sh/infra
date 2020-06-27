@@ -1,7 +1,7 @@
 ---
 - name: Install Packages
   dnf:
-    name: '{{ package }}'
+    name: '{{ packages }}'
     state: present
   vars:
     packages:
