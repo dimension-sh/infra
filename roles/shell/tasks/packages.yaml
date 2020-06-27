@@ -1,0 +1,16 @@
+---
+- name: Install Packages
+  dnf:
+    name: '{{ package }}'
+    state: present
+  vars:
+    packages:
+      - ansible
+      - firewalld
+      - mutt
+      - zip
+      - unzip
+      - git
+      - tmux
+      - nano
+      - zsh

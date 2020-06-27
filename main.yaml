@@ -1,0 +1,6 @@
+---
+- hosts: shell
+  become: true
+  roles:
+    - common
+    - shell
