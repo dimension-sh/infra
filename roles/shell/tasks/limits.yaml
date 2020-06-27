@@ -1,0 +1,8 @@
+---
+- name: Add user limits for nproc
+  pam_limits:
+    dest: /etc/security/limits.d/users.conf
+    domain: '@users'
+    limit_type: hard
+    limit_item: nproc
+    value: 50
