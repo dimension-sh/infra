@@ -28,4 +28,4 @@
     state: file
     owner: root
     group: users
-    mode: '0660'
+    mode: '0664'
