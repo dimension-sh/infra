@@ -1,4 +1,5 @@
 ---
+# Drivel install
 - name: Deploy drivel
   copy:
     src: ../files/scripts/drivel
@@ -7,6 +8,7 @@
     group: root
     mode: '0755'
 
+# news script install
 - name: Deploy news
   copy:
     src: ../files/scripts/news
@@ -17,7 +19,37 @@
 - name: Create the NEWS file
   file:
     path: /usr/local/etc/NEWS
-    state: touch
+    state: file
     owner: root
     group: root
     mode: '0644'
+
+# MkUser Install
+- name: Deploy mkuser
+  git:
+    repo: 'https://github.com/dimension-sh/mkuser.git'
+    dest: /usr/local/src/
+    version: master
+- name: Make mkuser executable
+  file:
+    path: /usr/local/src/mkuser/mkuser.py
+    owner: root
+    group: root
+    mode: '0700'
+- name: Link mkuser
+  file:
+    src: /usr/local/src/mkuser/mkuser.py
+    dest: /usr/local/sbin/mkuser
+    owner: root
+    group: root
+    state: link
+- name: Create mkuser config directory
+  file:
+    path: /usr/local/etc/mkuser
+    state: directory
+    mode: '0700'
+- name: Copy mkuser template
+  copy:
+    src: /usr/local/src/mkuser/welcome-email.tmpl
+    dest: /usr/local/etc/mkuser/welcome-email.tmpl
+    force: no

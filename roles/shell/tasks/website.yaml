@@ -1,0 +1,31 @@
+---
+- name: Install Packages
+  dnf:
+    name: 'nginx'
+    state: present
+
+- name: Add firewall rule for http
+  firewalld:
+    zone: public
+    service: smtp
+    permanent: yes
+    state: enabled
+- name: Add firewall rule for https
+  firewalld:
+    zone: public
+    service: smtp
+    permanent: yes
+    state: enabled
+
+- name: Deploy website files
+  git:
+    repo: 'https://github.com/dimension-sh/website.git'
+    dest: /var/www/dimension.sh/
+    version: master
+- name: Create the drivel output file
+  file:
+    path: /var/www/dimension.sh/inc/drivel.html
+    state: file
+    owner: root
+    group: users
+    mode: '0660'

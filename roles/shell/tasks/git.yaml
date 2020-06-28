@@ -1,0 +1,6 @@
+---
+- name: Checkout Skel
+  git:
+    repo: 'https://github.com/dimension-sh/skel.git'
+    dest: /etc/skel
+    version: master
