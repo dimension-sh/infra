@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# get ssh key
+if [ ! -f ~/.ssh/dcss ]; then
+    umask 077
+    curl -so ~/.ssh/dcss https://crawl.tildeverse.org/dcss.key
+    # suppress a warning about the public key format
+    umask 022
+    ssh-keygen -f ~/.ssh/dcss -y > ~/.ssh/dcss.pub
+fi
+
+exec ssh \
+    -i ~/.ssh/dcss \
+    -o VerifyHostKeyDNS=yes \
+    dcss@crawl.tildeverse.org

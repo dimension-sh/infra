@@ -24,6 +24,15 @@
     group: root
     mode: '0644'
 
+# DCSS
+- name: Deploy dcss
+  copy:
+    src: ../files/scripts/dcss
+    dest: /usr/local/bin/dcss
+    owner: root
+    group: root
+    mode: '0755'
+
 # MkUser Install
 - name: Deploy mkuser
   git:
