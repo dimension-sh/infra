@@ -1,0 +1,23 @@
+---
+- name: Deploy drivel
+  copy:
+    src: ../files/scripts/drivel
+    dest: /usr/local/bin/drivel
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Deploy news
+  copy:
+    src: ../files/scripts/news
+    dest: /usr/local/bin/news
+    owner: root
+    group: root
+    mode: 0755
+- name: Create the NEWS file
+  file:
+    path: /usr/local/etc/NEWS
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
