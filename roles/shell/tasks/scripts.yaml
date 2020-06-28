@@ -30,6 +30,7 @@
     repo: 'https://github.com/dimension-sh/mkuser.git'
     dest: /usr/local/src/mkuser
     version: master
+    force: yes
 - name: Make mkuser executable
   file:
     path: /usr/local/src/mkuser/mkuser.py
