@@ -3,6 +3,13 @@
   dnf:
     name: 'nginx'
     state: present
+- name: Configure userdirs in nginx
+  copy:
+    src: ../files/website/userdir.conf
+    dest: /etc/nginx/default.d/userdir.conf
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Add firewall rule for http
   firewalld:
