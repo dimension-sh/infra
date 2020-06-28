@@ -29,3 +29,18 @@
     owner: root
     group: users
     mode: '0664'
+
+- name: Deploy gen_website_users.py
+  copy:
+    src: ../files/website/gen_website_users.py
+    dest: /etc/cron.hourly/gen_website_users.py
+    owner: root
+    group: root
+    mode: '0755'
+- name: Deploy active_users cron
+  copy:
+    src: ../files/website/active_users
+    dest: /etc/cron.d/active_users
+    owner: root
+    group: root
+    mode: '0644'
