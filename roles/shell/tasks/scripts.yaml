@@ -28,7 +28,7 @@
 - name: Deploy mkuser
   git:
     repo: 'https://github.com/dimension-sh/mkuser.git'
-    dest: /usr/local/src/
+    dest: /usr/local/src/mkuser
     version: master
 - name: Make mkuser executable
   file:
