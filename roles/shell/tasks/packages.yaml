@@ -14,3 +14,10 @@
       - tmux
       - nano
       - zsh
+      - bind-utils
+- name: Install Python packages
+  pip:
+    name: '{{ packages }}'
+  var:
+    packages:
+      - toot
