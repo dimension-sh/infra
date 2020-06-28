@@ -15,6 +15,7 @@
       - nano
       - zsh
       - bind-utils
+      - wget
 - name: Install Python packages
   pip:
     name: '{{ packages }}'
