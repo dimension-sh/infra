@@ -45,11 +45,11 @@
     state: link
 - name: Create mkuser config directory
   file:
-    path: /usr/local/etc/mkuser
+    path: /etc/mkuser
     state: directory
     mode: '0700'
 - name: Copy mkuser template
   copy:
-    src: /usr/local/src/mkuser/welcome-email.tmpl
-    dest: /usr/local/etc/mkuser/welcome-email.tmpl
+    src: /usr/local/src/mkuser/welcome_mail.tmpl
+    dest: /etc/mkuser/welcome_mail.tmpl
     force: no
