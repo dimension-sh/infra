@@ -31,12 +31,14 @@
     dest: /usr/local/src/mkuser
     version: master
     force: yes
+  register: mkuser_repo
 - name: Make mkuser executable
   file:
     path: /usr/local/src/mkuser/mkuser.py
     owner: root
     group: root
     mode: '0700'
+  when: mkuser_repo.changed
 - name: Link mkuser
   file:
     src: /usr/local/src/mkuser/mkuser.py
@@ -54,3 +56,16 @@
     src: /usr/local/src/mkuser/welcome_mail.tmpl
     dest: /etc/mkuser/welcome_mail.tmpl
     force: no
+
+# Manuals
+- name: Deploy man pages
+  git:
+    repo: 'https://github.com/dimension-sh/man.git'
+    dest: /usr/local/src/man
+    version: master
+  register: man_repo
+- name: Install man files
+  shell:
+    cmd: install.sh
+    chdir: /usr/local/src/man/
+  when: man_repo.changed
