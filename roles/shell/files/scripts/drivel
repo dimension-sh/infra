@@ -2,6 +2,13 @@
 
 USER=`whoami`
 DATE=`date +"%Y-%m-%d %H:%M"`
+MESSAGE="$@"
 
-echo "$DATE <b>$USER</b>: $1<br/>" >> /var/www/dimension.sh/inc/drivel.html
+if [ -z "$MESSAGE" ]; then
+    echo "Usage: $0 <message>"
+    exit 1
+fi
+
+echo "$DATE <b>${USER}</b>: ${MESSAGE}<br/>" >> /var/www/dimension.sh/inc/drivel.html
 echo "Posted to Drivel"
+exit 0
