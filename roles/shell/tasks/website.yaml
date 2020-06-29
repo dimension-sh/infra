@@ -73,6 +73,13 @@
     owner: root
     group: root
     mode: '0755'
+- name: Deploy online.cgi
+  copy:
+    src: ../files/website/online.cgi
+    dest: /var/www/cgi/online.cgi
+    owner: root
+    group: root
+    mode: '0755'
 
 
 - name: Deploy gen_website_users.py
