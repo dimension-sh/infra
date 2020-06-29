@@ -41,20 +41,14 @@
     version: master
     force: yes
   register: mkuser_repo
-- name: Make mkuser executable
-  file:
-    path: /usr/local/src/mkuser/mkuser.py
-    owner: root
-    group: root
-    mode: '0700'
-  when: mkuser_repo.changed
 - name: Link mkuser
   file:
     src: /usr/local/src/mkuser/mkuser.py
     dest: /usr/local/sbin/mkuser
     owner: root
     group: root
-    state: link
+    mode: '0700'
+  when: mkuser_repo.changed
 - name: Create mkuser config directory
   file:
     path: /etc/mkuser
