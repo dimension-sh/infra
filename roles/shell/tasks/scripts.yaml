@@ -48,7 +48,6 @@
     owner: root
     group: root
     mode: '0700'
-  when: mkuser_repo.changed
 - name: Copy mkuser.1
   copy:
     src: /usr/local/src/mkuser/mkuser.1
@@ -56,7 +55,6 @@
     owner: root
     group: root
     mode: '0644'
-  when: mkuser_repo.changed
 - name: Create mkuser config directory
   file:
     path: /etc/mkuser
