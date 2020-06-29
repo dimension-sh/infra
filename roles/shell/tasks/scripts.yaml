@@ -52,7 +52,7 @@
 - name: Copy mkuser.1
   copy:
     src: /usr/local/src/mkuser/mkuser.1
-    dest: /usr/local/man/man1/mkuser.1
+    dest: /usr/local/share/man/man1/mkuser.1
     owner: root
     group: root
     mode: '0644'
