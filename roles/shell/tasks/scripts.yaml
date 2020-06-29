@@ -41,13 +41,21 @@
     version: master
     force: yes
   register: mkuser_repo
-- name: Link mkuser
-  file:
-    src: /usr/local/src/mkuser/mkuser.py
+- name: Copy mkuser
+  copy:
+    src: /usr/local/src/mkuser/mkuser
     dest: /usr/local/sbin/mkuser
     owner: root
     group: root
     mode: '0700'
+  when: mkuser_repo.changed
+- name: Copy mkuser.1
+  copy:
+    src: /usr/local/src/mkuser/mkuser.1
+    dest: /usr/local/man/man1/mkuser.1
+    owner: root
+    group: root
+    mode: '0644'
   when: mkuser_repo.changed
 - name: Create mkuser config directory
   file:
@@ -56,9 +64,18 @@
     mode: '0700'
 - name: Copy mkuser template
   copy:
-    src: /usr/local/src/mkuser/welcome_mail.tmpl
-    dest: /etc/mkuser/welcome_mail.tmpl
-    force: no
+    src: ../files/mail.tmpl
+    dest: /etc/mkuser/mail.tmpl
+    owner: root
+    group: root
+    mode: '0600'
+- name: Copy mkuser config
+  copy:
+    src: ../files/mkuser.yaml
+    dest: /etc/mkuser/mkuser.yaml
+    owner: root
+    group: root
+    mode: '0600'
 
 # Manuals
 - name: Deploy man pages
