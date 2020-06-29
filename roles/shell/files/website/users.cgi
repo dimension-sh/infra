@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # Updates the user page on the website with the current user list
 
+import cgi
 import pwd
 import os.path
 import sys
 
 users = 0
+
+sys.stdout.write('Content-Type: text/html\n\n')
 
 sys.stdout.write("<ul>\n")
 for user in pwd.getpwall():

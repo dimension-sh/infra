@@ -49,6 +49,8 @@ def error(msg):
     print('<p>An error was encountered: %s</p>' % msg)
 
 def main():
+    sys.stdout.write('Content-Type: text/html\n\n')
+
     # Get the form and extract the values
     form = cgi.FieldStorage()
     username = form.getvalue('username')
