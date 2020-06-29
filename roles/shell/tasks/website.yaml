@@ -10,6 +10,17 @@
     owner: root
     group: root
     mode: '0644'
+- name: Configure cgi in nginx
+  copy:
+    src: ../files/website/cgi.conf
+    dest: /etc/nginx/default.d/cgi.conf
+    owner: root
+    group: root
+    mode: '0644'
+- name: Reload service nginx, in all cases
+  service:
+    name: nginx
+    state: reloaded
 
 - name: Add firewall rule for http
   firewalld:
@@ -36,6 +47,33 @@
     owner: root
     group: users
     mode: '0664'
+- name: Create cgi directory
+  file:
+    path: /var/www/cgi
+    state: directory
+    mode: '0755'
+- name: Create requests directory
+  file:
+    path: /var/www/requests
+    state: directory
+    mode: '0700'
+
+# CGI scripts
+- name: Deploy join.cgi
+  copy:
+    src: ../files/website/join.cgi
+    dest: /var/www/cgi/join.cgi
+    owner: root
+    group: root
+    mode: '0755'
+- name: Deploy users.cgi
+  copy:
+    src: ../files/website/users.cgi
+    dest: /var/www/cgi/users.cgi
+    owner: root
+    group: root
+    mode: '0755'
+
 
 - name: Deploy gen_website_users.py
   copy:
