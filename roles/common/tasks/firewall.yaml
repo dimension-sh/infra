@@ -1,4 +1,9 @@
 ---
+- name: Install Packages
+  dnf:
+    name: 'firewalld'
+    state: present
+
 - name: Add firewall rule for ssh
   firewalld:
     zone: public

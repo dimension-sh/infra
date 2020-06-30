@@ -17,9 +17,10 @@
     group: root
     mode: '0755'
 - name: Create the NEWS file
-  file:
-    path: /usr/local/etc/NEWS
-    state: file
+  copy:
+    force: no
+    content: ""
+    dest: /usr/local/etc/NEWS
     owner: root
     group: root
     mode: '0644'
