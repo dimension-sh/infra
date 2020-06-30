@@ -41,9 +41,10 @@
     dest: /var/www/dimension.sh/
     version: master
 - name: Create the drivel output file
-  file:
-    path: /var/www/dimension.sh/inc/drivel.html
-    state: file
+  copy:
+    content: ""
+    dest: /var/www/dimension.sh/inc/drivel.html
+    force: no
     owner: root
     group: users
     mode: '0664'

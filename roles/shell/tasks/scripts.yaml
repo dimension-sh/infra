@@ -84,6 +84,6 @@
   register: man_repo
 - name: Install man files
   shell:
-    cmd: ./install.sh
+    cmd: sh ./install.sh
     chdir: /usr/local/src/man/
   when: man_repo.changed
