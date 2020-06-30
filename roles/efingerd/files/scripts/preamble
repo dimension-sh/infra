@@ -1,0 +1,9 @@
+#!/bin/bash
+cat /etc/motd.d/00-logo
+
+cat <<EOM
+dimension.sh is a shared linux shell system (or pubnix), open to everyone and anyone to
+use, learn, and experiment.
+
+If you're interested in joining check out the website: https://dimension.sh
+EOM

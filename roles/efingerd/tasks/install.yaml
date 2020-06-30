@@ -1,0 +1,16 @@
+---
+- name: Copy efingerd.centos8
+  copy:
+    src: ../files/bin/efingerd.centos8
+    dest: /usr/local/sbin/efingerd
+    owner: root
+    group: root
+    mode: '0755'
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8'
+- name: Copy efingerd.8
+  copy:
+    src: ../files/man/efingerd.8
+    dest: /usr/local/share/man/man8/efingerd.8
+    owner: root
+    group: root
+    mode: '0644'

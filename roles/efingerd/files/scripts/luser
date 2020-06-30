@@ -1,0 +1,50 @@
+#!/bin/sh
+
+. /etc/efingerd/log
+
+if [ "$1" = "(null)" ]; then
+  printf "\nhello %s,\n\n" "$2"
+else
+  printf "\nhello %s@%s\n\n" "$1" "$2"
+fi
+
+if [ "$3" = "root" ]; then
+  cat /etc/motd.d/00-logo
+else
+  user_folder="/home/${3}"
+
+  # Plan
+  printf "Plan:\\n"
+  if [ -f "${user_folder}/.plan" ]; then
+    sed 's/^/  /' "${user_folder}/.plan"
+  else
+    printf "No Plan.\n"
+  fi
+
+  # Pronouns
+  printf "Pronouns:\\n"
+  if [ -f "${user_folder}/.pronouns" ]; then
+    sed 's/^/  /' "${user_folder}/.pronouns"
+  fi
+
+  # Projects
+  printf "Projects:\\n"
+  if [ -f "${user_folder}/.project" ]; then
+    sed 's/^/  /' "${user_folder}/.project"
+  fi
+
+  # Timezone
+  if [ -f "${user_folder}/.tz" ]; then
+    printf "Timezone: "
+    cat "${user_folder}/.tz"
+    printf "\n"
+  fi
+
+  # Online status
+  if finger "$3" | grep -q 'On since'; then
+    printf "Online.\n"
+  fi
+
+fi
+
+exit 0
