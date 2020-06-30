@@ -4,7 +4,7 @@
   file:
     path: /etc/efingerd
     state: directory
-    mode: '0700'
+    mode: '0755'
 - name: Copy list
   copy:
     src: ../files/scripts/list

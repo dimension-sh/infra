@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: '0755'
-  when: ansible_distribution == 'CentOS' and ansible_lsb.major_release|int == 8
+  when: ansible_distribution == 'CentOS'
 - name: Copy efingerd.8
   copy:
     src: ../files/man/efingerd.8
