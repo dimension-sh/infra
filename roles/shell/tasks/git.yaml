@@ -1,5 +1,5 @@
 ---
-- name: Check if Skel is from Skel
+- name: Check if Skel is checkout from git
   stat:
     path: /etc/skel/.git/config
   register: skelt_result_git
