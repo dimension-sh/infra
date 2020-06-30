@@ -1,0 +1,22 @@
+---
+# Service files
+- name: Copy finger.socket
+  copy:
+    src: ../files/finger.socket
+    dest: /etc/systemd/system/finger.socket
+    owner: root
+    group: root
+    mode: '0644'
+  register: systemd-socket
+- name: Copy finger@.service
+  copy:
+    src: ../files/finger@.service
+    dest: /etc/systemd/system/finger@.service
+    owner: root
+    group: root
+    mode: '0644'
+  register: systemd-service
+- name: just force systemd to reread configs (2.4 and above)
+  systemd:
+    daemon_reload: yes
+  when: systemd-service.changed or systemd-socket.changed
