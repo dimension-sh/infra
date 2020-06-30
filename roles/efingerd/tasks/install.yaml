@@ -1,16 +1,14 @@
 ---
-- name: Copy efingerd.centos8
+- name: Copy efingerd RPM
   copy:
-    src: ../files/bin/efingerd.centos8
-    dest: /usr/local/sbin/efingerd
+    src: ../files/bin/efingerd-1.6.5-1.el8.x86_64.rpm
+    dest: /usr/local/sbin/src/efingerd-1.6.5-1.el8.x86_64.rpm
     owner: root
     group: root
     mode: '0755'
   when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8'
-- name: Copy efingerd.8
-  copy:
-    src: ../files/man/efingerd.8
-    dest: /usr/local/share/man/man8/efingerd.8
-    owner: root
-    group: root
-    mode: '0644'
+- name: Install efingerd
+  dnf:
+    name: /usr/local/sbin/src/efingerd-1.6.5-1.el8.x86_64.rpm
+    state: installed
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8'
