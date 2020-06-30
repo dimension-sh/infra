@@ -17,9 +17,10 @@
     group: root
     mode: '0755'
 - name: Create the NEWS file
-  file:
-    path: /usr/local/etc/NEWS
-    state: file
+  copy:
+    force: no
+    content: ""
+    dest: /usr/local/etc/NEWS
     owner: root
     group: root
     mode: '0644'
@@ -84,6 +85,6 @@
   register: man_repo
 - name: Install man files
   shell:
-    cmd: ./install.sh
+    cmd: sh ./install.sh
     chdir: /usr/local/src/man/
   when: man_repo.changed

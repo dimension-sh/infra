@@ -1,6 +1,19 @@
 ---
+- name: Check if Skel is checkout from git
+  stat:
+    path: /etc/skel/.git/config
+  register: skelt_result_git
+
+- name: Remove Skel dir if not in git
+  file:
+    path: /etc/skel/
+    state: absent
+  when: not skelt_result_git.stat.exists
+
+
 - name: Checkout Skel
   git:
     repo: 'https://github.com/dimension-sh/skel.git'
     dest: /etc/skel
     version: master
+
