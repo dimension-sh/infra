@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NEWS_ROOT=/srv/news
+NEWS2MD=/usr/local/bin/news2md
 ADMIN_GROUP=wheel
 NEWS_COUNT=${NEWS_COUNT:-5}
 QUIET=${QUIET:-0}
@@ -50,7 +51,7 @@ elif [ "${OPT}" == 'read' ]; then
         sleep 1
     fi
     for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${COUNT}`; do
-        news2md "${file}" | pandoc -t plain | less
+        ${NEWS2MD} "${file}" | pandoc -t plain | less
     done
 elif [ "${OPT}" == 'latest' ]; then
     if [ ${QUIET} -eq 0 ]; then
@@ -59,5 +60,5 @@ elif [ "${OPT}" == 'latest' ]; then
     fi
     QUIET=1 NEWS_COUNT=1 $0 read
 else
-    $0 read
+    $0 latest
 fi
