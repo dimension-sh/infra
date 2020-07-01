@@ -1,0 +1,50 @@
+"""Converts a 'news' Markdown document to a formatted Markdown"""
+#!/usr/bin/env python3
+
+import sys
+import yaml
+import argparse
+import os.path
+
+REQUIRED_KEYS = ['title', 'date', 'author']
+
+def main():
+    parser = argparse.ArgumentParser('news2md')
+    parser.add_argument('file')
+    parser.add_argument('--check', '-c', action='store_true', help='Check if the news file format is correct.')
+    args = parser.parse_args()
+
+    filename = os.path.expandvars(args.file)
+
+    if not os.path.exists(filename):
+        sys.stderr.write('%s does not exist!\n' % filename)
+        return 1
+
+    with open(args.file) as fobj:
+        docs = list(yaml.safe_load_all(fobj))
+
+    # Check if the document is valid
+    for key in REQUIRED_KEYS:
+        if not key in docs[0]:
+            sys.stderr.write('%s missing from document metadata!\n' % key)
+            return 1
+    if not isinstance(docs[1], str):
+        sys.stderr.write('Document section is missing!\n' % key)
+        return 1
+
+    if args.check:
+        sys.stdout.write('ok')
+        return 0
+
+    output = '%s\n%s\nBy **%s**, Posted: %s\n\n%s' % (
+        docs[0]['title'],
+        '=' * len(docs[0]['title']),
+        docs[0]['author'],
+        docs[0]['date'],
+        docs[1]
+    )
+    sys.stdout.write(output)
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())

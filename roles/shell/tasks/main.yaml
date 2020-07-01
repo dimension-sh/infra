@@ -2,6 +2,9 @@
 - name: Add efingerd role
   include_role:
     name: efingerd
+- name: Add news role
+  include_role:
+    name: news
 - include: firewall.yaml
 - include: packages.yaml
 - include: limits.yaml

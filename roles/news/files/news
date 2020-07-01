@@ -1,0 +1,73 @@
+#!/bin/bash
+
+NEWS_ROOT=/srv/news
+ADMIN_GROUP=wheel
+COUNT=5
+
+# Check if a user is a member of a group
+groupcheck() {
+    username=$1
+    group=$2
+    if groups "${username}"| grep -q "\b${group}\b"; then
+        echo 'true'
+    fi
+    echo 'false'
+}
+
+# Fix the permissions on /srv/news
+fixperms() {
+    chown -R root.root $NEWS_ROOT
+    find $NEWS_ROOT -type f -exec chmod 0644 {} \;
+}
+
+parse_yaml() {
+   local prefix=$2
+   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+   sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
+        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
+   awk -F$fs '{
+      indent = length($1)/2;
+      vname[indent] = $2;
+      for (i in vname) {if (i > indent) {delete vname[i]}}
+      if (length($3) > 0) {
+         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
+         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+      }
+   }'
+}
+
+parsenews() {
+    file=$1
+
+    eval $(parse_yaml $file "news_")
+}
+
+OPT=$1
+
+# Pull command
+if [ "${OPT}" == 'pull' ]; then
+    if [ ! $(id -u) -eq 0 ]; then
+        if [ $(groupcheck $(id -u -n) $ADMIN_GROUP) -eq 'true' ]; then
+            sudo $0 pull
+            exit
+        fi
+        echo "Sorry, you don't have permissions to do this."
+        exit
+    fi
+
+    cd $NEWS_ROOT
+    echo -n 'pulling latest news... '
+    git reset --hard -q
+    git pull -q
+    fixperms
+    echo "done"
+    exit 0
+elif [ "${OPT}" == 'read' ]; then
+    echo "Showing the latest ${COUNT} news articles, press 'q' to continue to the next article"
+    sleep 1
+    for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${COUNT}`; do
+        news2md "${NEWS_ROOT}/${file}" | panadoc -t plain | less
+    done
+else
+    $0 read
+fi

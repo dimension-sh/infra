@@ -1,0 +1,7 @@
+---
+- name: Deploy news articles
+  git:
+    repo: 'https://github.com/dimension-sh/news.git'
+    dest: /srv/news
+    version: master
+  register: news_repo
