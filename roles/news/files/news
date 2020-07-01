@@ -20,34 +20,12 @@ fixperms() {
     find $NEWS_ROOT -type f -exec chmod 0644 {} \;
 }
 
-parse_yaml() {
-   local prefix=$2
-   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
-   sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
-        -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
-   awk -F$fs '{
-      indent = length($1)/2;
-      vname[indent] = $2;
-      for (i in vname) {if (i > indent) {delete vname[i]}}
-      if (length($3) > 0) {
-         vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
-         printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
-      }
-   }'
-}
-
-parsenews() {
-    file=$1
-
-    eval $(parse_yaml $file "news_")
-}
-
 OPT=$1
 
 # Pull command
 if [ "${OPT}" == 'pull' ]; then
     if [ ! $(id -u) -eq 0 ]; then
-        if [ $(groupcheck $(id -u -n) $ADMIN_GROUP) -eq 'true' ]; then
+        if [ $(groupcheck "$(id -u -n)" "$ADMIN_GROUP") -eq 'true' ]; then
             sudo $0 pull
             exit
         fi
@@ -66,7 +44,7 @@ elif [ "${OPT}" == 'read' ]; then
     echo "Showing the latest ${COUNT} news articles, press 'q' to continue to the next article"
     sleep 1
     for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${COUNT}`; do
-        news2md "${NEWS_ROOT}/${file}" | pandoc -t plain | less
+        news2md "${file}" | pandoc -t plain | less
     done
 else
     $0 read
