@@ -1,5 +1,9 @@
 ---
 # news script install
+- name: Install pandoc package
+  dnf:
+    name: pandoc
+    state: present
 - name: Deploy news
   copy:
     src: ../files/news
