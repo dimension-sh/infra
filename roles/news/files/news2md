@@ -21,7 +21,11 @@ def main():
         return 1
 
     with open(args.file) as fobj:
-        docs = list(yaml.safe_load_all(fobj))
+        raw_doc = fobj.read()
+
+    # loading plain text with YAML mangles the LFs, so lets bodge it.
+    _, header, text = raw_doc.split('---')
+    docs = [yaml.safe_load(header), text]
 
     # Check if the document is valid
     for key in REQUIRED_KEYS:
