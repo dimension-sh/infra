@@ -10,6 +10,7 @@ groupcheck() {
     group=$2
     if groups "${username}"| grep -q "\b${group}\b"; then
         echo 'true'
+        return
     fi
     echo 'false'
 }
@@ -25,7 +26,7 @@ OPT=$1
 # Pull command
 if [ "${OPT}" == 'pull' ]; then
     if [ ! $(id -u) -eq 0 ]; then
-        if [ $(groupcheck "$(id -u -n)" "$ADMIN_GROUP") -eq 'true' ]; then
+        if [ $(groupcheck "$(id -u -n)" "$ADMIN_GROUP") == 'true' ]; then
             sudo $0 pull
             exit
         fi
