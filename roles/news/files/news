@@ -1,0 +1,64 @@
+#!/bin/bash
+
+NEWS_ROOT=/srv/news
+NEWS2MD=/usr/local/bin/news2md
+ADMIN_GROUP=wheel
+NEWS_COUNT=${NEWS_COUNT:-5}
+QUIET=${QUIET:-0}
+
+# Check if a user is a member of a group
+groupcheck() {
+    username=$1
+    group=$2
+    if groups "${username}"| grep -q "\b${group}\b"; then
+        echo 'true'
+        return
+    fi
+    echo 'false'
+}
+
+# Fix the permissions on /srv/news
+fixperms() {
+    chown -R root.root $NEWS_ROOT
+    find $NEWS_ROOT -type f -exec chmod 0644 {} \;
+}
+
+OPT=$1
+
+# Pull command
+if [ "${OPT}" == 'pull' ]; then
+    if [ ! $(id -u) -eq 0 ]; then
+        if [ $(groupcheck "$(id -u -n)" "$ADMIN_GROUP") == 'true' ]; then
+            sudo $0 pull
+            exit
+        fi
+        echo "Sorry, you don't have permissions to do this."
+        exit
+    fi
+
+    cd $NEWS_ROOT
+    if [ ${QUIET} -eq 0 ]; then
+        echo -n 'pulling latest news... '
+    fi
+    git reset --hard -q
+    git pull -q
+    fixperms
+    echo "done"
+    exit 0
+elif [ "${OPT}" == 'read' ]; then
+    if [ ${QUIET} -eq 0 ]; then
+        echo "Showing the latest ${COUNT} news articles, press 'q' to continue to the next article"
+        sleep 1
+    fi
+    for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${COUNT}`; do
+        ${NEWS2MD} "${file}" | pandoc -t plain | less
+    done
+elif [ "${OPT}" == 'latest' ]; then
+    if [ ${QUIET} -eq 0 ]; then
+        echo "Showing the latest news article, press 'q' to continue to quit"
+        sleep 1
+    fi
+    QUIET=1 NEWS_COUNT=1 $0 read
+else
+    $0 latest
+fi

@@ -81,3 +81,10 @@
     owner: root
     group: root
     mode: '0755'
+- name: Deploy news.cgi
+  copy:
+    src: ../files/website/news.cgi
+    dest: /var/www/cgi/news.cgi
+    owner: root
+    group: root
+    mode: '0755'

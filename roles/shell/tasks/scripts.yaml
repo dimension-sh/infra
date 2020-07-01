@@ -8,23 +8,6 @@
     group: root
     mode: '0755'
 
-# news script install
-- name: Deploy news
-  copy:
-    src: ../files/scripts/news
-    dest: /usr/local/bin/news
-    owner: root
-    group: root
-    mode: '0755'
-- name: Create the NEWS file
-  copy:
-    force: no
-    content: ""
-    dest: /usr/local/etc/NEWS
-    owner: root
-    group: root
-    mode: '0644'
-
 # DCSS
 - name: Deploy dcss
   copy:

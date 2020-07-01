@@ -1,0 +1,27 @@
+---
+# news script install
+- name: Install pandoc package
+  dnf:
+    name: pandoc
+    state: present
+- name: Deploy news
+  copy:
+    src: ../files/news
+    dest: /usr/local/bin/news
+    owner: root
+    group: root
+    mode: '0755'
+- name: Deploy news2md
+  copy:
+    src: ../files/news2md
+    dest: /usr/local/bin/news2md
+    owner: root
+    group: root
+    mode: '0755'
+- name: Deploy news.cron
+  copy:
+    src: ../files/news.cron
+    dest: /etc/cron.d/news
+    owner: root
+    group: root
+    mode: '0644'
