@@ -2,7 +2,8 @@
 
 NEWS_ROOT=/srv/news
 ADMIN_GROUP=wheel
-COUNT=5
+NEWS_COUNT=${NEWS_COUNT:-5}
+QUIET=${QUIET:-0}
 
 # Check if a user is a member of a group
 groupcheck() {
@@ -35,18 +36,28 @@ if [ "${OPT}" == 'pull' ]; then
     fi
 
     cd $NEWS_ROOT
-    echo -n 'pulling latest news... '
+    if [ ${QUIET} -eq 0 ]; then
+        echo -n 'pulling latest news... '
+    fi
     git reset --hard -q
     git pull -q
     fixperms
     echo "done"
     exit 0
 elif [ "${OPT}" == 'read' ]; then
-    echo "Showing the latest ${COUNT} news articles, press 'q' to continue to the next article"
-    sleep 1
+    if [ ${QUIET} -eq 0 ]; then
+        echo "Showing the latest ${COUNT} news articles, press 'q' to continue to the next article"
+        sleep 1
+    fi
     for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${COUNT}`; do
         news2md "${file}" | pandoc -t plain | less
     done
+elif [ "${OPT}" == 'latest' ]; then
+    if [ ${QUIET} -eq 0 ]; then
+        echo "Showing the latest news article, press 'q' to continue to quit"
+        sleep 1
+    fi
+    QUIET=1 NEWS_COUNT=1 $0 read
 else
     $0 read
 fi
