@@ -47,10 +47,10 @@ if [ "${OPT}" == 'pull' ]; then
     exit 0
 elif [ "${OPT}" == 'read' ]; then
     if [ ${QUIET} -eq 0 ]; then
-        echo "Showing the latest ${COUNT} news articles, press 'q' to continue to the next article"
+        echo "Showing the latest ${NEWS_COUNT} news articles, press 'q' to continue to the next article"
         sleep 1
     fi
-    for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${COUNT}`; do
+    for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${NEWS_COUNT}`; do
         ${NEWS2MD} "${file}" | pandoc -t plain | less
     done
 elif [ "${OPT}" == 'latest' ]; then
