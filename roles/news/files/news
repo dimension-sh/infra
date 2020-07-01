@@ -66,7 +66,7 @@ elif [ "${OPT}" == 'read' ]; then
     echo "Showing the latest ${COUNT} news articles, press 'q' to continue to the next article"
     sleep 1
     for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${COUNT}`; do
-        news2md "${NEWS_ROOT}/${file}" | panadoc -t plain | less
+        news2md "${NEWS_ROOT}/${file}" | pandoc -t plain | less
     done
 else
     $0 read

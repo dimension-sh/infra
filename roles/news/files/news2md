@@ -1,5 +1,5 @@
-"""Converts a 'news' Markdown document to a formatted Markdown"""
 #!/usr/bin/env python3
+"""Converts a 'news' Markdown document to a formatted Markdown"""
 
 import sys
 import yaml
