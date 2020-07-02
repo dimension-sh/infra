@@ -1,6 +1,6 @@
 ---
 - name: Start Gophernicus socket
   systemd:
-    name: gopher.socket
+    name: gophernicus.socket
     enabled: yes
     state: started
