@@ -2,7 +2,7 @@
 
 USER=`whoami`
 DATE=`date +"%Y-%m-%d %H:%M"`
-MESSAGE="$@"
+MESSAGE=$(echo "$@"| sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g')
 
 if [ -z "$MESSAGE" ]; then
     echo "Usage: $0 <message>"
