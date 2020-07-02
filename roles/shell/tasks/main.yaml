@@ -5,6 +5,9 @@
 - name: Add news role
   include_role:
     name: news
+- name: Add gopher role
+  include_role:
+    name: gopher
 - include: firewall.yaml
 - include: packages.yaml
 - include: limits.yaml
