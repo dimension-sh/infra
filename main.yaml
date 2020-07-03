@@ -4,3 +4,6 @@
   roles:
     - common
     - shell
+    - efingerd
+    - news
+    - gopher
