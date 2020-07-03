@@ -1,0 +1,13 @@
+---
+- name: Add firewall rule for http
+  firewalld:
+    zone: public
+    service: smtp
+    permanent: yes
+    state: enabled
+- name: Add firewall rule for https
+  firewalld:
+    zone: public
+    service: smtp
+    permanent: yes
+    state: enabled
