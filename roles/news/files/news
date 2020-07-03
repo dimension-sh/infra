@@ -5,6 +5,7 @@ NEWS2MD=/usr/local/bin/news2md
 ADMIN_GROUP=wheel
 NEWS_COUNT=${NEWS_COUNT:-5}
 QUIET=${QUIET:-0}
+CURRENT_USER=$(id -u -n)
 
 # Check if a user is a member of a group
 groupcheck() {
@@ -25,10 +26,10 @@ fixperms() {
 
 OPT=$1
 
-# Pull command
+# Pull the latest news (admin only)
 if [ "${OPT}" == 'pull' ]; then
     if [ ! $(id -u) -eq 0 ]; then
-        if [ $(groupcheck "$(id -u -n)" "$ADMIN_GROUP") == 'true' ]; then
+        if [ $(groupcheck "${CURRENT_USER}" "${ADMIN_GROUP}") == 'true' ]; then
             sudo $0 pull
             exit
         fi
@@ -45,6 +46,8 @@ if [ "${OPT}" == 'pull' ]; then
     fixperms
     echo "done"
     exit 0
+
+# Read the last x news
 elif [ "${OPT}" == 'read' ]; then
     if [ ${QUIET} -eq 0 ]; then
         echo "Showing the latest ${NEWS_COUNT} news articles, press 'q' to continue to the next article"
@@ -53,12 +56,25 @@ elif [ "${OPT}" == 'read' ]; then
     for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${NEWS_COUNT}`; do
         ${NEWS2MD} "${file}" | pandoc -t plain | less
     done
+
+# Show the latest article
 elif [ "${OPT}" == 'latest' ]; then
     if [ ${QUIET} -eq 0 ]; then
         echo "Showing the latest news article, press 'q' to continue to quit"
         sleep 1
     fi
     QUIET=1 NEWS_COUNT=1 $0 read
+
+# Check for new news
+elif [ ${OPT} == 'check' ]; then
+    LAST_LOGIN=$(last --time-format iso ${CURRENT_USER} -2|head -2|tail -1| tr -s " "|cut -d " " -f 6)
+    LAST_NEWS=$(find /srv/news -type f -newerct "${LAST_LOGIN}"|wc -l)
+
+    if [ $LAST_NEWS -gt 1 ]; then
+        echo "${LAST_NEWS} new news articles have been posted since your last login, run 'news' to view."
+    elif [ $LAST_NEWS -gt 0 ]; then
+        echo "A new news article has been posted since your last login, run 'news' to view."
+    fi
 else
     $0 latest
 fi
