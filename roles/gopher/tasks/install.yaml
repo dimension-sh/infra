@@ -1,12 +1,5 @@
 ---
-- name: Copy Gophernicus RPM
-  copy:
-    src: ../files/rpm/gophernicus-3.0.1-1.el8.x86_64.rpm
-    dest: /usr/local/src/gophernicus-3.0.1-1.el8.x86_64.rpm
-    owner: root
-    group: root
-    mode: '0644'
 - name: Install Gophernicus
   dnf:
-    name: /usr/local/src/gophernicus-3.0.1-1.el8.x86_64.rpm
+    name: gophernicus
     state: installed

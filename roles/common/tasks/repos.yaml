@@ -1,0 +1,14 @@
+---
+- name: Install Dimension RPMs repo
+  command: yum-config-manager --add-repo http://dimension-sh.github.io/dimension-rpms/dimension-rpms.repo
+  args:
+    creates: /etc/yum.repos.d/dimension-rpms.repo
+- name: Enable PowerTools repo
+  command: dnf config-manager --set-enabled PowerTools
+- name: Install epel-release Packages
+  dnf:
+    name: '{{ packages }}'
+    state: present
+  vars:
+    packages:
+      - epel-release
