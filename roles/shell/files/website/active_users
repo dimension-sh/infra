@@ -1,4 +1,0 @@
-SHELL=/bin/bash
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
-MAILTO=root
-* * * * * root w -h|cut -d " " -f 1|sort|uniq|wc -l > /var/www/dimension.sh/inc/active_users.txt

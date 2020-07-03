@@ -1,0 +1,23 @@
+---
+- name: Install Packages
+  dnf:
+    name: 'nginx'
+    state: present
+- name: Configure userdirs in nginx
+  copy:
+    src: ../files/config/userdir.conf
+    dest: /etc/nginx/default.d/userdir.conf
+    owner: root
+    group: root
+    mode: '0644'
+- name: Configure cgi in nginx
+  copy:
+    src: ../files/config/cgi.conf
+    dest: /etc/nginx/default.d/cgi.conf
+    owner: root
+    group: root
+    mode: '0644'
+- name: Reload service nginx, in all cases
+  service:
+    name: nginx
+    state: reloaded
