@@ -66,7 +66,7 @@ elif [ "${OPT}" == 'latest' ]; then
     QUIET=1 NEWS_COUNT=1 $0 read
 
 # Check for new news
-elif [ ${OPT} == 'check' ]; then
+elif [ "${OPT}" == 'check' ]; then
     LAST_LOGIN=$(last --time-format iso ${CURRENT_USER} -2|head -2|tail -1| tr -s " "|cut -d " " -f 6)
     LAST_NEWS=$(find /srv/news -type f -name '*.md' -newerct "${LAST_LOGIN}"|wc -l)
 
