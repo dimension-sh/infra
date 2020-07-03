@@ -1,0 +1,6 @@
+- name: Add firewall rule for gopher
+  firewalld:
+    zone: public
+    port: 70/tcp
+    permanent: yes
+    state: enabled
