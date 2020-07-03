@@ -14,15 +14,18 @@
   vars:
     packages:
       - ansible
-      - mutt
-      - zip
-      - unzip
-      - git
-      - tmux
-      - nano
-      - zsh
       - bind-utils
+      - figlet
+      - git
+      - lynx
+      - mutt
+      - nano
+      - nmap-ncat
+      - tmux
+      - unzip
       - wget
+      - zip
+      - zsh
 - name: Install Python packages
   pip:
     name: '{{ packages }}'
