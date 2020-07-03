@@ -7,7 +7,7 @@
 - name: Setup crontab to update the website
   copy:
     src: ../files/scripts/update-website
-    dest: /etc/cron.d/hourly/update-website
+    dest: /etc/cron.hourly/update-website
     owner: root
     group: root
     mode: '0700'
