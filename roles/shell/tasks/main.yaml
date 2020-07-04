@@ -4,3 +4,4 @@
 - include: limits.yaml
 - include: scripts.yaml
 - include: git.yaml
+- include: motd.yaml
