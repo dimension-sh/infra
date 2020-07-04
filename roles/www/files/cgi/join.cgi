@@ -76,6 +76,10 @@ def main():
         error('All fields must be provided')
         return
 
+    if not validate_username(username) is True:
+        error('Invalid username')
+        return
+
     if not validate_sshkey(ssh_key) is True:
         error('Invalid SSH public key')
         return
