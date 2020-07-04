@@ -11,14 +11,7 @@
     owner: root
     group: root
     mode: '0700'
-- name: Create the drivel output file
-  copy:
-    content: ""
-    dest: /var/www/dimension.sh/inc/drivel.html
-    force: no
-    owner: root
-    group: users
-    mode: '0664'
+
 
 
 
