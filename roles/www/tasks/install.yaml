@@ -3,6 +3,11 @@
   dnf:
     name: "nginx"
     state: present
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
 - name: Configure userdirs in nginx
   copy:
     src: ../files/config/userdir.conf
