@@ -5,11 +5,4 @@
     dest: /etc/motd.d/00-logo
     owner: root
     group: root
-    mode: '0644'
-- name: Add MOTD guide
-  copy:
-    src: ../files/motd/01-guide
-    dest: /etc/motd.d/01-guide
-    owner: root
-    group: root
-    mode: '0644'
+    mode: "0644"
