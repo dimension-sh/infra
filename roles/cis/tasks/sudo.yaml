@@ -4,5 +4,6 @@
     dest: /etc/sudoers.d/logfile.conf
     owner: root
     group: root
-    mode: '0644'
-    content: "Defaults logfile=\"/var/log/sudo.log\""
+    mode: "0644"
+    content: |
+      Defaults logfile="/var/log/sudo.log"

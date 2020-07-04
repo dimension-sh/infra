@@ -5,11 +5,11 @@
     dest: /etc/audit/rules.d/cis-hardening.rules
     owner: root
     group: root
-    mode: '0600'
+    mode: "0600"
 - name: Copy privileged commands ruleset
   copy:
     src: ../files/auditd/privileged.rules
     dest: /etc/audit/rules.d/privileged.rules
     owner: root
     group: root
-    mode: '0600'
+    mode: "0600"

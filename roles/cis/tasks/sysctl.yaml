@@ -1,5 +1,4 @@
 ---
-
 - name: Add disable sysctl values
   sysctl:
     name: "{{ item }}"
@@ -27,7 +26,6 @@
     state: present
     sysctl_file: /etc/sysctl.d/00-cis-rules
   loop:
-      - net.ipv4.conf.all.log_martians
-      - net.ipv4.conf.default.log_martians
-      - net.ipv4.conf.default.rp_filter
-
+    - net.ipv4.conf.all.log_martians
+    - net.ipv4.conf.default.log_martians
+    - net.ipv4.conf.default.rp_filter
