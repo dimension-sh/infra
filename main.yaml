@@ -3,6 +3,7 @@
   become: true
   roles:
     - common
+    - cis
     - shell
     - efingerd
     - news
