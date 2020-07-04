@@ -17,7 +17,7 @@ def validate_username(username):
         return False
     if os.path.exists(os.path.join(REQUESTS_FOLDER, 'banned_usernames.txt')):
         with open(os.path.join(REQUESTS_FOLDER, 'banned_usernames.txt'), 'r') as fobj:
-            if username in fobj.readlines():
+            if username in [x.strip() for x in fobj.readlines() if x.strip() != '']:
                 return False
     return True 
 
