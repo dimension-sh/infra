@@ -8,10 +8,12 @@ import os.path
 
 REQUIRED_KEYS = ['title', 'date', 'author']
 
+
 def main():
     parser = argparse.ArgumentParser('news2md')
     parser.add_argument('file')
-    parser.add_argument('--check', '-c', action='store_true', help='Check if the news file format is correct.')
+    parser.add_argument('--check', '-c', action='store_true',
+                        help='Check if the news file format is correct.')
     args = parser.parse_args()
 
     filename = os.path.expandvars(args.file)
@@ -49,6 +51,7 @@ def main():
     )
     sys.stdout.write(output)
     return 0
+
 
 if __name__ == '__main__':
     sys.exit(main())

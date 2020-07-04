@@ -1,7 +1,7 @@
 ---
 - name: Install Packages
   dnf:
-    name: '{{ packages }}'
+    name: "{{ packages }}"
     state: present
   vars:
     packages:
@@ -20,7 +20,7 @@
       - zsh
 - name: Install Python packages
   pip:
-    name: '{{ packages }}'
+    name: "{{ packages }}"
   vars:
     packages:
       - toot

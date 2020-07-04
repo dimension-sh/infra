@@ -1,13 +1,4 @@
 ---
-# Drivel install
-- name: Deploy drivel
-  copy:
-    src: ../files/scripts/drivel
-    dest: /usr/local/bin/drivel
-    owner: root
-    group: root
-    mode: '0755'
-
 # DCSS
 - name: Deploy dcss
   copy:
@@ -15,12 +6,12 @@
     dest: /usr/local/bin/dcss
     owner: root
     group: root
-    mode: '0755'
+    mode: "0755"
 
 # MkUser Install
 - name: Deploy mkuser
   git:
-    repo: 'https://github.com/dimension-sh/mkuser.git'
+    repo: "https://github.com/dimension-sh/mkuser.git"
     dest: /usr/local/src/mkuser
     version: master
     force: yes
@@ -31,38 +22,38 @@
     dest: /usr/local/sbin/mkuser
     owner: root
     group: root
-    mode: '0700'
+    mode: "0700"
 - name: Copy mkuser.1
   copy:
     src: /usr/local/src/mkuser/mkuser.1
     dest: /usr/local/share/man/man1/mkuser.1
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
 - name: Create mkuser config directory
   file:
     path: /etc/mkuser
     state: directory
-    mode: '0700'
+    mode: "0700"
 - name: Copy mkuser template
   copy:
     src: ../files/mail.tmpl
     dest: /etc/mkuser/mail.tmpl
     owner: root
     group: root
-    mode: '0600'
+    mode: "0600"
 - name: Copy mkuser config
   copy:
     src: ../files/mkuser.yaml
     dest: /etc/mkuser/mkuser.yaml
     owner: root
     group: root
-    mode: '0600'
+    mode: "0600"
 
 # Manuals
 - name: Deploy man pages
   git:
-    repo: 'https://github.com/dimension-sh/man.git'
+    repo: "https://github.com/dimension-sh/man.git"
     dest: /usr/local/src/man
     version: master
   register: man_repo

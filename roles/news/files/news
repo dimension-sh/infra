@@ -11,7 +11,7 @@ CURRENT_USER=$(id -u -n)
 groupcheck() {
     username=$1
     group=$2
-    if groups "${username}"| grep -q "\b${group}\b"; then
+    if groups "${username}" | grep -q "\b${group}\b"; then
         echo 'true'
         return
     fi
@@ -53,7 +53,7 @@ elif [ "${OPT}" == 'read' ]; then
         echo "Showing the latest ${NEWS_COUNT} news articles, press 'q' to continue to the next article"
         sleep 1
     fi
-    for file in `ls -1 $NEWS_ROOT/*.md | sort -r | head -${NEWS_COUNT}`; do
+    for file in $(ls -1 $NEWS_ROOT/*.md | sort -r | head -${NEWS_COUNT}); do
         ${NEWS2MD} "${file}" | pandoc -t plain | less
     done
 
@@ -67,8 +67,8 @@ elif [ "${OPT}" == 'latest' ]; then
 
 # Check for new news
 elif [ "${OPT}" == 'check' ]; then
-    LAST_LOGIN=$(last --time-format iso ${CURRENT_USER} -2|head -2|tail -1| tr -s " "|cut -d " " -f 6)
-    LAST_NEWS=$(find /srv/news -type f -name '*.md' -newerct "${LAST_LOGIN}"|wc -l)
+    LAST_LOGIN=$(last --time-format iso ${CURRENT_USER} -2 | head -2 | tail -1 | tr -s " " | cut -d " " -f 6)
+    LAST_NEWS=$(find /srv/news -type f -name '*.md' -newerct "${LAST_LOGIN}" | wc -l)
 
     if [ $LAST_NEWS -gt 1 ]; then
         echo "${LAST_NEWS} new news articles have been posted since your last login, run 'news' to view."

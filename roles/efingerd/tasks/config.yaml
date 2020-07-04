@@ -4,39 +4,39 @@
   file:
     path: /etc/efingerd
     state: directory
-    mode: '0755'
+    mode: "0755"
 - name: Copy list
   copy:
     src: ../files/scripts/list
     dest: /etc/efingerd/list
     owner: root
     group: root
-    mode: '0755'
+    mode: "0755"
 - name: Copy log
   copy:
     src: ../files/scripts/log
     dest: /etc/efingerd/log
     owner: root
     group: root
-    mode: '0755'
+    mode: "0755"
 - name: Copy luser
   copy:
     src: ../files/scripts/luser
     dest: /etc/efingerd/luser
     owner: root
     group: root
-    mode: '0755'
+    mode: "0755"
 - name: Copy nouser
   copy:
     src: ../files/scripts/nouser
     dest: /etc/efingerd/nouser
     owner: root
     group: root
-    mode: '0755'
+    mode: "0755"
 - name: Copy preamble
   copy:
     src: ../files/scripts/preamble
     dest: /etc/efingerd/preamble
     owner: root
     group: root
-    mode: '0755'
+    mode: "0755"
