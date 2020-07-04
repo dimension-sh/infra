@@ -1,0 +1,43 @@
+---
+- name: Set sshd_config file security
+  file:
+    path: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0600'
+- name: Ensure X11Forwarding is disabled in sshd
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^X11Forwarding'
+    line: X11Forwarding no
+  notify: restart sshd
+- name: Ensure MaxAuthTries is set to 4
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^MaxAuthTries'
+    line: MaxAuthTries 4
+  notify: restart sshd
+- name: Ensure PermitRootLogin is set to no
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: PermitRootLogin no
+  notify: restart sshd
+- name: Ensure PermitEmptyPasswords is set to no
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitEmptyPasswords'
+    line: PermitEmptyPasswords no
+  notify: restart sshd
+- name: Ensure PermitUserEnvironment is set to no
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitUserEnvironment'
+    line: PermitUserEnvironment no
+  notify: restart sshd
+- name: Ensure AllowTcpForwarding is set to no
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^AllowTcpForwarding'
+    line: AllowTcpForwarding no
+  notify: restart sshd

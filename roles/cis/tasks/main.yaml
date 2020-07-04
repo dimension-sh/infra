@@ -1,0 +1,8 @@
+---
+- include: auditd.yaml
+- include: limits.yaml
+- include: sudo.yaml
+- include: file_security.yaml
+- include: ssh.yaml
+- include: sysctl.yaml
+- include: aide.yaml
