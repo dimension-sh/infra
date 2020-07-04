@@ -1,11 +1,25 @@
 #!/usr/bin/env python3
 
+import sys
 import cgi
 import re
 import struct
 import binascii
 import base64
 import pwd
+import os.path
+
+
+REQUESTS_FOLDER = '/var/www/requests'
+
+def validate_username(username):
+    if re.match(r"^[a-z][-a-z0-9]*$", username) is None:
+        return False
+    if os.path.exists(os.path.join(REQUESTS_FOLDER, 'banned_usernames.txt')):
+        with open(os.path.join(REQUESTS_FOLDER, 'banned_usernames.txt'), 'r') as fobj:
+            if username in fobj.readlines():
+                return False
+    return True 
 
 def validate_sshkey(keystring):
     """ Validates that SSH pubkey string is valid """
@@ -45,7 +59,7 @@ def validate_email(address):
     return re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", address) != None
 
 def error(msg):
-    print('<meta http-equiv="refresh" content="1; URL=\'http://dimension.sh/join.html\'"/>')
+    print('<meta http-equiv="refresh" content="3; URL=\'http://dimension.sh/join.html\'"/>')
     print('<p>An error was encountered: %s</p>' % msg)
 
 def main():
@@ -63,21 +77,24 @@ def main():
         return
 
     if not validate_sshkey(ssh_key) is True:
-        error('Invalid SSH key')
+        error('Invalid SSH public key')
         return
 
     if not validate_email(email):
         error('Invalid email address provided')
         return
 
-    if pwd.getpwnam(username):
-        error('Username %s is already took' % username)
-        return
+    try:
+        if pwd.getpwnam(username):
+            error('Username %s is already took' % username)
+            return
+    except KeyError:
+        pass
 
-    with open('/var/www/requests/%s' % username) as fobj:
-        fobj.write('%s\n\n mkuser %s %s "%s"' % (why.replace('\n', ' '), username, email, ssh_key))
+    with open(os.path.join(REQUESTS_FOLDER, username), 'w') as fobj:
+        fobj.write('Why\n---\n\n%s\n\n# mkuser %s %s "%s"\n' % (why.replace('\n', ' '), username, email, ssh_key))
 
-    print('<p>Your request has been submitted</p>')
+    print('<meta http-equiv="refresh" content="0; URL=\'http://dimension.sh/join_submitted.html\'"/>')
 
 if __name__ == '__main__':
     main()
