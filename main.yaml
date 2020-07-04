@@ -1,9 +1,12 @@
 ---
-- hosts: shell
+- hosts: all
   become: true
   roles:
     - common
     - cis
+- hosts: shell
+  become: true
+  roles:
     - shell
     - efingerd
     - news
