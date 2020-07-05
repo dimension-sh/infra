@@ -23,6 +23,12 @@
     regexp: "^PermitRootLogin"
     line: PermitRootLogin no
   notify: restart sshd
+- name: Ensure PasswordAuthentication is set to no
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: PasswordAuthentication no
+  notify: restart sshd
 - name: Ensure PermitEmptyPasswords is set to no
   lineinfile:
     path: /etc/ssh/sshd_config
