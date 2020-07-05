@@ -7,7 +7,7 @@
   command: dnf config-manager --set-enabled PowerTools
 - name: Install epel-release Packages
   dnf:
-    name: '{{ packages }}'
+    name: "{{ packages }}"
     state: present
   vars:
     packages:
