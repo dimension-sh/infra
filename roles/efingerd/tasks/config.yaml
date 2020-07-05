@@ -40,3 +40,14 @@
     owner: root
     group: root
     mode: "0755"
+- name: Add logrotate rule for efingerd
+  copy:
+    dest: /etc/logrotate.d/finger
+    content: |
+      /var/log/efingerd.log {
+          rotate 5
+          daily
+          compress
+          copytruncate
+          missingok
+      }
