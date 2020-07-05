@@ -30,7 +30,7 @@ def validate_ip_dnsbl(ip):
         query_type = 'A'
     elif isinstance(ipobj, ipaddress.IPv6Address):
         query = '.'.join(reversed(ip.split(':'))) + '.dnsbl.dronebl.org.'
-        query_type = 'AAA'
+        query_type = 'AAAA'
     else:
         return False
 
