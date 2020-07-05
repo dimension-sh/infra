@@ -4,6 +4,10 @@
   roles:
     - common
     - cis
+- hosts: build
+  become: true
+  roles:
+    - build
 - hosts: shell
   become: true
   roles:
