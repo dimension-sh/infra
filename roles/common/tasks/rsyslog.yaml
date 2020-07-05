@@ -1,0 +1,9 @@
+---
+- name: Install rsyslog
+  dnf:
+    name: rsyslog
+    state: present
+- name: Start rsyslog
+  service:
+    state: started
+    enabled: yes
