@@ -1,4 +1,9 @@
 ---
+- name: Create /etc/motd.d
+  file:
+    path: /etc/motd.d
+    state: directory
+    mode: "0755"
 - name: Add MOTD Logo
   copy:
     src: ../files/motd/00-logo
