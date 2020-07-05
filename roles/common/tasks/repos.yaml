@@ -1,4 +1,8 @@
 ---
+- name: Install yum-utils
+  dnf:
+    name: yum-utils
+    state: present
 - name: Install Dimension RPMs repo
   command: yum-config-manager --add-repo http://dimension-sh.github.io/dimension-rpms/dimension-rpms.repo
   args:
