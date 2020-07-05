@@ -10,6 +10,14 @@
     state: directory
     mode: "0700"
 
+# Install python dependencies
+- name: Install Python packages for CGI scripts
+  pip:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - dnspython
+
 # CGI scripts
 - name: Deploy join.cgi
   copy:
