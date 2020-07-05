@@ -5,6 +5,7 @@
     owner: root
     group: root
     mode: "0600"
+    ignore_errors: yes
   loop:
     - /boot/grub2/grub.cfg
     - /boot/grub2/grubenv
