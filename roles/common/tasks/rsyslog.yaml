@@ -5,5 +5,6 @@
     state: present
 - name: Start rsyslog
   service:
+    name: rsyslog
     state: started
     enabled: yes
