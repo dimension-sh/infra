@@ -5,6 +5,7 @@
     state: present
   vars:
     packages:
+      - alpine
       - ansible
       - bind-utils
       - figlet
@@ -15,6 +16,7 @@
       - nmap-ncat
       - tmux
       - unzip
+      - util-linux-user
       - wget
       - zip
       - zsh
