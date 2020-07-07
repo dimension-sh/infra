@@ -11,7 +11,7 @@ users = 0
 sys.stdout.write('Content-Type: text/html\n\n')
 
 sys.stdout.write("<ul>\n")
-for user in pwd.getpwall():
+for user in sorted(pwd.getpwall(), key=lambda x: x.pw_name):
     # if the user doesn't have a public_html folder, skip
     if not os.path.exists(os.path.join(user.pw_dir, 'public_html')) or user.pw_gid != 100:
         continue
