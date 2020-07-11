@@ -1,5 +1,5 @@
 ---
-- name: Install Dovecot 
+- name: Install Dovecot
   dnf:
     name: "dovecot"
     state: present
@@ -12,6 +12,11 @@
     mode: "0644"
   notify: restart dovecot
 
+- name: Create dhparam for Dovecot
+  command: /usr/bin/openssl dhparam -out /etc/dovecot/dh.pem 4096
+  args:
+    creates: /etc/dovecot/dh.pem
+
 - name: Check if TLS cert for host exists
   stat:
     path: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem"
@@ -22,7 +27,7 @@
     dest: /etc/dovecot/conf.d/10-ssl.conf
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   when: lets_cert.stat.exists == true
   notify: restart dovecot
 
