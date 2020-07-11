@@ -2,7 +2,7 @@
 # DCSS
 - name: Deploy dcss
   copy:
-    src: ../files/scripts/dcss
+    src: scripts/dcss
     dest: /usr/local/bin/dcss
     owner: root
     group: root
@@ -37,14 +37,14 @@
     mode: "0700"
 - name: Copy mkuser template
   copy:
-    src: ../files/mail.tmpl
+    src: mail.tmpl
     dest: /etc/mkuser/mail.tmpl
     owner: root
     group: root
     mode: "0600"
 - name: Copy mkuser config
   copy:
-    src: ../files/mkuser.yaml
+    src: mkuser.yaml
     dest: /etc/mkuser/mkuser.yaml
     owner: root
     group: root
@@ -56,9 +56,4 @@
     repo: "https://github.com/dimension-sh/man.git"
     dest: /usr/local/src/man
     version: master
-  register: man_repo
-- name: Install man files
-  shell:
-    cmd: sh ./install.sh
-    chdir: /usr/local/src/man/
-  when: man_repo.changed
+  notify: Install man files

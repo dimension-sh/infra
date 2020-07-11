@@ -1,7 +1,7 @@
 ---
 - name: Add Bash config for Maildr
   copy:
-    src: ../files/mail/mail.sh
+    src: mail/mail.sh
     dest: /etc/profile.d/mail.sh
     owner: root
     group: root

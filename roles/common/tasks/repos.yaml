@@ -7,8 +7,18 @@
   command: yum-config-manager --add-repo http://dimension-sh.github.io/dimension-rpms/dimension-rpms.repo
   args:
     creates: /etc/yum.repos.d/dimension-rpms.repo
+
+- name: Check if Powertools Repo exists
+  stat:
+    path: /etc/yum.repos.d/CentOS-PowerTools.repo
+  register: powertools_repo_file
 - name: Enable PowerTools repo
-  command: dnf config-manager --set-enabled PowerTools
+  lineinfile:
+    path: /etc/yum.repos.d/CentOS-PowerTools.repo
+    regexp: "^enabled="
+    line: "enabled=1"
+  when: powertools_repo_file.stat.exists
+
 - name: Install epel-release Packages
   dnf:
     name: "{{ packages }}"

@@ -6,7 +6,7 @@
     mode: "0755"
 - name: Add MOTD Logo
   copy:
-    src: ../files/motd/00-logo
+    src: motd/00-logo
     dest: /etc/motd.d/00-logo
     owner: root
     group: root

@@ -10,7 +10,7 @@
     enabled: yes
 - name: Configure userdirs in nginx
   copy:
-    src: ../files/config/userdir.conf
+    src: config/userdir.conf
     dest: /etc/nginx/default.d/userdir.conf
     owner: root
     group: root
@@ -18,7 +18,7 @@
   notify: restart nginx
 - name: Configure cgi in nginx
   copy:
-    src: ../files/config/cgi.conf
+    src: config/cgi.conf
     dest: /etc/nginx/default.d/cgi.conf
     owner: root
     group: root

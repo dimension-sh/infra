@@ -6,7 +6,7 @@
     version: master
 - name: Setup crontab to update the website
   copy:
-    src: ../files/scripts/update-website
+    src: scripts/update-website
     dest: /etc/cron.hourly/update-website
     owner: root
     group: root

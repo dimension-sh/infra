@@ -21,28 +21,28 @@
 # CGI scripts
 - name: Deploy join.cgi
   copy:
-    src: ../files/cgi/join.cgi
+    src: cgi/join.cgi
     dest: /var/www/cgi/join.cgi
     owner: root
     group: root
     mode: "0755"
 - name: Deploy users.cgi
   copy:
-    src: ../files/cgi/users.cgi
+    src: cgi/users.cgi
     dest: /var/www/cgi/users.cgi
     owner: root
     group: root
     mode: "0755"
 - name: Deploy online.cgi
   copy:
-    src: ../files/cgi/online.cgi
+    src: cgi/online.cgi
     dest: /var/www/cgi/online.cgi
     owner: root
     group: root
     mode: "0755"
 - name: Deploy news.cgi
   copy:
-    src: ../files/cgi/news.cgi
+    src: cgi/news.cgi
     dest: /var/www/cgi/news.cgi
     owner: root
     group: root

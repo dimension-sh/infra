@@ -7,35 +7,35 @@
     mode: "0755"
 - name: Copy list
   copy:
-    src: ../files/scripts/list
+    src: scripts/list
     dest: /etc/efingerd/list
     owner: root
     group: root
     mode: "0755"
 - name: Copy log
   copy:
-    src: ../files/scripts/log
+    src: scripts/log
     dest: /etc/efingerd/log
     owner: root
     group: root
     mode: "0755"
 - name: Copy luser
   copy:
-    src: ../files/scripts/luser
+    src: scripts/luser
     dest: /etc/efingerd/luser
     owner: root
     group: root
     mode: "0755"
 - name: Copy nouser
   copy:
-    src: ../files/scripts/nouser
+    src: scripts/nouser
     dest: /etc/efingerd/nouser
     owner: root
     group: root
     mode: "0755"
 - name: Copy preamble
   copy:
-    src: ../files/scripts/preamble
+    src: scripts/preamble
     dest: /etc/efingerd/preamble
     owner: root
     group: root

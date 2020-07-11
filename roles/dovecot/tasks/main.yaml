@@ -5,7 +5,7 @@
     state: present
 - name: Deploy updated 10-master.conf
   copy:
-    src: ../files/dovecot/10-master.conf
+    src: dovecot/10-master.conf
     dest: /etc/dovecot/conf.d/10-master.conf
     owner: root
     group: root
@@ -28,7 +28,7 @@
     owner: root
     group: root
     mode: "0644"
-  when: lets_cert.stat.exists == true
+  when: lets_cert.stat.exists
   notify: restart dovecot
 
 - name: Start dovecot
@@ -43,4 +43,4 @@
     service: imaps
     permanent: yes
     state: enabled
-  when: lets_cert.stat.exists == true
+  when: lets_cert.stat.exists
