@@ -5,11 +5,31 @@
     value: "{{ item.value }}"
   notify: restart postfix
   loop:
+    - { name: "inet_interfaces", value: "all" }
     - { name: "myhostname", value: "{{ ansible_fqdn }}" }
     - { name: "mydomain", value: "{{ ansible_domain }}" }
     - { name: "myorigin", value: "$mydomain" }
+    - { name: "mydestination", value: "$myhostname, $mydomain"}
+    - { name: "mynetworks", value: "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128" }
     - { name: "smtpd_tls_received_header", value: "yes" }
     - { name: "smtp_tls_security_level", value: "may" }
     - { name: "virtual_alias_maps", value: "hash:/etc/postfix/virtual" }
     - { name: "virtual_alias_domains", value: "" }
     - { name: "home_mailbox", value: "Maildir/" }
+    - { name: "disable_vrfy_command", value: "yes" }
+    - { name: "smtpd_helo_required", value: "yes" }
+
+- name: Check if TLS cert for host exists
+  stat: 
+    path: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem"
+  register: lets_cert
+- name: Set postfix TLS configuration options
+  postconf:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  notify: restart postfix
+  when: lets_cert.stat.exists == true
+  loop:
+    - { name: "smtpd_tls_cert_file", value: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem" }
+    - { name: "smtpd_tls_key_file", value: "/etc/letsencrypt/live/{{ ansible_fqdn }}/privkey.pem" }
+    - { name: "smtpd_tls_security_level", value: "may" }
