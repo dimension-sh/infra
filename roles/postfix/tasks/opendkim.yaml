@@ -1,0 +1,16 @@
+---
+# install opendkim
+- name: Install OpenDKIM
+  dnf:
+    name: "opendkim"
+    state: present
+- name: Set postfix DKIM options
+  postconf:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  notify: restart postfix
+  loop:
+    - { name: "milter_default_action", value: "accept" }
+    - { name: "milter_protocol", value: "6" }
+    - { name: "smtpd_milters", value: "inet:127.0.0.1:8891" }
+    - { name: "non_smtpd_milters", value: "$smtpd_milters" }

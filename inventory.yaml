@@ -1,0 +1,20 @@
+
+
+all:
+  children:
+    build:
+      hosts:
+        b1.dimension.sh: 
+    shell:
+      hosts:
+        s1.dimension.sh:
+          postfix_virtual_domains:
+            - nixsh.club
+            - nixshell.club
+          postfix_virtual_aliases:
+            - virtual: root@nixsh.club
+              alias: root
+            - virtual: root@nixshell.club
+              alias: root
+vars:
+  ansible_python_interpreter: /usr/bin/python3

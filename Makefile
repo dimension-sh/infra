@@ -7,7 +7,7 @@ help:
 	| column -t  -s ' '
 
 deploy: ## Run the main.yaml playbook against the inventory
-	ansible-playbook -i ./inventory main.yaml -K -u $(shell whoami)
+	ansible-playbook -i ./inventory.yaml main.yaml -K -u $(shell whoami)
 
 ping: ## Ping all hosts in the inventory file
 	ansible -i ./inventory -m ping all

@@ -1,0 +1,59 @@
+---
+- name: Set postfix configuration options
+  postconf:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  notify: restart postfix
+  loop:
+    - { name: "inet_interfaces", value: "all" }
+    - { name: "myhostname", value: "{{ ansible_fqdn }}" }
+    - { name: "mydomain", value: "{{ ansible_domain }}" }
+    - { name: "myorigin", value: "$mydomain" }
+    - { name: "mydestination", value: "$myhostname, $mydomain"}
+    - { name: "mynetworks", value: "{{ postfix_mynetworks | join(' ') }}" }
+    - { name: "smtpd_tls_received_header", value: "yes" }
+    - { name: "smtp_tls_security_level", value: "may" }
+    - { name: "virtual_alias_maps", value: "hash:/etc/postfix/virtual" }
+    - { name: "virtual_alias_domains", value: "{{ postfix_virtual_domains | join(' ') }}" }
+    - { name: "home_mailbox", value: "Maildir/" }
+    - { name: "disable_vrfy_command", value: "yes" }
+    - { name: "smtpd_helo_required", value: "yes" }
+    - { name: "smtpd_delay_reject", value: "yes" }
+    - { name: "smtpd_helo_restrictions", value: "{{ postfix_smtpd_helo_restrictions | join(',') }}" }
+    - { name: "smtpd_sender_restrictions", value: "{{ postfix_smtpd_sender_restrictions | join(',') }}" }
+    - { name: "smtpd_recipient_restrictions", value: "{{ postfix_smtpd_recipient_restrictions | join(',') }}" }
+
+- name: Check if TLS cert for host exists
+  stat:
+    path: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem"
+  register: lets_cert
+- name: Set postfix TLS configuration options
+  postconf:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  notify: restart postfix
+  when: lets_cert.stat.exists == true
+  loop:
+    - { name: "smtpd_tls_cert_file", value: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem" }
+    - { name: "smtpd_tls_key_file", value: "/etc/letsencrypt/live/{{ ansible_fqdn }}/privkey.pem" }
+    - { name: "smtpd_tls_security_level", value: "may" }
+    - { name: "smtpd_tls_auth_only", value: "yes" }
+
+
+- name: Check if Dovecot is installed
+  stat:
+    path: "/etc/dovecot/dovecot.conf"
+  register: dovecot_conf
+- name: Set postfix SASL configuration options
+  postconf:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  notify: restart postfix
+  when: dovecot_conf.stat.exists == true
+  loop:
+    - { name: "smtpd_sasl_auth_enable", value: "yes" }
+    - { name: "smtpd_sasl_type", value: "dovecot" }
+    - { name: "smtpd_sasl_path", value: "private/auth" }
+    - { name: "smtpd_tls_auth_only", value: "yes" }
+    - { name: "smtpd_sasl_authenticated_header", value: "yes" }
+

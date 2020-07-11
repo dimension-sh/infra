@@ -1,0 +1,140 @@
+#!/usr/bin/python
+
+from ansible.module_utils.basic import AnsibleModule
+
+
+ANSIBLE_METADATA = {
+    'metadata_version': '1.1',
+    'status': ['preview'],
+    'supported_by': 'community'
+}
+
+DOCUMENTATION = '''
+---
+module: postconf
+
+short_description: Module for Postfix postconf
+
+version_added: "2.4"
+
+description:
+    - "This is module for setup Postfix variables in main.cf with postconf command"
+
+options:
+    name:
+        description:
+            - Variable name.
+        required: true
+    value:
+        description:
+            - Value of the variable. Required if C(state=present).
+        required: false
+        default: null
+    state:
+        description:
+            - Whether to ensure that the variable is present or absent.
+        required: false
+        default: present
+        choices: [ "present", "absent" ]
+
+
+extends_documentation_fragment:
+    - system
+
+author:
+    - Alexander Galato (@alet)
+'''
+
+EXAMPLES = '''
+# Assign value
+- name: Make myhostname be equal "gateway.home"
+  postconf:
+    name: myhostname
+    value: gateway.home
+
+# Remove variable from config file
+- name: Remove milter_protocol
+  postconf:
+    name: milter_protocol
+    state: absent
+'''
+
+
+def test_var(module, postconf_path, postconf_arg):
+    postconf_arg += " -H"
+    rc, out, err = module.run_command("%s %s %s" % (
+        postconf_path, postconf_arg, module.params["name"]))
+    if rc != 0:
+        return False
+
+    return True
+
+
+def query_var(module, postconf_path, postconf_arg):
+    postconf_arg += " -h"
+    rc, out, err = module.run_command("%s %s %s" % (
+        postconf_path, postconf_arg, module.params["name"]))
+    if rc != 0:
+        return False
+
+    if out.rstrip() != module.params["value"]:
+        return False
+
+    return True
+
+
+def set_value(module, postconf_path, postconf_arg):
+    if query_var(module, postconf_path, postconf_arg):
+        return (False, "The variable already set in value %s" % module.params["value"])
+    rc, out, err = module.run_command("%s %s %s=\"%s\"" % (
+        postconf_path, postconf_arg, module.params["name"], module.params["value"]))
+    if rc != 0:
+        module.fail_json(msg="Could not set variable")
+
+    return (True, "Variable was set")
+
+
+def remove_value(module, postconf_path, postconf_arg):
+    if test_var(module, postconf_path, postconf_arg):
+        postconf_arg += " -X"
+        rc, out, err = module.run_command("%s %s %s" % (
+            postconf_path, postconf_arg, module.params["name"]))
+        if rc == 0:
+            return (True, "Variable was removed")
+
+    return (False, "Variable was not removed")
+
+
+def main():
+    module_args = dict(
+        name=dict(type='str', required=True),
+        value=dict(type='str', required=False, default=''),
+        state=dict(type='str', required=False, default='present',
+                   choices=["present", "absent"]),
+    )
+
+    module = AnsibleModule(
+        argument_spec=module_args,
+        supports_check_mode=True,
+    )
+
+    postconf_path = module.get_bin_path('postconf', True)
+    p = module.params
+
+    changed = False
+    message = ''
+    postconf_arg = ""
+
+    if p["value"] is None and p["state"] == "present":
+        module.fail_json(msg="You must specify 'value' to setup variable")
+
+    if p["state"] == "present":
+        changed, msg = set_value(module, postconf_path, postconf_arg)
+    elif p["state"] == "absent":
+        changed, msg = remove_value(module, postconf_path, postconf_arg)
+
+    module.exit_json(changed=changed, msg=', '.join(message))
+
+
+if __name__ == '__main__':
+    main()
