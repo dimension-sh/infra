@@ -1,5 +1,6 @@
 ---
 - include: install.yaml
 - include: config.yaml
+- include: aliases.yaml
 - include: service.yaml
 - include: firewall.yaml
