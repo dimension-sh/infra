@@ -1,0 +1,15 @@
+---
+- name: Set postfix configuration options
+  postconf:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  notify: restart postfix
+  loop:
+    - { name: "myhostname", value: "{{ ansible_fqdn }}" }
+    - { name: "mydomain", value: "{{ ansible_domain }}" }
+    - { name: "myorigin", value: "$mydomain" }
+    - { name: "smtpd_tls_received_header", value: "yes" }
+    - { name: "smtp_tls_security_level", value: "may" }
+    - { name: "virtual_alias_maps", value: "hash:/etc/postfix/virtual" }
+    - { name: "virtual_alias_domains", value: "" }
+    - { name: "home_mailbox", value: "Maildir/" }

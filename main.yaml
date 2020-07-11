@@ -11,6 +11,7 @@
 - hosts: shell
   become: true
   roles:
+    - postfix
     - shell
     - efingerd
     - news
