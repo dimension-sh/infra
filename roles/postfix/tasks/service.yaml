@@ -1,0 +1,6 @@
+---
+- name: Start postfix
+  service:
+    name: postfix
+    state: started
+    enabled: yes
