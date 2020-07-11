@@ -24,7 +24,7 @@
     - { name: "smtpd_recipient_restrictions", value: "permit_sasl_authenticated,permit_mynetworks,reject_non_fqdn_recipient,reject_unknown_recipient_domain,reject_unauth_destination,permit" }
 
 - name: Check if TLS cert for host exists
-  stat: 
+  stat:
     path: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem"
   register: lets_cert
 - name: Set postfix TLS configuration options
@@ -38,10 +38,10 @@
     - { name: "smtpd_tls_key_file", value: "/etc/letsencrypt/live/{{ ansible_fqdn }}/privkey.pem" }
     - { name: "smtpd_tls_security_level", value: "may" }
     - { name: "smtpd_tls_auth_only", value: "yes" }
-    
+
 
 - name: Check if Dovecot is installed
-  stat: 
+  stat:
     path: "/etc/dovecot/dovecot.conf"
   register: dovecot_conf
 - name: Set postfix SASL configuration options
@@ -49,9 +49,11 @@
     name: "{{ item.name }}"
     value: "{{ item.value }}"
   notify: restart postfix
-  when: dovecot.stat.exists == true
+  when: dovecot_conf.stat.exists == true
   loop:
     - { name: "smtpd_sasl_auth_enable", value: "yes" }
     - { name: "smtpd_sasl_type", value: "dovecot" }
     - { name: "smtpd_sasl_path", value: "private/auth" }
     - { name: "smtpd_tls_auth_only", value: "yes" }
+    - { name: "smtpd_sasl_authenticated_header", value: "yes" }
+
