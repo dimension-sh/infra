@@ -1,5 +1,4 @@
 ---
-- include: firewall.yaml
 - include: packages.yaml
 - include: limits.yaml
 - include: scripts.yaml
