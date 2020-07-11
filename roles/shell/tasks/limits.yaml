@@ -5,4 +5,4 @@
     domain: "@users"
     limit_type: hard
     limit_item: nproc
-    value: "50"
+    value: "100"

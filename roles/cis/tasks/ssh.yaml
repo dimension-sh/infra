@@ -45,5 +45,11 @@
   lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^AllowTcpForwarding"
-    line: AllowTcpForwarding no
+    line: AllowTcpForwarding yes
+  notify: restart sshd
+- name: Ensure StreamLocalBindUnlink is set to yes
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^StreamLocalBindUnlink"
+    line: StreamLocalBindUnlink yes
   notify: restart sshd
