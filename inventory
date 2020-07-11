@@ -1,8 +1,0 @@
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3
-
-[build]
-b1.dimension.sh
-
-[shell]
-s1.dimension.sh

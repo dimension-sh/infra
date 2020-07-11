@@ -14,7 +14,7 @@
     - { name: "smtpd_tls_received_header", value: "yes" }
     - { name: "smtp_tls_security_level", value: "may" }
     - { name: "virtual_alias_maps", value: "hash:/etc/postfix/virtual" }
-    - { name: "virtual_alias_domains", value: "" }
+    - { name: "virtual_alias_domains", value: "{{ postfix_virtual_domains | default([]) | join(' ') }}" }
     - { name: "home_mailbox", value: "Maildir/" }
     - { name: "disable_vrfy_command", value: "yes" }
     - { name: "smtpd_helo_required", value: "yes" }

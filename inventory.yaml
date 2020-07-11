@@ -1,0 +1,15 @@
+
+
+all:
+  children:
+    build:
+      hosts:
+        b1.dimension.sh: 
+    shell:
+      hosts:
+        s1.dimension.sh:
+          postfix_virtual_domains:
+            - nixsh.club
+            - nixshell.club
+vars:
+  ansible_python_interpreter: /usr/bin/python3
