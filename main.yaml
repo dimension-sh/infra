@@ -11,6 +11,7 @@
 - hosts: shell
   become: true
   roles:
+    - dovecot
     - postfix
     - shell
     - efingerd
