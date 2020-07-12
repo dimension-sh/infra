@@ -1,4 +1,24 @@
 ---
+- name: Install fcgiwrap
+  package:
+    name: fcgiwrap
+    state: installed
+
+- name: Enable fcgiwrap
+  service:
+    name: fcgiwrap@nginx.socket
+    enabled: yes
+    state: started
+
+- name: Configure cgi in nginx
+  copy:
+    src: config/cgi.conf
+    dest: /etc/nginx/default.d/cgi.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart nginx
+
 - name: Create cgi directory
   file:
     path: /var/www/cgi

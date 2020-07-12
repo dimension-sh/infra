@@ -16,11 +16,4 @@
     group: root
     mode: "0644"
   notify: restart nginx
-- name: Configure cgi in nginx
-  copy:
-    src: config/cgi.conf
-    dest: /etc/nginx/default.d/cgi.conf
-    owner: root
-    group: root
-    mode: "0644"
-  notify: restart nginx
+
