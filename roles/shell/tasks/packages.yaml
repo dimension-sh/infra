@@ -8,12 +8,19 @@
       - alpine-maildir
       - ansible
       - bind-utils
+      - dos2unix
       - figlet
       - git
+      - inotify-tools
       - lynx
       - mutt
       - nano
+      - nethack
       - nmap-ncat
+      - pandoc
+      - sqlite
+      - stow
+      - tig
       - tmux
       - unzip
       - util-linux-user
