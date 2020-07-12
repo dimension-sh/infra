@@ -5,7 +5,7 @@
     dest: /etc/profile.d/mail.sh
     owner: root
     group: root
-    mode: "0755"
+    mode: "0644"
 
 - name: Copy mutt defaults
   copy:
