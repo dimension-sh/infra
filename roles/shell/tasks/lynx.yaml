@@ -1,0 +1,8 @@
+---
+- name: Set WWW homepage
+  copy:
+    source: lynx-homepage.sh
+    dest: /etc/profile.d/lynx-homepage.sh
+    owner: root
+    group: root
+    mode: "0644"

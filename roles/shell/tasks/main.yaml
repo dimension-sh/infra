@@ -2,6 +2,7 @@
 - include: packages.yaml
 - include: limits.yaml
 - include: scripts.yaml
-- include: git.yaml
+- include: skel.yaml
 - include: motd.yaml
 - include: mail.yaml
+- include: lynx.yaml

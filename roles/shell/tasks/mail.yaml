@@ -6,3 +6,11 @@
     owner: root
     group: root
     mode: "0755"
+
+- name: Copy mutt defaults
+  copy:
+    src: mail/Muttrc.local
+    dest: /etc/Muttrc.local
+    owner: root
+    group: root
+    mode: "0644"
