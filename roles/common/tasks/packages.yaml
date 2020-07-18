@@ -1,0 +1,20 @@
+---
+- name: Install Packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - ansible
+      - bind-utils
+      - dos2unix
+      - git
+      - nano
+      - pandoc
+      - sqlite
+      - stow
+      - tig
+      - unzip
+      - wget
+      - zip
+      - zsh

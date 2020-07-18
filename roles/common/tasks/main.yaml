@@ -3,3 +3,4 @@
 - include: rsyslog.yaml
 - include: firewall.yaml
 - include: motd.yaml
+- include: packages.yaml
