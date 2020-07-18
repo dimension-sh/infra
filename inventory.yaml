@@ -4,17 +4,24 @@ all:
   children:
     build:
       hosts:
-        b1.dimension.sh: 
+        b1.dimension.sh:
     shell:
       hosts:
         s1.dimension.sh:
           postfix_virtual_domains:
             - nixsh.club
             - nixshell.club
+            - honk.life
+            - hjonk.life
           postfix_virtual_aliases:
             - virtual: root@nixsh.club
               alias: root
             - virtual: root@nixshell.club
               alias: root
+            - virtual: root@honk.life
+              alias: root
+            - virtual: root@hjonk.life
+              alias: root
+vars:
 vars:
   ansible_python_interpreter: /usr/bin/python3
