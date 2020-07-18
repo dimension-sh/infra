@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: restart ngnix
+  notify: restart nginx
   loop:
     - { src: 'config/sites/honk-life.conf', dest: '/etc/nginx/conf.d/nixshell-club.conf' }
     - { src: 'config/sites/nixshell-club.conf', dest: '/etc/nginx/conf.d/nixshell-club.conf' }
