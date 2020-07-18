@@ -16,4 +16,14 @@
     group: root
     mode: "0644"
   notify: restart nginx
-
+- name: Copy vhost config to nginx
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart ngnix
+  loop:
+    - { src: 'config/sites/honk-life.conf', dest: '/etc/nginx/conf.d/nixshell-club.conf' }
+    - { src: 'config/sites/nixshell-club.conf', dest: '/etc/nginx/conf.d/nixshell-club.conf' }
