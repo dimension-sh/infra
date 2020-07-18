@@ -11,12 +11,12 @@ help:
 
 .PHONY: deploy
 deploy: ## Run the main.yaml playbook against the inventory
-    @env=$(env) ansible-playbook --inventory-file="$(env)" --diff "$(playbook).yaml" -K -u $(shell whoami)
+	@env=$(env) ansible-playbook --inventory-file="$(env)" --diff "$(playbook).yaml" -K -u $(shell whoami)
 
 .PHONY: ping
 ping: ## Ping all hosts in the inventory file
-    @env=$(env) ansible -i $(env) -m ping all
+	@env=$(env) ansible -i $(env) -m ping all
 
 .PHONY: lint
 lint: ## make lint [playbook=setup] [env=hosts] [args=<ansible-playbook arguments>] # Check syntax of a playbook
-    @env=$(env) ansible-playbook --inventory-file="$(env)" --syntax-check "$(playbook).yaml"
+	@env=$(env) ansible-playbook --inventory-file="$(env)" --syntax-check "$(playbook).yaml"
