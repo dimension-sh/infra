@@ -5,51 +5,18 @@
     owner: root
     group: root
     mode: "0600"
-- name: Ensure X11Forwarding is disabled in sshd
+- name: Set SSHD configuration values
   lineinfile:
     path: /etc/ssh/sshd_config
-    regexp: "^X11Forwarding"
-    line: X11Forwarding no
+    regexp: "^{{ item.key }}"
+    line: "{{ item.key }} {{ item.value }}"
   notify: restart sshd
-- name: Ensure MaxAuthTries is set to 4
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: "^MaxAuthTries"
-    line: MaxAuthTries 4
-  notify: restart sshd
-- name: Ensure PermitRootLogin is set to no
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: "^PermitRootLogin"
-    line: PermitRootLogin no
-  notify: restart sshd
-- name: Ensure PasswordAuthentication is set to no
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: "^PasswordAuthentication"
-    line: PasswordAuthentication no
-  notify: restart sshd
-- name: Ensure PermitEmptyPasswords is set to no
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: "^PermitEmptyPasswords"
-    line: PermitEmptyPasswords no
-  notify: restart sshd
-- name: Ensure PermitUserEnvironment is set to no
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: "^PermitUserEnvironment"
-    line: PermitUserEnvironment no
-  notify: restart sshd
-- name: Ensure AllowTcpForwarding is set to no
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: "^AllowTcpForwarding"
-    line: AllowTcpForwarding yes
-  notify: restart sshd
-- name: Ensure StreamLocalBindUnlink is set to yes
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regexp: "^StreamLocalBindUnlink"
-    line: StreamLocalBindUnlink yes
-  notify: restart sshd
+  loop:
+    - { key: 'X11Forwarding', value: 'no'}
+    - { key: 'MaxAuthTries', value: '4'}
+    - { key: 'PermitRootLogin', value: 'no'}
+    - { key: 'PasswordAuthentication', value: 'no'}
+    - { key: 'PermitEmptyPasswords', value: 'no'}
+    - { key: 'PermitUserEnvironment', value: 'no'}
+    - { key: 'AllowTcpForwarding', value: 'yes'}
+    - { key: 'StreamLocalBindUnlink', value: 'yes'}
