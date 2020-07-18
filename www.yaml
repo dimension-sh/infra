@@ -1,0 +1,5 @@
+---
+- hosts: shell
+  become: true
+  roles:
+    - www

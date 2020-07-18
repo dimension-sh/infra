@@ -1,6 +1,6 @@
 ---
 - name: Create certificates
-  command: "certbot-auto certonly --webroot -w /var/www/acme-challenge -d {{ item.hostname }} {% for san in item.sans|default([]) %} -d {{ san }} {% endfor %} -m {{ cert_email }}"
+  command: "certbot-auto certonly --webroot -w /var/www/acme-challenge -d {{ item.hostname }} {% for san in item.sans|default([]) %} -d {{ san }} {% endfor %} -m {{ www_certs_email|default('root@dimension.sh') }}"
   args:
     creates: "/etc/letsencrypt/renewal/{{ item.hostname }}.conf"
   with_items: "{{ www_certs }}"
