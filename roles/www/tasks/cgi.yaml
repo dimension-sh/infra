@@ -37,6 +37,7 @@
   vars:
     packages:
       - dnspython
+      - markdown
 
 # CGI scripts
 - name: Deploy join.cgi
@@ -67,3 +68,11 @@
     owner: root
     group: root
     mode: "0755"
+- name: Deploy wiki.cgi
+  copy:
+    src: cgi/wiki.cgi
+    dest: /var/www/cgi/wiki.cgi
+    owner: root
+    group: root
+    mode: "0755"
+

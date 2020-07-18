@@ -4,10 +4,22 @@
     repo: "https://github.com/dimension-sh/www-site.git"
     dest: /var/www/dimension.sh/
     version: master
+- name: Deploy wiki files
+  git:
+    repo: "https://github.com/dimension-sh/wiki.git"
+    dest: /var/www/wiki/
+    version: master
 - name: Setup crontab to update the website
   copy:
     src: scripts/update-website
     dest: /etc/cron.hourly/update-website
+    owner: root
+    group: root
+    mode: "0700"
+- name: Setup crontab to update the wiki
+  copy:
+    src: scripts/update-wiki
+    dest: /etc/cron.hourly/update-wiki
     owner: root
     group: root
     mode: "0700"
