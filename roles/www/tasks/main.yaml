@@ -1,5 +1,7 @@
 ---
 - include: install.yaml
+- include: certs.yaml
+- include: sites.yaml
 - include: cgi.yaml
 - include: website.yaml
 - include: firewall.yaml

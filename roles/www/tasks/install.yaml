@@ -8,22 +8,28 @@
     name: nginx
     state: started
     enabled: yes
-- name: Configure userdirs in nginx
+- name: Install nginx.conf
   copy:
-    src: config/userdir.conf
-    dest: /etc/nginx/default.d/userdir.conf
+    src: config/nginx.conf
+    dest: /etc/nginx/nginx.conf
     owner: root
     group: root
     mode: "0644"
   notify: restart nginx
-- name: Copy vhost config to nginx
+- name: Copy redirect http config to nginx
   copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: "config/sites/http-redirect.conf"
+    dest: "/etc/nginx/conf.d/http-redirect.conf"
     owner: root
     group: root
     mode: "0644"
   notify: restart nginx
-  loop:
-    - { src: 'config/sites/honk-life.conf', dest: '/etc/nginx/conf.d/nixshell-club.conf' }
-    - { src: 'config/sites/nixshell-club.conf', dest: '/etc/nginx/conf.d/nixshell-club.conf' }
+- name: Create well-known folder for certbot
+  file:
+    path: /var/www/acme-challenge
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+- name: Restart nginx now, if needed
+  meta: flush_handlers

@@ -1,0 +1,10 @@
+---
+- name: Copy SSL vhosts config to nginx
+  copy:
+    src: "config/sites/{{ item }}.conf"
+    dest: "/etc/nginx/conf.d/{{ item }}.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart nginx
+  with_items: "{{ www_sites }}"

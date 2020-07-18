@@ -22,6 +22,19 @@ all:
               alias: root
             - virtual: root@hjonk.life
               alias: root
-vars:
+          www_sites:
+            - dimension-sh
+            - nixshell-club
+            - honk-life
+          www_certs:
+            - hostname: s1.dimension.sh
+              sans:
+                - dimension.sh
+            - hostname: nixshell.club
+              sans:
+                - nixsh.club
+            - hostname: honk.life
+              sans:
+                - hjonk.club
 vars:
   ansible_python_interpreter: /usr/bin/python3
