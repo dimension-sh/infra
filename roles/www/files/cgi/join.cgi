@@ -13,6 +13,15 @@ import dns.resolver
 
 REQUESTS_FOLDER = '/var/www/requests'
 
+VALID_SSH_KEYTYPES = [
+    'sk-ecdsa-sha2-nistp256@openssh.com',
+    'ecdsa-sha2-nistp256',
+    'ecdsa-sha2-nistp384',
+    'ecdsa-sha2-nistp521',
+    'sk-ssh-ed25519@openssh.com',
+    'ssh-ed25519',
+    'ssh-rsa',
+]
 
 def validate_ip_dnsbl(ip):
     """Validate a IP against DroneBL"""
@@ -66,7 +75,7 @@ def validate_sshkey(keystring):
         keytype, pubkey, _ = keystring.split(' ')
 
     # Check it is a valid type
-    if not keytype in ['ssh-rsa', 'ssh-ed25519']:
+    if not keytype in VALID_SSH_KEYTYPES:
         return 'Invalid keytype'
 
     # Decode the key data from Base64
