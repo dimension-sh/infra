@@ -5,7 +5,7 @@ postfix_mynetworks:
   - "[::1]/128"
 postfix_virtual_domains: []
 postfix_virtual_aliases: []
-postfix_smtpd_helo_restrictions: 
+postfix_smtpd_helo_restrictions:
   - permit_mynetworks
   - reject_non_fqdn_helo_hostname
   - reject_invalid_helo_hostname
@@ -15,8 +15,7 @@ postfix_smtpd_sender_restrictions:
   - reject_non_fqdn_sender
   - reject_unknown_sender_domain
   - permit
-postfix_smtpd_recipient_restrictions: 
-  - permit_sasl_authenticated
+postfix_smtpd_recipient_restrictions:
   - permit_mynetworks
   - reject_non_fqdn_recipient
   - reject_unknown_recipient_domain

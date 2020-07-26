@@ -44,16 +44,20 @@
   stat:
     path: "/etc/dovecot/dovecot.conf"
   register: dovecot_conf
-- name: Set postfix SASL configuration options
-  postconf:
-    name: "{{ item.name }}"
-    value: "{{ item.value }}"
-  notify: restart postfix
+- name: Copy submission master.cf
+  copy:
+    src: master.cf
+    dest: /etc/postfix/master.cf
+    owner: root
+    group: root
+    mode: "0644"
   when: dovecot_conf.stat.exists
-  loop:
-    - { name: "smtpd_sasl_auth_enable", value: "yes" }
-    - { name: "smtpd_sasl_type", value: "dovecot" }
-    - { name: "smtpd_sasl_path", value: "private/auth" }
-    - { name: "smtpd_tls_auth_only", value: "yes" }
-    - { name: "smtpd_sasl_authenticated_header", value: "yes" }
+- name: Copy sender_login_maps.pcre
+  copy:
+    src: sender_login_maps.pcre
+    dest: /etc/postfix/sender_login_maps.pcre
+    owner: root
+    group: root
+    mode: "0644"
+  when: dovecot_conf.stat.exists
 

@@ -1,5 +1,8 @@
 ---
-- name: Install Postfix
+- name: Install Postfix Packages
   dnf:
-    name: "postfix"
+    name: "{{ item }}"
     state: present
+  loop:
+    - "postfix"
+    - "postfix-pcre"
