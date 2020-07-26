@@ -10,17 +10,6 @@
     enabled: yes
     state: started
 
-- name: Create cgi directory
-  file:
-    path: /var/www/cgi
-    state: directory
-    mode: "0755"
-- name: Create requests directory
-  file:
-    path: /var/www/requests
-    state: directory
-    mode: "0700"
-
 # Install python dependencies
 - name: Install Python packages for CGI scripts
   pip:
@@ -29,3 +18,4 @@
     packages:
       - dnspython
       - markdown
+      - jinja2
