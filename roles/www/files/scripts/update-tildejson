@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import re
+import json
+import pwd
+import datetime
+
+DEFAULT_DATA = {
+    'name': 'dimension.sh',
+    'url': 'https://dimension.sh',
+    'signup_url': 'https://dimension.sh/join.html',
+    'want_users': True,
+    'admin_email': 'hostmaster@dimension.sh',
+    'description': 'dimension.sh is a small public linux shell host (or pubnix system) that is open to anyone who wants to learn, experiment, and socialize with other like minded people.',
+}
+
+
+def get_title(filename):
+    with open(filename, 'r') as fobj:
+        data = fobj.read()
+    res = re.search(r'<title>(.*?)</title>', data)
+    return res.group(1)
+
+
+def main():
+    data = DEFAULT_DATA.copy()
+
+    users = []
+    for user in sorted(pwd.getpwall(), key=lambda x: x.pw_name):
+        # if the user doesn't have a public_html folder, skip
+        if not os.path.exists(os.path.join(user.pw_dir, 'public_html')) or user.pw_gid != 100:
+            continue
+
+        # if .hidden exists in the public_html, skip it
+        if os.path.exists(os.path.join(user.pw_dir, 'public_html', '.hidden')):
+            continue
+
+        index_file = os.path.join(user.pw_dir, 'public_html', 'index.html')
+        if os.path.exists(os.path.join(user.pw_dir, 'public_html', 'index.html')):
+            title = get_title(index_file)
+            mtime = os.path.getmtime(index_file)
+        else:
+            title = None
+            mtime = 0
+
+        users.append({
+            'username': user.pw_name,
+            'title': title,
+            'mtime': int(mtime),
+        })
+
+    data.update({
+        'users': users,
+        'user_count': len(users),
+        'last_generated': str(datetime.datetime.utcnow()),
+    })
+
+    with open('/var/www/dimension.sh/tilde.json', 'w') as fobj:
+        fobj.write(json.dumps(data))
+
+
+if __name__ == '__main__':
+    main()

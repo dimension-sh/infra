@@ -23,3 +23,10 @@
     owner: root
     group: root
     mode: "0700"
+- name: Setup crontab to update tilde.json
+  copy:
+    src: scripts/update-tildejson
+    dest: /etc/cron.hourly/update-tildejson
+    owner: root
+    group: root
+    mode: "0700"
