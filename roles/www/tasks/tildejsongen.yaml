@@ -9,7 +9,7 @@
 - name: Install tildejsongen
   command: python3 /usr/local/src/tildejsongen/setup.py
   args:
-    creates: /usr/bin/tildejsongen
+    creates: /usr/local/bin/tildejsongen
 - name: Copy tildejsongen config
   copy:
     src: tildejsongen.ini
