@@ -7,7 +7,7 @@
     force: yes
   register: tildejsongen_repo
 - name: Install tildejsongen
-  command: python3 /usr/local/src/tildejsongen/setup.py
+  command: python3 /usr/local/src/tildejsongen/setup.py install
   args:
     creates: /usr/local/bin/tildejsongen
 - name: Copy tildejsongen config
