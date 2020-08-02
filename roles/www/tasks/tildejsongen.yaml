@@ -1,0 +1,26 @@
+---
+- name: Checkout tildejsongen
+  git:
+    repo: "https://github.com/dimension-sh/tildejsongen.git"
+    dest: /usr/local/src/tildejsongen
+    version: master
+    force: yes
+  register: tildejsongen_repo
+- name: Install tildejsongen
+  command: python3 /usr/local/src/tildejsongen/setup.py
+  args:
+    creates: /usr/bin/tildejsongen
+- name: Copy tildejsongen config
+  copy:
+    src: tildejsongen.ini
+    dest: /etc/tildejsongen.ini
+    owner: root
+    group: root
+    mode: "0700"
+- name: Setup crontab to update tilde.json
+  copy:
+    src: scripts/update-tildejson
+    dest: /etc/cron.hourly/update-tildejson
+    owner: root
+    group: root
+    mode: "0700"

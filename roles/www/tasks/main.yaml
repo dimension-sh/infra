@@ -5,3 +5,4 @@
 - include: sites.yaml
 - include: cgi.yaml
 - include: website.yaml
+- include: tildejsongen.yaml
