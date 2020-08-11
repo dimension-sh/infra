@@ -16,6 +16,8 @@ all:
             - nixshell.club
             - honk.life
             - hjonk.life
+            - gamut.one
+            - caret.one
           postfix_virtual_aliases:
             - virtual: root@nixsh.club
               alias: root
@@ -24,6 +26,10 @@ all:
             - virtual: root@honk.life
               alias: root
             - virtual: root@hjonk.life
+              alias: root
+            - virtual: root@gamut.one
+              alias: root
+            - virtual: root@caret.one
               alias: root
           www_sites:
             - dimension-sh
