@@ -6,6 +6,14 @@
     owner: root
     group: root
     mode: "0644"
+- name: Add csh config for Maildr
+  copy:
+    src: mail/mail.csh
+    dest: /etc/profile.d/mail.csh
+    owner: root
+    group: root
+    mode: "0644"
+
 
 - name: Copy mutt defaults
   copy:

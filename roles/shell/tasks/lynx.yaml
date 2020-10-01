@@ -6,3 +6,9 @@
     owner: root
     group: root
     mode: "0644"
+  copy:
+    src: lynx-homepage.csh
+    dest: /etc/profile.d/lynx-homepage.csh
+    owner: root
+    group: root
+    mode: "0644"
