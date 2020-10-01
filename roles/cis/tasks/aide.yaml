@@ -4,7 +4,7 @@
     name: aide
     state: installed
 - name: Init AIDE if database is missing
-  shell: aide --init && mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+  shell: aide --init; mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
   args:
     creates: /var/lib/aide/aide.db.gz
 - name: Install AIDE crontab
@@ -17,4 +17,4 @@
       SHELL=/bin/bash
       PATH=/sbin:/bin:/usr/sbin:/usr/bin
       MAILTO=root
-      0 5 * * * root /usr/sbin/aide --update && mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+      0 5 * * * root /usr/sbin/aide --update; mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
