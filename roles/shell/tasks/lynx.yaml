@@ -1,11 +1,12 @@
 ---
-- name: Set WWW homepage
+- name: Set WWW homepage (bash)
   copy:
     src: lynx-homepage.sh
     dest: /etc/profile.d/lynx-homepage.sh
     owner: root
     group: root
     mode: "0644"
+- name: Set WWW homepage (csh)
   copy:
     src: lynx-homepage.csh
     dest: /etc/profile.d/lynx-homepage.csh
