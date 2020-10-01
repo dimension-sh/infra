@@ -18,3 +18,4 @@
       - wget
       - zip
       - zsh
+      - tcsh
