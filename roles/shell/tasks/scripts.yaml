@@ -18,6 +18,7 @@
   register: mkuser_repo
 - name: Copy mkuser
   copy:
+    remote_src: true
     src: /usr/local/src/mkuser/mkuser
     dest: /usr/local/sbin/mkuser
     owner: root
@@ -25,6 +26,7 @@
     mode: "0700"
 - name: Copy mkuser.1
   copy:
+    remote_src: true
     src: /usr/local/src/mkuser/mkuser.1
     dest: /usr/local/share/man/man1/mkuser.1
     owner: root
