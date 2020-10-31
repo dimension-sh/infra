@@ -3,6 +3,7 @@
   dnf:
     name: yum-utils
     state: present
+
 - name: Install Dimension RPMs repo
   command: yum-config-manager --add-repo http://dimension-sh.github.io/dimension-rpms/dimension-rpms.repo
   args:
@@ -12,6 +13,7 @@
   stat:
     path: /etc/yum.repos.d/CentOS-PowerTools.repo
   register: powertools_repo_file
+
 - name: Enable PowerTools repo
   lineinfile:
     path: /etc/yum.repos.d/CentOS-PowerTools.repo

@@ -1,7 +1,7 @@
 ---
 - name: Install Packages
   dnf:
-    name: "firewalld"
+    name: firewalld
     state: present
 
 - name: Add firewall rule for ssh
