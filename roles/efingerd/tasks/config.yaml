@@ -43,6 +43,9 @@
 - name: Add logrotate rule for efingerd
   copy:
     dest: /etc/logrotate.d/finger
+    owner: root
+    group: root
+    mode: "0644"
     content: |
       /var/log/efingerd.log {
           rotate 5
