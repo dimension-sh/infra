@@ -32,7 +32,6 @@ all:
             - dimension-sh
             - nixshell-club
             - honk-life
-            - incognitus-net
           www_cert_email: root@dimension.sh
           www_certs:
             - hostname: s1.dimension.sh
@@ -44,6 +43,5 @@ all:
             - hostname: honk.life
               sans:
                 - hjonk.club
-            - hostname: incognitus.net
 vars:
   ansible_python_interpreter: /usr/bin/python3
