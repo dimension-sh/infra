@@ -3,6 +3,11 @@
   dnf:
     name: "nginx"
     state: present
+- name: Enable httpd_read_user_content
+  ansible.posix.seboolean:
+    name: httpd_read_user_content
+    persistent: yes
+    state: yes
 - name: Start nginx
   service:
     name: nginx
