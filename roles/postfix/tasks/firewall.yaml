@@ -5,9 +5,11 @@
     service: smtp
     permanent: yes
     state: enabled
+    immediate: yes
 - name: Add firewall rule for smtp-submission
   firewalld:
     zone: public
     service: smtp-submission
     permanent: yes
     state: enabled
+    immediate: yes

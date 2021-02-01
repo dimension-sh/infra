@@ -5,9 +5,11 @@
     service: http
     permanent: yes
     state: enabled
+    immediate: yes
 - name: Add firewall rule for https
   firewalld:
     zone: public
     service: https
     permanent: yes
     state: enabled
+    immediate: yes

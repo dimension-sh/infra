@@ -43,4 +43,5 @@
     service: imaps
     permanent: yes
     state: enabled
+    immediate: yes
   when: lets_cert.stat.exists

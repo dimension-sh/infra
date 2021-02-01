@@ -4,3 +4,4 @@
     port: 70/tcp
     permanent: yes
     state: enabled
+    immediate: yes

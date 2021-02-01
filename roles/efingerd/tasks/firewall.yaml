@@ -5,3 +5,4 @@
     service: finger
     permanent: yes
     state: enabled
+    immediate: yes
