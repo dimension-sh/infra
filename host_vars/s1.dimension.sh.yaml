@@ -16,6 +16,8 @@ postfix_virtual_aliases:
     alias: root
   - virtual: root@gamut.one
     alias: root
+  - virtual: admin@gamut.one
+    alias: gamut@m.tensixtyone.com
 www_sites:
   - dimension-sh
   - nixshell-club
