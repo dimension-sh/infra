@@ -1,4 +1,10 @@
 ---
+- name: Enable httpd_enable_cgi
+  ansible.posix.seboolean:
+    name: httpd_enable_cgi
+    persistent: yes
+    state: yes
+
 - name: Install fcgiwrap
   package:
     name: fcgiwrap
