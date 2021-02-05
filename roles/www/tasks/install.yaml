@@ -8,6 +8,11 @@
     name: httpd_read_user_content
     persistent: yes
     state: yes
+- name: Enable httpd_enable_homedirs
+  ansible.posix.seboolean:
+    name: httpd_enable_homedirs
+    persistent: yes
+    state: yes
 - name: Start nginx
   service:
     name: nginx
