@@ -27,3 +27,7 @@
     mode: 0440
     create: yes
     validate: "visudo -cf %s"
+- name: Remove all SSH keys from root
+  ansible.builtin.file:
+    path: /root/.ssh/authorized_keys
+    state: absent
