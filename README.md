@@ -6,6 +6,8 @@ infrastructure and system configuration.
 ## Playbooks
 
 * `main.yaml` - Run everything playbook.
+* `www.yaml` - Run web roles.
+* `bootstrap.yaml` - Run initial bootstrapping for new servers.
 
 ## Base Roles
 

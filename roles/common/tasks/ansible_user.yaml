@@ -1,0 +1,29 @@
+---
+- name: Install ansible pre-reqs
+  dnf:
+    name: sudo
+    state: present
+- name: Ensure that includedir in sudoers
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    line: "#includedir /etc/sudoers.d"
+    state: present
+    validate: "/usr/sbin/visudo -cf %s"
+- name: Create ansible user
+  ansible.builtin.user:
+    name: ansible
+    system: yes
+    home: /var/lib/ansible
+    comment: Ansible User
+- name: Install AWX key into ansible user
+  ansible.posix.authorized_key:
+    user: ansible
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORyJ0195AyNxsTxQpucXuz1460x/2SphPi8dYxMzoRU Doofnet AWX"
+- name: Add user "ansible" to sudo
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/ansible
+    line: "ansible ALL=(ALL) NOPASSWD: ALL"
+    state: present
+    mode: 0440
+    create: yes
+    validate: "visudo -cf %s"
