@@ -1,0 +1,6 @@
+#!/bin/bash
+# Pulls the latest commit on master to the local gemsite folder
+
+cd /var/gemini
+git reset --hard > /dev/null 2>&1
+git pull origin > /dev/null 2>&1

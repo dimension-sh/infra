@@ -1,0 +1,21 @@
+---
+- name: Deploy gemini site files
+  git:
+    repo: "https://github.com/dimension-sh/gemini-site.git"
+    dest: /var/gemini/
+    version: master
+- name: Setup crontab to update the gemsite
+  copy:
+    src: scripts/update-gemsite
+    dest: /etc/cron.hourly/update-gemsite
+    owner: root
+    group: root
+    mode: "0700"
+- name: Setup crontab to link users to the gemsite
+  copy:
+    src: scripts/link-gemini
+    dest: /etc/cron.hourly/link-gemini
+    owner: root
+    group: root
+    mode: "0700"
+

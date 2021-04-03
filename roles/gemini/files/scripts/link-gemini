@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+
+import os
+import os.path
+import pwd
+
+GEMINI_ROOT = '/var/gemini'
+GEMINI_USERS = os.path.join(GEMINI_ROOT, 'users')
+
+if not os.path.exists(GEMINI_USERS):
+  os.mkdir(GEMINI_USERS)
+  os.chmod(GEMINI_USERS, 0o755)
+
+for user in pwd.getpwall():
+  if os.path.exists(os.path.join(user.pw_dir, 'public_gemini')):
+    link_path = os.path.join(GEMINI_USERS, user.pw_name)
+    if not os.path.exists(link_path) or not os.path.islink(link_path):
+      os.symlink(os.path.join(user.pw_dir, 'public_gemini'), link_path)
