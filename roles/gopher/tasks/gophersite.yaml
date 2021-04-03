@@ -1,0 +1,14 @@
+---
+- name: Deploy gophersite files
+  git:
+    repo: "https://github.com/dimension-sh/gopher-site.git"
+    dest: /var/gopher/
+    version: master
+- name: Setup crontab to update the website
+  copy:
+    src: scripts/update-gophersite
+    dest: /etc/cron.hourly/update-gophersite
+    owner: root
+    group: root
+    mode: "0700"
+
