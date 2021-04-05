@@ -2,6 +2,7 @@
 - name: Deploy gophersite files
   git:
     repo: "https://github.com/dimension-sh/gopher-site.git"
+    separate_git_dir: /usr/local/src/gopher-site
     dest: /var/gopher/
     version: master
 - name: Setup crontab to update the website

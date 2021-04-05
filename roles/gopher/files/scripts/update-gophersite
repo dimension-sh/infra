@@ -1,6 +1,6 @@
 #!/bin/bash
 # Pulls the latest commit on master to the local gophersite folder
 
-cd /var/gopher
+cd /usr/local/src/gopher-site/
 git reset --hard > /dev/null 2>&1
 git pull origin > /dev/null 2>&1

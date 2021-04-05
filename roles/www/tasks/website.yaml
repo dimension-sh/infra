@@ -2,11 +2,13 @@
 - name: Deploy website files
   git:
     repo: "https://github.com/dimension-sh/www-site.git"
+    separate_git_dir: /usr/local/src/www-site
     dest: /var/www/dimension.sh/
     version: master
 - name: Deploy wiki files
   git:
     repo: "https://github.com/dimension-sh/wiki.git"
+    separate_git_dir: /usr/local/src/wiki
     dest: /srv/wiki/
     version: master
 - name: Setup crontab to update the website
