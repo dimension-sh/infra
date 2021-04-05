@@ -3,3 +3,5 @@
   become: true
   roles:
     - www
+    - gopher
+    - gemini
