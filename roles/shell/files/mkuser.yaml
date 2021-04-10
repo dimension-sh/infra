@@ -1,5 +1,7 @@
 site_name: dimension.sh
 site_url: https://dimension.sh
+site_gopher: gopher://dimension.sh/1
+site_gemini: gemini://dimension.sh
 site_contact: root@dimension.sh
 mail_template: /etc/mkuser/mail.tmpl
 mail_subject: Welcome to dimension.sh!
