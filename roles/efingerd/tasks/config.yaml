@@ -54,3 +54,8 @@
           copytruncate
           missingok
       }
+- name: Start finger socket
+  systemd:
+    name: finger.socket
+    enabled: yes
+    state: started
