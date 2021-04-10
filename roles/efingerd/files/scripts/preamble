@@ -1,5 +1,5 @@
 #!/bin/bash
-cat /etc/motd.d/00-logo
+cat /etc/motd.d/00-logo | sed 's/\x1b\[[0-9;]*m//g'
 
 cat <<EOM
 dimension.sh is a shared linux shell system (or pubnix), open to everyone and anyone to
