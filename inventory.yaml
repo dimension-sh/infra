@@ -3,9 +3,6 @@ all:
     build:
       hosts:
         b1.dimension.sh:
-    services:
-      hosts:
-        srv1.dimension.sh:
     shell:
       hosts:
         s1.dimension.sh:
