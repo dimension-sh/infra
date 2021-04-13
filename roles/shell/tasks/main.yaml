@@ -5,4 +5,4 @@
 - include: skel.yaml
 - include: motd.yaml
 - include: mail.yaml
-- include: lynx.yaml
+- include: profile.yaml

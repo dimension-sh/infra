@@ -20,6 +20,7 @@
       - pandoc
       - sqlite
       - stow
+      - tin
       - tig
       - tmux
       - unzip

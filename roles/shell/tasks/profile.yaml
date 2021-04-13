@@ -13,3 +13,10 @@
     owner: root
     group: root
     mode: "0644"
+- name: Set NNTP Server (bash)
+  copy:
+    src: nntpserver.sh
+    dest: /etc/profile.d/nntpserver.sh
+    owner: root
+    group: root
+    mode: "0644"
