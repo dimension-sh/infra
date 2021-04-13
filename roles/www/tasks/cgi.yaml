@@ -25,3 +25,5 @@
       - dnspython
       - markdown
       - jinja2
+      - python-frontmatter
+      - utmp
