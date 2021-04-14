@@ -11,17 +11,3 @@
     separate_git_dir: /usr/local/src/wiki
     dest: /srv/wiki/
     version: master
-- name: Setup crontab to update the website
-  copy:
-    src: scripts/update-website
-    dest: /etc/cron.hourly/update-website
-    owner: root
-    group: root
-    mode: "0700"
-- name: Setup crontab to update the wiki
-  copy:
-    src: scripts/update-wiki
-    dest: /etc/cron.hourly/update-wiki
-    owner: root
-    group: root
-    mode: "0700"

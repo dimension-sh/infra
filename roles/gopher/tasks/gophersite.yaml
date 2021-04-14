@@ -5,11 +5,3 @@
     separate_git_dir: /usr/local/src/gopher-site
     dest: /var/gopher/
     version: master
-- name: Setup crontab to update the website
-  copy:
-    src: scripts/update-gophersite
-    dest: /etc/cron.hourly/update-gophersite
-    owner: root
-    group: root
-    mode: "0700"
-
