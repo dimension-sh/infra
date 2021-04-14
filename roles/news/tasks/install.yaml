@@ -18,10 +18,3 @@
     owner: root
     group: root
     mode: "0755"
-- name: Deploy news.cron
-  copy:
-    src: news.cron
-    dest: /etc/cron.d/news
-    owner: root
-    group: root
-    mode: "0644"
