@@ -25,6 +25,10 @@
   ansible.posix.authorized_key:
     user: ansible
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORyJ0195AyNxsTxQpucXuz1460x/2SphPi8dYxMzoRU Doofnet AWX"
+- name: Install Github deploy key into ansible user
+  ansible.posix.authorized_key:
+    user: ansible
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIALZxAIQwODgToet5E1ya5x6jsQYdZHhNlWrs8Ed6voO Dimension Github Key"
 - name: Add user "ansible" to sudo
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/ansible
