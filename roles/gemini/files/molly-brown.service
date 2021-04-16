@@ -1,0 +1,14 @@
+[Unit]
+Description=Molly Brown gemini server
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=30
+User=molly
+Group=molly
+ExecStart=/usr/local/bin/molly-brown -c /etc/molly/molly.conf
+
+[Install]
+WantedBy=multi-user.target

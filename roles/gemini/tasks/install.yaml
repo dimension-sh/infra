@@ -1,0 +1,45 @@
+---
+- name: Build molly-brown
+  command: "{{ ansible_local.golang.general.home }}/bin/go get tildegit.org/solderpunk/molly-brown"
+  args:
+    creates: "/root/go/bin/molly-brown"
+- name: Build gemcert
+  command: "{{ ansible_local.golang.general.home }}/bin/go get tildegit.org/solderpunk/gemcert"
+  args:
+    creates: "/root/go/bin/gemcert"
+- name: Copy molly-brown executable
+  ansible.builtin.copy:
+    src: /root/go/bin/molly-brown
+    dest: /usr/local/bin/molly-brown
+    mode: "0755"
+    setype: bin_t
+    remote_src: yes
+- name: Copy gemcert executable
+  ansible.builtin.copy:
+    src: /root/go/bin/gemcert
+    dest: /usr/local/bin/gemcert
+    mode: "0755"
+    setype: bin_t
+    remote_src: yes
+- name: Create molly group
+  ansible.builtin.group:
+    name: molly
+    system: yes
+- name: Create molly user
+  ansible.builtin.user:
+    name: molly
+    group: molly
+    home: /var/gemini
+    create_home: no
+    shell: /bin/false
+    system: yes
+- name: Copy molly-brown.service
+  copy:
+    src: "molly-brown.service"
+    dest: "/etc/systemd/system/molly-brown.service"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload systemd
+- name: Refresh systemd now
+  meta: flush_handlers
