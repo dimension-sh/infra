@@ -13,7 +13,7 @@
     www_site_files: "{{ www_site_files|default(['http-redirect.conf', 'ip-redirect.conf']) }} + [ '{{ item }}.conf' ]"
   loop: "{{ www_sites }}"
 - name: Get a list of all files in /etc/nginx/conf.d/
-  shell: ls -1 /etc/nginx/conf.d/
+  command: /bin/ls -1 /etc/nginx/conf.d/
   register: contents
   changed_when: false
 - name: Remove unmanaged files

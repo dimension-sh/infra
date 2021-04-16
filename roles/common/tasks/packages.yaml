@@ -3,4 +3,4 @@
   dnf:
     name: "{{ item }}"
     state: present
-  loop: "{{ common_packages}} "
+  loop: "{{ common_packages }} "
