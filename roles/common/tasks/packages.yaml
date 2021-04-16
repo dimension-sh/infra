@@ -1,6 +1,5 @@
 ---
 - name: Install Packages
   dnf:
-    name: "{{ item }}"
+    name: "{{ common_packages }}"
     state: present
-  loop: "{{ common_packages }} "
