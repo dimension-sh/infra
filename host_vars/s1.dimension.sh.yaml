@@ -1,35 +1,15 @@
 ---
 postfix_virtual_domains:
-  - nixsh.club
-  - nixshell.club
-  - honk.life
-  - hjonk.life
   - gamut.one
 postfix_virtual_aliases:
-  - virtual: root@nixsh.club
-    alias: root
-  - virtual: root@nixshell.club
-    alias: root
-  - virtual: root@honk.life
-    alias: root
-  - virtual: root@hjonk.life
-    alias: root
   - virtual: root@gamut.one
     alias: root
   - virtual: admin@gamut.one
     alias: gamut@m.tensixtyone.com
 www_sites:
   - dimension-sh
-  - nixshell-club
-  - honk-life
 www_cert_email: root@dimension.sh
 www_certs:
   - hostname: s1.dimension.sh
     sans:
       - dimension.sh
-  - hostname: nixshell.club
-    sans:
-      - nixsh.club
-  - hostname: honk.life
-    sans:
-      - hjonk.club
