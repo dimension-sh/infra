@@ -15,3 +15,7 @@ common_packages:
   - zsh
   - tcsh
   - policycoreutils
+
+ansible_keys:
+ - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORyJ0195AyNxsTxQpucXuz1460x/2SphPi8dYxMzoRU Doofnet AWX"
+ - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIALZxAIQwODgToet5E1ya5x6jsQYdZHhNlWrs8Ed6voO Dimension Github Key"
