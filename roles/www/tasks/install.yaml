@@ -34,6 +34,14 @@
     group: root
     mode: "0644"
   notify: restart nginx
+- name: Copy ip redirect config to nginx
+  copy:
+    src: "config/sites/ip-redirect.conf"
+    dest: "/etc/nginx/conf.d/ip-redirect.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart nginx
 - name: Create well-known folder for certbot
   file:
     path: /var/www/acme-challenge
