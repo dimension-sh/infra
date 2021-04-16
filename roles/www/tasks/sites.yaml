@@ -25,5 +25,5 @@
     path: "/etc/nginx/conf.d/{{ item }}"
     state: absent
   notify: restart nginx
-  with_items: contents.stdout_lines
+  with_items: "{{ contents.stdout_lines }}"
   when: item not in www_site_files
