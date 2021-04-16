@@ -19,11 +19,10 @@
 # Install python dependencies
 - name: Install Python packages for CGI scripts
   pip:
-    name: "{{ packages }}"
-  vars:
-    packages:
-      - dnspython
-      - markdown
-      - jinja2
-      - python-frontmatter
-      - utmp
+    name: "{{ item }}"
+  loop:
+    - dnspython
+    - markdown
+    - jinja2
+    - python-frontmatter
+    - utmp

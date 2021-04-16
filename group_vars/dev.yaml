@@ -1,0 +1,22 @@
+---
+common_packages:
+  - ansible
+  - bind-utils
+  - dos2unix
+  - git
+  - nano
+  - pandoc
+  - sqlite
+  - stow
+  - tig
+  - unzip
+  - wget
+  - zip
+  - zsh
+  - tcsh
+  - policycoreutils
+  - nmap-ncat
+  - gcc
+  - automake
+  - rpmdevtools
+  - rpm-build

@@ -7,11 +7,11 @@
     group: root
     mode: "0644"
   notify: restart nginx
-  with_items: "{{ www_sites }}"
+  loop: "{{ www_sites }}"
 - name: Build a list of all site files.
   set_fact:
     www_site_files: "{{ www_site_files|default(['http-redirect.conf', 'ip-redirect.conf']) }} + [ '{{ item }}.conf' ]"
-  with_items: "{{ www_sites }}"
+  loop: "{{ www_sites }}"
 - name: Get a list of all files in /etc/nginx/conf.d/
   shell: ls -1 /etc/nginx/conf.d/
   register: contents
@@ -21,5 +21,5 @@
     path: "/etc/nginx/conf.d/{{ item }}"
     state: absent
   notify: restart nginx
-  with_items: "{{ contents.stdout_lines }}"
+  loop: "{{ contents.stdout_lines }}"
   when: item not in www_site_files

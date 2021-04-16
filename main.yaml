@@ -6,8 +6,8 @@
     - cis
 - hosts: build
   become: true
-  roles:
-    - build
+- hosts: dev
+  become: true
 - hosts: shell
   become: true
   roles:

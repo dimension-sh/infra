@@ -9,7 +9,7 @@
     mode: 0644
     create: true
     state: present
-  with_items: "{{ postfix_virtual_aliases }}"
+  loop: "{{ postfix_virtual_aliases }}"
   notify:
     - new virtual aliases
     - restart postfix

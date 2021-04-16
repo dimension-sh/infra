@@ -7,4 +7,4 @@
   command: "certbot certonly -n --webroot -w /var/www/acme-challenge -d {{ item.hostname }} {% for san in item.sans|default([]) %} -d {{ san }} {% endfor %} -m {{ www_certs_email|default('root@dimension.sh') }}" # noqa 204
   args:
     creates: "/etc/letsencrypt/renewal/{{ item.hostname }}.conf"
-  with_items: "{{ www_certs }}"
+  loop: "{{ www_certs }}"

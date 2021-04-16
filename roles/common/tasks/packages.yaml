@@ -1,22 +1,6 @@
 ---
 - name: Install Packages
   dnf:
-    name: "{{ packages }}"
+    name: "{{ item }}"
     state: present
-  vars:
-    packages:
-      - ansible
-      - bind-utils
-      - dos2unix
-      - git
-      - nano
-      - pandoc
-      - sqlite
-      - stow
-      - tig
-      - unzip
-      - wget
-      - zip
-      - zsh
-      - tcsh
-      - policycoreutils
+  loop: "{{ common_packages}} "

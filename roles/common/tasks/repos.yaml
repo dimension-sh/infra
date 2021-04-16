@@ -23,8 +23,5 @@
 
 - name: Install epel-release Packages
   dnf:
-    name: "{{ packages }}"
+    name: epel-release
     state: present
-  vars:
-    packages:
-      - epel-release
