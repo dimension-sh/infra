@@ -15,6 +15,11 @@
 - name: Get a list of all files in /etc/nginx/conf.d/
   shell: ls -1 /etc/nginx/conf.d/
   register: contents
+  changed_when: false
+- debug:
+    var: www_site_files
+- debug:
+    var: contents
 - name: Remove unmanaged files
   file:
     path: "/etc/nginx/conf.d/{{ item }}"
