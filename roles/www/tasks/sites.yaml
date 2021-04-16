@@ -10,7 +10,7 @@
   with_items: "{{ www_sites }}"
 - name: Build a list of all site files.
   set_fact:
-    www_site_files: "{{ www_site_files }} + [ '{{ item }}.conf' ]"
+    www_site_files: "{{ www_site_files|default([]) }} + [ '{{ item }}.conf' ]"
   with_items: "{{ www_sites }}"
 - name: Get a list of all files in /etc/nginx/conf.d/
   shell: ls -1 /etc/nginx/conf.d/
