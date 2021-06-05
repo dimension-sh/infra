@@ -8,6 +8,9 @@
     mode: "0644"
   notify: restart nginx
   loop: "{{ www_sites }}"
+- name: Set default www_site_files fact.
+  set_fact:
+    www_site_files: ['http-redirect.conf', 'ip-redirect.conf']
 - name: Build a list of all site files.
   set_fact:
     www_site_files: "{{ www_site_files|default(['http-redirect.conf', 'ip-redirect.conf']) }} + [ '{{ item }}.conf' ]"
