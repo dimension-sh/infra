@@ -5,13 +5,6 @@ postfix_mynetworks:
   - "[::1]/128"
   - "134.209.189.201/32"
   - "[2a03:b0c0:1:e0::4ce:1]/128"
-postfix_virtual_domains:
-  - gamut.one
-postfix_virtual_aliases:
-  - virtual: root@gamut.one
-    alias: root
-  - virtual: admin@gamut.one
-    alias: gamut@m.tensixtyone.com
 www_sites:
   - dimension-sh
 www_cert_email: root@dimension.sh
