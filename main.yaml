@@ -6,12 +6,8 @@
     - cis
 - hosts: build
   become: true
-  roles:
-    - gantsign.golang
 - hosts: dev
   become: true
-  roles:
-    - gantsign.golang
 - hosts: shell
   become: true
   roles:
@@ -20,7 +16,6 @@
     - news
     - www
     - gopher
-    - gantsign.golang
     - gemini
 - hosts: mail
   become: true
