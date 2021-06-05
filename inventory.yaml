@@ -3,9 +3,13 @@ all:
     build:
       hosts:
         b1.dimension.sh:
+    mail:
+      hosts:
+        s1.dimension.sh:
     shell:
       hosts:
         s1.dimension.sh:
+        s2.dimension.sh:
     dev:
       hosts:
         d1.dimension.sh:

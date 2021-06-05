@@ -15,8 +15,6 @@
 - hosts: shell
   become: true
   roles:
-    - dovecot
-    - postfix
     - shell
     - efingerd
     - news
@@ -24,5 +22,10 @@
     - gopher
     - gantsign.golang
     - gemini
+- hosts: mail
+  become: true
+  roles:
+    - postfix
+    - dovecot
 - hosts: services
   become: true
