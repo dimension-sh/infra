@@ -17,6 +17,10 @@ common_packages:
   - policycoreutils
   - python3-libsemanage
 
+remove_packages:
+  - cockpit
+  - cockpit-ws
+
 www_cert_email: root@dimension.sh
 
 ansible_keys:

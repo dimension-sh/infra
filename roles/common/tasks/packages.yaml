@@ -3,3 +3,8 @@
   dnf:
     name: "{{ common_packages }}"
     state: present
+
+- name: Remove unneeded Packages
+  dnf:
+    name: "{{ remove_packages }}"
+    state: absent
