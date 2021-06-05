@@ -11,3 +11,11 @@
     owner: root
     group: root
     mode: "0644"
+- name: Add system message
+  copy:
+    content: "Welcome to {{ ansible_fqdn }}\n\n"
+    dest: /etc/motd.d/01-system
+    owner: root
+    group: root
+    mode: "0644"
+
