@@ -9,33 +9,27 @@
   args:
     creates: /etc/yum.repos.d/dimension-rpms.repo
 
-# CentOS
-- name: Check if Powertools Repo exists
-  stat:
-    path: /etc/yum.repos.d/CentOS-PowerTools.repo
-  register: centospowertools_repo_file
+- name: Set Powertools repo name for RedHat
+  set_fact:
+    powertools_repofile: "CentOS-PowerTools.repo"
   when: ansible_facts['os_family'] == "RedHat"
 
-- name: Enable PowerTools repo
-  lineinfile:
-    path: /etc/yum.repos.d/CentOS-PowerTools.repo
-    regexp: "^enabled="
-    line: "enabled=1"
-  when: ansible_facts['os_family'] == "RedHat" and centospowertools_repo_file.stat.exists
-
-# Rocky
-- name: Check if Powertools Repo exists
-  stat:
-    path: /etc/yum.repos.d/Rocky-PowerTools.repo
-  register: rockypowertools_repo_file
+- name: Set Powertools repo name for Rocky
+  set_fact:
+    powertools_repofile: "Rocky-PowerTools.repo"
   when: ansible_facts['os_family'] == "Rocky"
 
+- name: Check if PowerTools Repo exists
+  stat:
+    path: "/etc/yum.repos.d/{{ powertools_repofile }}"
+  register: centospowertools_repo_file
+
 - name: Enable PowerTools repo
   lineinfile:
-    path: /etc/yum.repos.d/Rocky-PowerTools.repo
+    path: "/etc/yum.repos.d/{{ powertools_repofile }}"
     regexp: "^enabled="
     line: "enabled=1"
-  when: ansible_facts['os_family'] == "Rocky" and rockypowertools_repo_file.stat.exists
+  when: powertools_repo_file.stat.exists
 
 - name: Install epel-release Packages
   dnf:
