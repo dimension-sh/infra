@@ -1,4 +1,13 @@
 ---
+- name: Check if /var/gopher is checkout from git
+  stat:
+    path: /var/gemini/.git
+  register: gemini_result_git
+- name: Remove /var/gemini dir if not a git repo
+  file:
+    path: /var/gemini
+    state: absent
+  when: not gemini_result_git.stat.exists
 - name: Deploy gemini site files
   git:
     repo: "https://github.com/dimension-sh/gemini-site.git"
