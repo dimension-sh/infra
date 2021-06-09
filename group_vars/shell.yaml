@@ -27,3 +27,4 @@ common_packages:
   - tmux
   - util-linux-user
   - w3m
+  - python3-libsemanage
