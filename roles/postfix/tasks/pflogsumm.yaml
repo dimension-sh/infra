@@ -13,4 +13,4 @@
       SHELL=/bin/bash
       PATH=/sbin:/bin:/usr/sbin:/usr/bin
       MAILTO=root
-      @daily root /bin/pflogsumm -d yesterday --mailq /var/log/maillog*
+      @daily root pflogsumm -d yesterday --mailq /var/log/maillog*
