@@ -11,6 +11,6 @@
     mode: "0600"
     content: |
       SHELL=/bin/bash
-      PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin
+      PATH=/sbin:/bin:/usr/sbin:/usr/bin
       MAILTO=root
-      @daily root /usr/local/sbin/pflogsumm -d yesterday --mailq /var/log/maillog*
+      @daily root /bin/pflogsumm -d yesterday --mailq /var/log/maillog*
