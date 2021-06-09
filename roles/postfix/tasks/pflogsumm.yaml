@@ -1,0 +1,16 @@
+---
+- name: Install pflogsumm
+  dnf:
+    name: "pflogsumm"
+    state: present
+- name: Install pflogsumm crontab
+  copy:
+    dest: /etc/cron.d/pflogsumm
+    owner: root
+    group: root
+    mode: "0600"
+    content: |
+      SHELL=/bin/bash
+      PATH=/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin
+      MAILTO=root
+      @daily root /usr/local/sbin/pflogsumm -d yesterday --mailq /var/log/maillog*

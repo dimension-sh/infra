@@ -4,3 +4,4 @@
 - include: aliases.yaml
 - include: service.yaml
 - include: firewall.yaml
+- include: pflogsumm.yaml
