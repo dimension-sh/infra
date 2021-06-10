@@ -14,7 +14,7 @@
     option: ignoreip
     value: "{{ fail2ban_ignoreip | join(' ') }}"
     backup: yes
-  notify: Restart fail2ban
+  notify: restart fail2ban
 - name: Set default ban time
   ini_file:
     path: /etc/fail2ban/jail.local
@@ -22,7 +22,7 @@
     option: bantime
     value: '600'
     backup: yes
-  notify: Restart fail2ban
+  notify: restart fail2ban
 - name: Enable sshd jail
   ini_file:
     path: /etc/fail2ban/jail.local
