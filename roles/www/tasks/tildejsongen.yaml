@@ -10,10 +10,14 @@
     owner: root
     group: root
     mode: "0700"
-- name: Setup crontab to update tilde.json
+- name: Install tilejsongen crontab
   copy:
-    src: scripts/update-tildejson
-    dest: /etc/cron.hourly/update-tildejson
+    dest: /etc/cron.d/tildejsongen
     owner: root
     group: root
-    mode: "0700"
+    mode: "0600"
+    content: |
+      SHELL=/bin/bash
+      PATH=/sbin:/bin:/usr/sbin:/usr/bin
+      MAILTO=root
+      @hourly root tildejsongen
