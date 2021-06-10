@@ -1,15 +1,8 @@
 ---
-- name: Checkout tildejsongen
-  git:
-    repo: "https://github.com/dimension-sh/tildejsongen.git"
-    dest: /usr/local/src/tildejsongen
-    version: master
-    force: yes
-  register: tildejsongen_repo
 - name: Install tildejsongen
-  command: python3 /usr/local/src/tildejsongen/setup.py install
-  args:
-    creates: /usr/local/bin/tildejsongen
+  dnf:
+    name: tildejsongen
+    state: installed
 - name: Copy tildejsongen config
   copy:
     src: tildejsongen.ini
