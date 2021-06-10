@@ -14,4 +14,3 @@
     separate_git_dir: /usr/local/src/gemini-site
     dest: /var/gemini/
     version: master
-
