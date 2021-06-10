@@ -1,0 +1,32 @@
+---
+- name: Install fail2ban
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - fail2ban
+      - fail2ban-selinux
+- name: Set ignoreip
+  ini_file:
+    path: /etc/fail2ban/jail.local
+    section: DEFAULT
+    option: ignoreip
+    value: "{{ fail2ban_ignoreip | join(' ') }}"
+    backup: yes
+  notify: Restart fail2ban
+- name: Set default ban time
+  ini_file:
+    path: /etc/fail2ban/jail.local
+    section: DEFAULT
+    option: bantime
+    value: '600'
+    backup: yes
+  notify: Restart fail2ban
+- name: Enable sshd jail
+  ini_file:
+    path: /etc/fail2ban/jail.local
+    section: sshd
+    option: enabled
+    value: 'true'
+  notify: restart fail2ban

@@ -6,3 +6,4 @@
 - include: motd.yaml
 - include: mail.yaml
 - include: profile.yaml
+- include: fail2ban.yaml

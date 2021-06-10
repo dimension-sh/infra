@@ -31,6 +31,19 @@
   when: lets_cert.stat.exists
   notify: restart dovecot
 
+- name: Check if fail2ban is installed
+  stat:
+    path: "/etc/fail2ban/jail.local"
+  register: fail2ban_jail_file
+- name: Enable dovecot jail
+  ini_file:
+    path: /etc/fail2ban/jail.local
+    section: dovecot
+    option: enabled
+    value: 'true'
+  when: fail2ban_jail_file.stat.exists
+  notify: restart fail2ban
+
 - name: Start dovecot
   service:
     name: dovecot
