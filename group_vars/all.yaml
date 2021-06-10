@@ -16,6 +16,7 @@ common_packages:
   - tcsh
   - policycoreutils
   - python3-libsemanage
+  - util-linux-user
 
 remove_packages:
   - cockpit
