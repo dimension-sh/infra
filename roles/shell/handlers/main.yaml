@@ -3,7 +3,3 @@
   command:
     cmd: sh ./install.sh
     chdir: /usr/local/src/man/
-- name: restart fail2ban
-  service:
-    name: fail2ban
-    state: restarted

@@ -3,5 +3,6 @@
 - include: ansible_user.yaml
 - include: rsyslog.yaml
 - include: firewall.yaml
+- include: fail2ban.yaml
 - include: motd.yaml
 - include: packages.yaml
