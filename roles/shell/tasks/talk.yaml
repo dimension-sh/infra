@@ -1,0 +1,22 @@
+---
+- name: Install talk packages
+  package:
+    name: "{{ packages }}"
+    state: installed
+  vars:
+    packages:
+      - talk
+      - talk-server
+      - ytalk
+- name: Start ntalk.socket
+  service:
+    name: ntalk.socket
+    state: started
+    enabled: yes
+- name: Add firewall rule for ntalk
+  firewalld:
+    zone: public
+    port: 518/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
