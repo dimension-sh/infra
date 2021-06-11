@@ -4,7 +4,14 @@
   gather_facts: no
   tasks:
     - include: roles/common/tasks/ansible_user.yaml
-    - name: Install nikdoof's key into root user
+    - name: Add nikdoof user
+      ansible.builtin.user:
+        name: nikdoof
+        shell: /bin/bash
+        group: 100
+        groups: wheel
+        append: yes
+    - name: Install ssh pubkey into nikdoof user
       ansible.posix.authorized_key:
         user: root
-        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJPCxgs8vZbjm6ktpf9Jr3sLoKfMQJ6DT1/20wNq9RQe nikdoof"
+        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJPCxgs8vZbjm6ktpf9Jr3sLoKfMQJ6DT1/20wNq9RQe"
