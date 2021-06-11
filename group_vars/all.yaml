@@ -6,18 +6,18 @@ common_packages:
   - git
   - nano
   - pandoc
+  - policycoreutils
+  - python3-libsemanage
   - sqlite
   - stow
+  - tcsh
   - tig
+  - traceroute
   - unzip
+  - util-linux-user
   - wget
   - zip
   - zsh
-  - tcsh
-  - policycoreutils
-  - python3-libsemanage
-  - util-linux-user
-  - traceroute
 
 remove_packages:
   - cockpit

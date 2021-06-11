@@ -1,17 +1,17 @@
 ---
 group_packages:
   - alpine-maildir
+  - catgirl
   - figlet
   - inotify-tools
   - lynx
   - mutt
   - nethack
   - nmap-ncat
+  - pb
   - stow
+  - telnet
   - tin
   - tmux
-  - w3m
-  - catgirl
   - todo
-  - pb
-  - telnet
+  - w3m
