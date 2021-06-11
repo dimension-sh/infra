@@ -1,0 +1,9 @@
+---
+# Tighten down /proc
+- name: Hide other user's PIDs for non-root users
+  ansible.posix.mount:
+    src: proc
+    path: /proc
+    opts: defaults,hidepid=1
+    state: remounted
+    fstype: proc
