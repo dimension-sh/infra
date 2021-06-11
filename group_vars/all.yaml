@@ -17,6 +17,7 @@ common_packages:
   - policycoreutils
   - python3-libsemanage
   - util-linux-user
+  - traceroute
 
 remove_packages:
   - cockpit
