@@ -3,10 +3,7 @@
   dnf:
     name: aide
     state: installed
-- name: Init AIDE if database is missing
-  shell: aide --init; mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
-  args:
-    creates: /var/lib/aide/aide.db.gz
+  notify: init aide
 - name: Install AIDE crontab
   copy:
     dest: /etc/cron.d/aide
