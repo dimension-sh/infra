@@ -1,5 +1,1 @@
 ---
-- name: Install man files
-  command:
-    cmd: sh ./install.sh
-    chdir: /usr/local/src/man/

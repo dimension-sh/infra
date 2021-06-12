@@ -51,11 +51,3 @@
     owner: root
     group: root
     mode: "0600"
-
-# Manuals
-- name: Deploy man pages
-  git:
-    repo: "https://github.com/dimension-sh/man.git"
-    dest: /usr/local/src/man
-    version: master
-  notify: Install man files
