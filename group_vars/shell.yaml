@@ -2,6 +2,7 @@
 group_packages:
   - alpine-maildir
   - catgirl
+  - dimension-man
   - figlet
   - inotify-tools
   - lynx
