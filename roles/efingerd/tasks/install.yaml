@@ -3,6 +3,10 @@
   dnf:
     name: efingerd
     state: installed
+- name: create override folder for finger@.service
+  file:
+    path: /etc/systemd/system/finger@.service.d
+    state: directory
 - name: Install systemd overrides
   copy:
     src: override.conf
