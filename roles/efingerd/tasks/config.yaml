@@ -5,55 +5,19 @@
     path: /etc/efingerd
     state: directory
     mode: "0755"
-- name: Copy list
+- name: Copy efingerd scripts
   copy:
-    src: scripts/list
-    dest: /etc/efingerd/list
+    src: "scripts/{{ item }}"
+    dest: "/etc/efingerd/{{ item }}"
     owner: root
     group: root
     mode: "0755"
-- name: Copy log
-  copy:
-    src: scripts/log
-    dest: /etc/efingerd/log
-    owner: root
-    group: root
-    mode: "0755"
-- name: Copy luser
-  copy:
-    src: scripts/luser
-    dest: /etc/efingerd/luser
-    owner: root
-    group: root
-    mode: "0755"
-- name: Copy nouser
-  copy:
-    src: scripts/nouser
-    dest: /etc/efingerd/nouser
-    owner: root
-    group: root
-    mode: "0755"
-- name: Copy preamble
-  copy:
-    src: scripts/preamble
-    dest: /etc/efingerd/preamble
-    owner: root
-    group: root
-    mode: "0755"
-- name: Add logrotate rule for efingerd
-  copy:
-    dest: /etc/logrotate.d/finger
-    owner: root
-    group: root
-    mode: "0644"
-    content: |
-      /var/log/efingerd.log {
-          rotate 5
-          daily
-          compress
-          copytruncate
-          missingok
-      }
+  loop:
+    - list
+    - log
+    - luser
+    - nouser
+    - preamble
 - name: Start finger socket
   systemd:
     name: finger.socket
