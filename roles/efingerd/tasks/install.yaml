@@ -7,6 +7,9 @@
   file:
     path: /etc/systemd/system/finger@.service.d
     state: directory
+    owner: root
+    group: root
+    mode: "0755"
 - name: Install systemd overrides
   copy:
     src: override.conf
