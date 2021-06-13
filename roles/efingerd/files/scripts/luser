@@ -1,49 +1,43 @@
 #!/bin/sh
 
-. /etc/efingerd/log
-
-if [ "$1" = "(null)" ]; then
-  printf "\nhello %s,\n\n" "$2"
-else
-  printf "\nhello %s@%s\n\n" "$1" "$2"
-fi
+source /etc/efingerd/log
 
 if [ "$3" = "root" ]; then
-  cat /etc/motd.d/00-logo | sed 's/\x1b\[[0-9;]*m//g'
+    source /etc/efingerd/preamble
 else
-  user_folder="/home/${3}"
+    user_folder="/home/${3}"
 
-  # Plan
-  printf "Plan:\\n"
-  if [ -f "${user_folder}/.plan" ]; then
-    sed 's/^/  /' "${user_folder}/.plan"
-  else
-    printf "No Plan.\n"
-  fi
+    # Plan
+    printf "Plan:\\n"
+    if [ -f "${user_folder}/.plan" ]; then
+        sed 's/^/  /' "${user_folder}/.plan"
+    else
+        printf "No Plan.\n"
+    fi
 
-  # Pronouns
-  printf "Pronouns:\\n"
-  if [ -f "${user_folder}/.pronouns" ]; then
-    sed 's/^/  /' "${user_folder}/.pronouns"
-  fi
+    # Pronouns
+    if [ -f "${user_folder}/.pronouns" ]; then
+        printf "Pronouns: "
+        sed 's/^/  /' "${user_folder}/.pronouns"
+    fi
 
-  # Projects
-  printf "Projects:\\n"
-  if [ -f "${user_folder}/.project" ]; then
-    sed 's/^/  /' "${user_folder}/.project"
-  fi
+    # Projects
+    if [ -f "${user_folder}/.project" ]; then
+        printf "Projects:\\n"
+        sed 's/^/  /' "${user_folder}/.project"
+    fi
 
-  # Timezone
-  if [ -f "${user_folder}/.tz" ]; then
-    printf "Timezone: "
-    cat "${user_folder}/.tz"
-    printf "\n"
-  fi
+    # Timezone
+    if [ -f "${user_folder}/.tz" ]; then
+        printf "Timezone: "
+        cat "${user_folder}/.tz"
+        printf "\n"
+    fi
 
-  # Online status
-  if finger "$3" | grep -q 'On since'; then
-    printf "Online.\n"
-  fi
+    # Online status
+    if finger "$3" | grep -q 'On since'; then
+        printf "Online.\n"
+    fi
 
 fi
 

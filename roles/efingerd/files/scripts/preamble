@@ -1,9 +1,7 @@
 #!/bin/bash
 cat /etc/motd.d/00-logo | sed 's/\x1b\[[0-9;]*m//g'
+echo "dimension.sh is a shared linux shell system (or pubnix), open to everyone and anyone to"
+echo "use, learn, and experiment."
+echo ""
+echo "If you're interested in joining check out the website: https://dimension.sh"
 
-cat <<EOM
-dimension.sh is a shared linux shell system (or pubnix), open to everyone and anyone to
-use, learn, and experiment.
-
-If you're interested in joining check out the website: https://dimension.sh
-EOM

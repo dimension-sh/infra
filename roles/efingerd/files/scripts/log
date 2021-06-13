@@ -1,6 +1,2 @@
 #!/bin/sh
-
-# file /var/log/efingerd.log has to be writeable by UID
-# efingerd runs under for this to work
-
-echo "$(date)" "$3" fingered from "$1@$2" >>/var/log/efingerd.log
+echo "$3 fingered from \"$1@$2\"" | systemd-cat
