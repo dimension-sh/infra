@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source /etc/efingerd/log
-
 if [ "$3" = "root" ]; then
     source /etc/efingerd/preamble
 else

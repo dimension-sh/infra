@@ -1,6 +1,5 @@
 #!/bin/sh
 
-source /etc/efingerd/log
 source /etc/efingerd/preamble
 
-printf "users currently logged in are:\n\n%s\n" "$(who -uw | cut -d "(" -f 1 | sort -u -k 1,1)"
+printf "\nusers currently logged in are:\n\n%s\n" "$(who -uw | cut -d "(" -f 1 | sort -u -k 1,1)"
