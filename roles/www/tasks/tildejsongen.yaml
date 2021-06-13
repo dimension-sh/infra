@@ -9,7 +9,7 @@
     dest: /etc/tildejsongen.ini
     owner: root
     group: root
-    mode: "0700"
+    mode: "0600"
 - name: Install tilejsongen crontab
   copy:
     dest: /etc/cron.d/tildejsongen
