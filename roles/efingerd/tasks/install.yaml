@@ -3,3 +3,11 @@
   dnf:
     name: efingerd
     state: installed
+- name: Install systemd overrides
+  copy:
+    src: override.conf
+    dest: /etc/systemd/system/finger@.service.d/override.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload systemd
