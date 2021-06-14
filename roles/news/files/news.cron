@@ -1,3 +1,0 @@
-SHELL=/bin/bash
-PATH=/sbin:/bin/:/usr/sbin:/usr/bin
-*/5 * * * * root /usr/local/bin/news pull >/dev/null

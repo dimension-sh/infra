@@ -60,7 +60,7 @@ elif [ "${OPT}" == 'read' ]; then
 # Show the latest article
 elif [ "${OPT}" == 'latest' ]; then
     if [ ${QUIET} -eq 0 ]; then
-        echo "Showing the latest news article, press 'q' to continue to quit"
+        echo "Showing the latest news article, press 'q' to quit"
         sleep 1
     fi
     QUIET=1 NEWS_COUNT=1 $0 read
