@@ -7,3 +7,4 @@
 - include: mail.yaml
 - include: profile.yaml
 - include: talk.yaml
+- include: cron.yaml
