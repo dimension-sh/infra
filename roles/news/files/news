@@ -67,7 +67,7 @@ elif [ "${OPT}" == 'latest' ]; then
 
 # Check for new news
 elif [ "${OPT}" == 'check' ]; then
-    LAST_LOGIN=$(last --time-format iso ${CURRENT_USER} -2 | head -2 | tail -1 | tr -s " " | cut -d " " -f 6)
+    LAST_LOGIN=$(/usr/bin/last --time-format iso ${CURRENT_USER} -2 | head -2 | tail -1 | tr -s " " | cut -d " " -f 4)
     LAST_NEWS=$(find /srv/news -type f -name '*.md' -newerct "${LAST_LOGIN}" | wc -l)
 
     if [ $LAST_NEWS -gt 1 ]; then
