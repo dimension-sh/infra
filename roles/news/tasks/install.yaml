@@ -1,8 +1,8 @@
 ---
 # news script install
-- name: Install pandoc package
+- name: Install lowdown package
   dnf:
-    name: pandoc
+    name: lowdown
     state: present
 - name: Deploy news
   copy:
