@@ -1,6 +1,7 @@
 ---
 group_packages:
   - alpine-maildir
+  - bombadillo
   - catgirl
   - dimension-man
   - figlet
