@@ -1,10 +1,28 @@
 ---
 - name: Install certbot
   dnf:
-    name: certbot
+    name: "{{ packages }}"
     state: present
+  vars:
+    packages:
+      - certbot
+      - python3-certbot-dns-digitalocean
+- name: Install nginx restart deploy-hook for certbot
+  copy:
+    dest: /etc/letsencrypt/renewal-hooks/deploy/nginx
+    mode: "0755"
+    owner: root
+    group: root
+    content: "#!/bin/sh\nsystemctl restart nginx"
+- name: Write out DigitalOcean auth key
+  template:
+    src: do_secrets.j2
+    dest: /root/do_secrets.ini
+    mode: "0600"
+    owner: root
+    group: root
 - name: Create certificates
-  command: "certbot certonly -n --webroot -w /var/www/acme-challenge -d {{ item.hostname }} {% for san in item.sans|default([]) %} -d {{ san }} {% endfor %} -m {{ www_certs_email|default('root@dimension.sh') }}" # noqa 204
+  command: "certbot certonly -n --expand --dns-digitalocean --dns-digitalocean-credentials /root/do_secrets.ini -d '{{ item.hostname }}' {% for san in item.sans|default([]) %} -d '{{ san }}' {% endfor %} -m {{ www_certs_email|default('root@dimension.sh') }}" # noqa 204
   args:
     creates: "/etc/letsencrypt/renewal/{{ item.hostname }}.conf"
-  loop: "{{ www_certs }}"
+  with_items: "{{ www_certs }}"
