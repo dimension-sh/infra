@@ -5,7 +5,9 @@ postfix_mynetworks:
   - "[::1]/128"
 www_sites:
   - dimension-sh
+  - user-dimension-sh
 www_certs:
   - hostname: s1.dimension.sh
     sans:
       - dimension.sh
+      - '*.dimension.sh'
