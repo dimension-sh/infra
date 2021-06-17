@@ -7,6 +7,7 @@ www_sites:
   - dimension-sh
   - user-dimension-sh
 www_certs:
+  - hostname: s1.dimension.sh
   - hostname: dimension.sh
     sans:
       - '*.dimension.sh'
