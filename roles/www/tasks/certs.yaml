@@ -13,7 +13,9 @@
     mode: "0755"
     owner: root
     group: root
-    content: "#!/bin/sh\nsystemctl restart nginx"
+    content: |
+      #!/bin/sh
+      /bin/systemctl restart nginx
 - name: Write out DigitalOcean auth key
   template:
     src: do_secrets.j2

@@ -36,7 +36,9 @@
     mode: "0755"
     owner: root
     group: root
-    content: "#!/bin/sh\nsystemctl restart dovecot"
+    content: |
+      #!/bin/sh
+      /bin/systemctl restart dovecot
   when: lets_cert.stat.exists
 
 - name: Check if fail2ban is installed

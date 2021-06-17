@@ -44,7 +44,9 @@
     mode: "0755"
     owner: root
     group: root
-    content: "#!/bin/sh\nsystemctl restart postfix"
+    content: |
+      #!/bin/sh
+      /bin/systemctl restart postfix
   when: lets_cert.stat.exists
 
 - name: Check if Dovecot is installed
