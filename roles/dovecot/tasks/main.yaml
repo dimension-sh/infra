@@ -30,6 +30,14 @@
     mode: "0644"
   when: lets_cert.stat.exists
   notify: restart dovecot
+- name: Install dovecot restart deploy-hook for certbot
+  copy:
+    dest: /etc/letsencrypt/renewal-hooks/deploy/dovecot
+    mode: "0755"
+    owner: root
+    group: root
+    content: "#!/bin/sh\nsystemctl restart dovecot"
+  when: lets_cert.stat.exists
 
 - name: Check if fail2ban is installed
   stat:

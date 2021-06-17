@@ -38,7 +38,14 @@
     - { name: "smtpd_tls_key_file", value: "/etc/letsencrypt/live/{{ ansible_fqdn }}/privkey.pem" }
     - { name: "smtpd_tls_security_level", value: "may" }
     - { name: "smtpd_tls_auth_only", value: "yes" }
-
+- name: Install postfix restart deploy-hook for certbot
+  copy:
+    dest: /etc/letsencrypt/renewal-hooks/deploy/postfix
+    mode: "0755"
+    owner: root
+    group: root
+    content: "#!/bin/sh\nsystemctl restart postfix"
+  when: lets_cert.stat.exists
 
 - name: Check if Dovecot is installed
   stat:
