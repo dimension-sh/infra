@@ -9,4 +9,4 @@
       SHELL=/bin/bash
       PATH=/sbin:/bin:/usr/sbin:/usr/bin
       MAILTO=root
-      @daily root bash -c "echo -e \"User disk usage on /home - $(date +%Y-%m-%d)\n\n$(du -xsh /home/*|sort -hr)\" | mail -s \"Disk usage report\" root"
+      @daily root echo -e "User disk usage on /home - $(date +%Y-%m-%d)\n\n$(du -xsh /home/*|sort -hr)" | mail -s "Disk usage report" root"
