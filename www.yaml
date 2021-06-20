@@ -2,6 +2,7 @@
 - hosts: shell
   become: true
   roles:
+    - certbot
     - www
     - gopher
     - gemini
