@@ -1,2 +1,15 @@
 ---
 allow_duplicates: false
+
+galaxy_info:
+  role_name: certbot
+  author: Andrew Williams
+  description: Basic installation for Certbot
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: RedHat
+      versions:
+        - 8
