@@ -1,4 +1,8 @@
 ---
+- name: Include certbot role
+  include_role:
+    name: certbot
+
 - name: Install Dovecot
   dnf:
     name: "dovecot"
