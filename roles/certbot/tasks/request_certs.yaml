@@ -1,3 +1,7 @@
 ---
+- name: Add FQDN if not already listed in certs
+  set_fact:
+    certbot_certs: "{{ certbot_certs + [ ansible_fqdn ] }}"
+  when: not ansible_fqdn in certbot_certs
 - include: cert.yaml
   with_items: "{{ certbot_certs }}"
