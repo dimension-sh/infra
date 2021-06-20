@@ -1,3 +1,3 @@
 ---
 - name: "Request a certificate for {{ item.hostname }}"
-  command: "certbot certonly -n --expand --dns-digitalocean --dns-digitalocean-credentials /root/do_secrets.ini -d '{{ item.hostname }}' {% for san in item.sans|default([]) %} -d '{{ san }}' {% endfor %} -m {{ certbot_certs_email }}" # noqa 204
+  command: "certbot certonly -n --expand --agree-tos --dns-digitalocean --dns-digitalocean-credentials /root/do_secrets.ini -d '{{ item.hostname }}' {% for san in item.sans|default([]) %} -d '{{ san }}' {% endfor %} -m {{ certbot_certs_email }}" # noqa 204
