@@ -1,3 +1,16 @@
 ---
+- name: "Check the cert for {{ item.hostname }} exists"
+  stat:
+    path: "/etc/letsencrypt/live/{{ item.hostname }}/cert.pem"
+  register: cert_stat
+- name: Get the SANs from the certificate file"
+  openssl_certificate_info:
+    path: "/etc/letsencrypt/live/{{ item.hostname }}/cert.pem"
+  register: cert_info
+  when: cert_stat.stat.exists
+- name: Calculate the SAN list
+  set_fact:
+    cert_sans: "{{ ['DNS:'] | product(item.sans|default([item.hostname])) | map('join') | list }}"
 - name: "Request a certificate for {{ item.hostname }}"
   command: "certbot certonly -n --expand --agree-tos --dns-digitalocean --dns-digitalocean-credentials /root/do_secrets.ini -d '{{ item.hostname }}' {% for san in item.sans|default([]) %} -d '{{ san }}' {% endfor %} -m {{ certbot_certs_email }}" # noqa 204
+  when: not cert_stat.stat.exists or cert_sans | difference(cert_info.subject_alt_name) | list | length > 0
