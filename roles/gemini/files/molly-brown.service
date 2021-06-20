@@ -8,7 +8,31 @@ Restart=always
 RestartSec=30
 User=molly
 Group=molly
+RuntimeDirectory=%p
+ExecStartPre=touch -- %t/%p/fullchain.pem %t/%p/privkey.pem
+ExecStartPre=chmod -v -- 0600 %t/%p/fullchain.pem %t/%p/privkey.pem
+ExecStartPre=+cp /etc/letsencrypt/live/dimension.sh/fullchain.pem /etc/letsencrypt/live/dimension.sh/privkey.pem %t/%p
 ExecStart=/usr/local/bin/molly-brown -c /etc/molly/molly.conf
+
+CapabilityBoundingSet=
+DynamicUser=true
+PrivateNetwork=true
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+DevicePolicy=closed
+ProtectSystem=strict
+ProtectHome=read-only
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+MemoryDenyWriteExecute=yes
+LockPersonality=yes
+SystemCallArchitectures=native
 
 [Install]
 WantedBy=multi-user.target
