@@ -1,2 +1,3 @@
 ---
 certbot_certs: []
+certbot_certs_email: nobody@changeme.org
