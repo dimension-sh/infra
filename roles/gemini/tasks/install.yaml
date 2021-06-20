@@ -1,6 +1,6 @@
 ---
 - name: Include golang role
-  include_role:
+  import_role:
     name: gantsign.golang
     allow_duplicates: no
 - name: Build molly-brown
