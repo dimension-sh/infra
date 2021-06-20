@@ -2,6 +2,7 @@
 - name: Include golang role
   include_role:
     name: gantsign.golang
+    allow_duplicates: no
 - name: Build molly-brown
   command: "{{ ansible_local.golang.general.home }}/bin/go get tildegit.org/solderpunk/molly-brown"
   args:
