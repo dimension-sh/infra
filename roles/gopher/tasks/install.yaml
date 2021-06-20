@@ -3,3 +3,18 @@
   dnf:
     name: gophernicus
     state: installed
+- name: create override folder for gophernicus@.service
+  file:
+    path: /etc/systemd/system/gophernicus@.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+- name: Install systemd overrides
+  copy:
+    src: override.conf
+    dest: /etc/systemd/system/gophernicus@.service.d/override.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload systemd
