@@ -23,7 +23,7 @@ remove_packages:
   - cockpit
   - cockpit-ws
 
-www_cert_email: root@dimension.sh
+certbot_cert_email: root@dimension.sh
 
 ansible_keys:
  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORyJ0195AyNxsTxQpucXuz1460x/2SphPi8dYxMzoRU Doofnet AWX"

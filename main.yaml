@@ -4,6 +4,7 @@
   roles:
     - common
     - cis
+    - certbot
 - hosts: build
   become: true
 - hosts: dev

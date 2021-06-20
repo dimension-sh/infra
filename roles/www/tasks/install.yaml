@@ -52,3 +52,12 @@
     setype: httpd_sys_content_t
 - name: Restart nginx now, if needed
   meta: flush_handlers
+- name: Install nginx restart deploy-hook for certbot
+  copy:
+    dest: /etc/letsencrypt/renewal-hooks/deploy/nginx
+    mode: "0755"
+    owner: root
+    group: root
+    content: |
+      #!/bin/sh
+      /bin/systemctl restart nginx

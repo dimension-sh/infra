@@ -1,0 +1,3 @@
+---
+- include: cert.yaml
+  with_items: "{{ certbot_certs }}"

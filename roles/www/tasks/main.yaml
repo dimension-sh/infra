@@ -1,7 +1,9 @@
 ---
+- name: Include certbot role
+  include_role:
+    name: certbot
 - include: install.yaml
 - include: firewall.yaml
-- include: certs.yaml
 - include: sites.yaml
 - include: cgi.yaml
 - include: website.yaml

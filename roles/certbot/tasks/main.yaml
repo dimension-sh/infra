@@ -1,0 +1,5 @@
+---
+- include: install_el8.yaml
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Rocky'
+- include: config.yaml
+- include: request_certs.yaml
