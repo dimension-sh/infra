@@ -8,6 +8,8 @@ www_sites:
   - user-dimension-sh
 certbot_certs:
   - hostname: s1.dimension.sh
+    sans:
+      - mail.dimension.sh
   - hostname: dimension.sh
     sans:
       - '*.dimension.sh'
