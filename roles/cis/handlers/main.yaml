@@ -7,3 +7,7 @@
   shell: aide --init; mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
   args:
     creates: /var/lib/aide/aide.db.gz
+- name: remount proc
+  ansible.posix.mount:
+    path: /proc
+    state: remount
