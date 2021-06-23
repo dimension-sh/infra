@@ -35,3 +35,14 @@
   dnf:
     name: epel-release
     state: present
+
+- name: Add DO Agent repository
+  yum_repository:
+    file: digitalocean-agent
+    name: sonar
+    description: do agent
+    baseurl: https://repos.insights.digitalocean.com/yum/do-agent/$basearch
+    gpgcheck: yes
+    gpgkey: https://repos.insights.digitalocean.com/sonar-agent.asc
+    state: present
+  when: ansible_system_vendor == 'DigitalOcean'

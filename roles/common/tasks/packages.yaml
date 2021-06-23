@@ -11,3 +11,15 @@
   dnf:
     name: "{{ remove_packages }}"
     state: absent
+
+- name: Install Digital Ocean Agent
+  dnf:
+    name: do-agent
+    state: installed
+  when: ansible_system_vendor == 'DigitalOcean'
+
+- name: Install VMware Tools
+  dnf:
+    name: open-vm-tools
+    state: installed
+  when: ansible_system_vendor == 'VMware, Inc.'
