@@ -1,4 +1,5 @@
 ---
+borgmatic_ssh_keys: []
 borgmatic_config:
   # Where to look for files to backup, and where to store those backups.
   # See https://borgbackup.readthedocs.io/en/stable/quickstart.html and

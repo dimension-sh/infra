@@ -33,6 +33,8 @@ fail2ban_ignoreip:
   - "81.187.48.147"
   - "2001:8b0:bd9::/48"
 
+borgmagic_ssh_keys:
+  - id_ed25519_rsync
 borgmatic_config:
   location:
     source_directories:
