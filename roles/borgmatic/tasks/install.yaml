@@ -14,12 +14,12 @@
       - borgmatic
 - name: Add borgmatic systemd units
   copy:
-    src: "{{ item }}"
+    src: "systemd/{{ item }}"
     dest: "/etc/systemd/system/{{ item }}"
     owner: root
     group: root
     mode: "0644"
   notify: reload systemd
   loop:
-    - systemd/borgmatic.service
-    - systemd/borgmatic.timer
+    - borgmatic.service
+    - borgmatic.timer
