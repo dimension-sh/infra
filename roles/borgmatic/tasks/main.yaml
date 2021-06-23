@@ -1,0 +1,4 @@
+---
+- include: install.yaml
+- include: config.yaml
+- include: init.yaml
