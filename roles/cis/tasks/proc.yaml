@@ -4,6 +4,14 @@
   ansible.posix.mount:
     src: proc
     path: /proc
-    opts: defaults,hidepid=1
-    state: remounted
+    opts: defaults,hidepid=1,gid=986
+    state: present
     fstype: proc
+  register: procmount
+- name: Remount /proc
+  ansible.posix.mount:
+    src: proc
+    path: /proc
+    fstype: proc
+    state: remount
+  when: procmount.changed
