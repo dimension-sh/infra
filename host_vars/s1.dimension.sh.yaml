@@ -12,4 +12,4 @@ certbot_certs:
       - mail.dimension.sh
   - hostname: dimension.sh
     sans:
-      - '*.dimension.sh'
+      - "*.dimension.sh"
