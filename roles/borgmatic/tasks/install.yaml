@@ -1,0 +1,25 @@
+---
+- name: Install BorgBackup
+  package:
+    name: "{{ packages }}"
+    state: installed
+  vars:
+    packages:
+      - borgbackup
+- name: Install Borgmatic
+  pip:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - borgmatic
+- name: Add borgmatic systemd units
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload systemd
+  loop:
+    - borgmatic.service
+    - borgmatic.timer

@@ -1,0 +1,8 @@
+---
+- name: Write borgmatic config
+  template:
+    src: config.yaml.j2
+    dest: /etc/borgmatic/config.yaml
+    owner: root
+    group: root
+    mode: "0600"

@@ -5,6 +5,7 @@
     - common
     - cis
     - certbot
+    - borgmatic
 - hosts: build
   become: true
 - hosts: dev
