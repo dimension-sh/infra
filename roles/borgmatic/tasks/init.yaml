@@ -1,6 +1,7 @@
 ---
 - name: Initialize borg check_repositories
   command: "/usr/local/bin/borgmatic init --encryption {{ borgmatic_config['storage']['encryption_passphrase'] }}"
+  no_log: true
 - name: Enable borgmatic.timer
   ansible.builtin.systemd:
     name: borgmatic.timer
