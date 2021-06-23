@@ -44,5 +44,6 @@
     baseurl: https://repos.insights.digitalocean.com/yum/do-agent/$basearch
     gpgcheck: yes
     gpgkey: https://repos.insights.digitalocean.com/sonar-agent.asc
+    enabled: yes
     state: present
   when: ansible_system_vendor == 'DigitalOcean'
