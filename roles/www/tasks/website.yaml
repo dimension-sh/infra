@@ -1,9 +1,8 @@
 ---
 - name: Deploy website files
   git:
-    repo: "https://github.com/dimension-sh/www-site.git"
-    separate_git_dir: /usr/local/src/www-site
-    dest: /var/www/dimension.sh/
+    repo: "https://github.com/dimension-sh/www-site-v2.git"
+    dest: /usr/local/src/www-site
     version: master
 - name: Deploy wiki files
   git:
