@@ -13,3 +13,5 @@ galaxy_info:
     - name: RedHat
       versions:
         - 8
+  collections:
+    - community.crypto

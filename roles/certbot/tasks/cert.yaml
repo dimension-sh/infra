@@ -4,7 +4,7 @@
     path: "/etc/letsencrypt/live/{{ item.hostname }}/cert.pem"
   register: cert_stat
 - name: "Get the SANs from the certificate file for {{ item.hostname }}"
-  openssl_certificate_info:
+  community.crypto.x509_certificate_info:
     path: "/etc/letsencrypt/live/{{ item.hostname }}/cert.pem"
   register: cert_info
   when: cert_stat.stat.exists
