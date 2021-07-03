@@ -1,14 +1,20 @@
 ---
+- name: Check if grub file exists
+  stat:
+    path: "{{ item }}"
+  register: grub_results
+  with_items:
+    - /boot/grub2/grub.cfg
+    - /boot/grub2/grubenv
+  ignore_errors: True
 - name: Change grub file modes
   file:
     path: "{{ item }}"
     owner: root
     group: root
     mode: "0600"
-  ignore_errors: yes
-  loop:
-    - /boot/grub2/grub.cfg
-    - /boot/grub2/grubenv
+  with_items: "{{ grub_results.results }}"
+  when: item.stat.exists
 - name: Change MOTD files security
   file:
     path: "{{ item }}"
