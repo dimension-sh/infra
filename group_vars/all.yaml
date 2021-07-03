@@ -31,7 +31,9 @@ ansible_keys:
 
 fail2ban_ignoreip:
   - "81.187.48.147"
+  - "217.169.25.8/29"
   - "2001:8b0:bd9::/48"
+  - "2001:470:1f1d:79c::/64"
 
 digitalocean_token: !vault |
           $ANSIBLE_VAULT;1.2;AES256;dimension-vault
