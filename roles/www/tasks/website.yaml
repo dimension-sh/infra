@@ -3,7 +3,7 @@
   git:
     repo: "https://github.com/dimension-sh/www-site-v2.git"
     dest: /usr/local/src/www-site
-    version: master
+    version: main
 - name: Deploy wiki files
   git:
     repo: "https://github.com/dimension-sh/wiki.git"
