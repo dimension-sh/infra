@@ -1,6 +1,6 @@
 ---
 - name: Install talk packages
-  package:
+  ansible.builtin.package:
     name: "{{ packages }}"
     state: installed
   vars:

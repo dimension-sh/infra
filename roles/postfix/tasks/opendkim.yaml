@@ -1,7 +1,7 @@
 ---
 # install opendkim
 - name: Install OpenDKIM
-  dnf:
+  ansible.builtin.package:
     name: "opendkim"
     state: present
 - name: Set postfix DKIM options

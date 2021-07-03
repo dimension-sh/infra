@@ -1,6 +1,6 @@
 ---
 - name: Install certbot
-  package:
+  ansible.builtin.package:
     name: "{{ packages }}"
     state: present
   vars:

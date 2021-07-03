@@ -1,7 +1,7 @@
 ---
 # news script install
 - name: Install lowdown package
-  dnf:
+  ansible.builtin.package:
     name: lowdown
     state: present
 - name: Deploy news

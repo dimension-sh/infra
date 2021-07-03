@@ -5,7 +5,7 @@
     allow_duplicates: no
 
 - name: Install Dovecot
-  dnf:
+  ansible.builtin.package:
     name: "dovecot"
     state: present
 - name: Deploy updated 10-master.conf

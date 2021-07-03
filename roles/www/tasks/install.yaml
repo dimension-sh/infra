@@ -1,6 +1,6 @@
 ---
 - name: Install Packages
-  dnf:
+  ansible.builtin.package:
     name: "nginx"
     state: present
 - name: Enable httpd_read_user_content

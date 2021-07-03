@@ -1,6 +1,6 @@
 ---
 - name: Install Gophernicus
-  dnf:
+  ansible.builtin.package:
     name: gophernicus
     state: installed
 - name: create override folder for gophernicus@.service

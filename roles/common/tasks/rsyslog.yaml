@@ -1,6 +1,6 @@
 ---
 - name: Install rsyslog
-  dnf:
+  ansible.builtin.package:
     name: rsyslog
     state: present
 - name: Start rsyslog

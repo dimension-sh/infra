@@ -1,6 +1,6 @@
 ---
 - name: Install Postfix Packages
-  dnf:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   loop:

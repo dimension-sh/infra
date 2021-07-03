@@ -1,6 +1,6 @@
 ---
 - name: Install yum-utils
-  dnf:
+  ansible.builtin.package:
     name: yum-utils
     state: present
 
@@ -32,7 +32,7 @@
   when: powertools_repo_file.stat.exists
 
 - name: Install epel-release Packages
-  dnf:
+  ansible.builtin.package:
     name: epel-release
     state: present
 

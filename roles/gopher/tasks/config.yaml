@@ -1,6 +1,6 @@
 ---
 - name: Start Gophernicus socket
-  systemd:
+  ansible.builtin.systemd:
     name: gophernicus.socket
     enabled: yes
     state: started

@@ -1,6 +1,6 @@
 ---
 - name: Install pflogsumm
-  dnf:
+  ansible.builtin.package:
     name: "pflogsumm"
     state: present
 - name: Install pflogsumm crontab

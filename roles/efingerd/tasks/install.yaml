@@ -1,6 +1,6 @@
 ---
 - name: Install efingerd
-  dnf:
+  ansible.builtin.package:
     name: efingerd
     state: installed
 - name: create override folder for finger@.service

@@ -19,7 +19,7 @@
     - nouser
     - preamble
 - name: Start finger socket
-  systemd:
+  ansible.builtin.systemd:
     name: finger.socket
     enabled: yes
     state: started

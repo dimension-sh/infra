@@ -6,7 +6,7 @@
     state: yes
 
 - name: Install fcgiwrap
-  package:
+  ansible.builtin.package:
     name: fcgiwrap
     state: installed
 

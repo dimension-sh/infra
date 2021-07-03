@@ -10,7 +10,7 @@
 
 # MkUser Install
 - name: Install mkuser
-  package:
+  ansible.builtin.package:
     name: mkuser
     state: installed
 - name: Copy mkuser template

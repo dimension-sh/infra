@@ -1,6 +1,6 @@
 ---
 - name: Install Packages
-  dnf:
+  ansible.builtin.package:
     name: firewalld
     state: present
 

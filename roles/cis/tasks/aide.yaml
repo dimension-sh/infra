@@ -1,6 +1,6 @@
 ---
 - name: Install AIDE
-  dnf:
+  ansible.builtin.package:
     name: aide
     state: installed
   notify: init aide

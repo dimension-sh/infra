@@ -1,6 +1,6 @@
 ---
 - name: Install ansible pre-reqs
-  dnf:
+  ansible.builtin.package:
     name: sudo
     state: present
 - name: Ensure that includedir in sudoers

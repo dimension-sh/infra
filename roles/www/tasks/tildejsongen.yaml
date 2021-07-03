@@ -1,6 +1,6 @@
 ---
 - name: Install tildejsongen
-  dnf:
+  ansible.builtin.package:
     name: tildejsongen
     state: installed
 - name: Copy tildejsongen config

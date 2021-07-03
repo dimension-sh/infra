@@ -1,6 +1,6 @@
 ---
 - name: Install BorgBackup
-  package:
+  ansible.builtin.package:
     name: "{{ packages }}"
     state: installed
   vars:
