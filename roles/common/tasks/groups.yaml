@@ -1,0 +1,14 @@
+---
+- name: Add sysops group
+  ansible.builtin.group:
+    name: sysops
+    gid: 1000
+    state: present
+- name: Add group "sysops" to sudo
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/sysops
+    line: "%sysops ALL=(ALL) NOPASSWD: ALL"
+    state: present
+    mode: 0440
+    create: yes
+    validate: "visudo -cf %s"
