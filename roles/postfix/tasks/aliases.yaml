@@ -2,8 +2,8 @@
 - name: configure virtual aliases
   lineinfile:
     dest: "/etc/postfix/virtual"
-    regexp: '^{{ item.virtual | regex_escape }}.*'
-    line: '{{ item.virtual }} {{ item.alias }}'
+    regexp: "^{{ item.virtual | regex_escape }}.*"
+    line: "{{ item.virtual }} {{ item.alias }}"
     owner: root
     group: root
     mode: 0644
@@ -12,4 +12,3 @@
   loop: "{{ postfix_virtual_aliases }}"
   notify:
     - new virtual aliases
-    - restart postfix

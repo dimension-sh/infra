@@ -1,0 +1,22 @@
+---
+- name: Install simplelist
+  package:
+    name: "simplelist"
+    state: present
+
+- name: Configure simplelist
+  file:
+    dest: /etc/postfix/simplelist.yaml
+    owner: root
+    group: root
+    mode: "0644"
+    content: "{{ postfix_simplelist_config | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}"
+
+- name: Add alias to configured list
+  lineinfile:
+    dest: "/etc/aliases"
+    regexp: "^{{ item }}:.*"
+    line: "{{ item }}: \"|/usr/bin/simplelist.py {{ item }}\""
+    state: present
+  loop: "{{ postfix_simplelist_config }}"
+  notify: new aliases

@@ -13,3 +13,14 @@ certbot_certs:
   - hostname: dimension.sh
     sans:
       - "*.dimension.sh"
+
+postfix_simplelist_enable: true
+postfix_simplelist_config:
+  domain: "{{ ansible_domain }}"
+  lists:
+    announce:
+      gid: 100
+      allowed_senders:
+        - nikdoof@dimension.sh
+    sysops:
+      gid: 1000

@@ -9,3 +9,6 @@
 - include: service.yaml
 - include: firewall.yaml
 - include: pflogsumm.yaml
+
+- include: simplelist.yaml
+  when: postfix_simplelist_enable == true

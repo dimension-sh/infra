@@ -30,3 +30,8 @@ postfix_smtpd_recipient_restrictions:
   - reject_rbl_client b.barracudacentral.org
   - reject_rbl_client dnsbl-1.uceprotect.net
   - permit
+
+postfix_simplelist_enable: false
+postfix_simplelist_config:
+  domain: "{{ ansible_domain }}"
+  lists: {}
