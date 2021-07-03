@@ -11,4 +11,4 @@
 - include: pflogsumm.yaml
 
 - include: simplelist.yaml
-  when: postfix_simplelist_enable == true
+  when: postfix_simplelist_enable
