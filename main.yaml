@@ -2,10 +2,10 @@
 - hosts: all
   become: true
   roles:
-    - common
-    - cis
-    - certbot
-    - borgmatic
+    - role: common
+    - role: cis
+    - role: certbot
+    - role: borgmatic
 - hosts: build
   become: true
 - hosts: dev
@@ -13,16 +13,26 @@
 - hosts: shell
   become: true
   roles:
-    - shell
-    - efingerd
-    - news
-    - www
-    - gopher
-    - gemini
+    - role: shell
+    - role: efingerd
+    - role: news
+    - role: www
+      tags:
+        - www
+    - role: gopher
+      tags:
+        - www
+    - role: gemini
+      tags:
+        - www
 - hosts: mail
   become: true
   roles:
-    - postfix
-    - dovecot
+    - role: postfix
+      tags:
+        - mail
+    - role: dovecot
+      tags:
+        - mail
 - hosts: services
   become: true
