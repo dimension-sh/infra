@@ -3,17 +3,17 @@
   stat:
     path: "{{ item }}"
   register: grub_results
-  with_items:
+  loop:
     - /boot/grub2/grub.cfg
     - /boot/grub2/grubenv
   ignore_errors: True
 - name: Change grub file modes
   file:
-    path: "{{ item }}"
+    path: "{{ item.item }}"
     owner: root
     group: root
     mode: "0600"
-  with_items: "{{ grub_results.results }}"
+  loop: "{{ grub_results.results }}"
   when: item.stat.exists
 - name: Change MOTD files security
   file:
