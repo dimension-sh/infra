@@ -31,6 +31,8 @@ postfix_smtpd_recipient_restrictions:
   - reject_rbl_client dnsbl-1.uceprotect.net
   - permit
 
+postfix_opendkim_enable: false
+postfix_pflogsumm_enable: true
 postfix_simplelist_enable: false
 postfix_simplelist_config:
   domain: "{{ ansible_domain }}"

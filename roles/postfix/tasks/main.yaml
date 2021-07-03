@@ -8,7 +8,10 @@
 - include: aliases.yaml
 - include: service.yaml
 - include: firewall.yaml
-- include: pflogsumm.yaml
 
+- include: opendkim.yaml
+  when: postfix_opendkim_enable
+- include: pflogsumm.yaml
+  when: postfix_pflogsumm_enable
 - include: simplelist.yaml
   when: postfix_simplelist_enable

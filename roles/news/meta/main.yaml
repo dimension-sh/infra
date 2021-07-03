@@ -1,0 +1,15 @@
+---
+allow_duplicates: false
+
+galaxy_info:
+  role_name: news
+  author: Andrew Williams
+  description: Configures the dimension news system
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: RedHat
+      versions:
+        - 8

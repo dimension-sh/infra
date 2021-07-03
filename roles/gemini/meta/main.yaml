@@ -1,0 +1,21 @@
+---
+allow_duplicates: false
+
+galaxy_info:
+  role_name: gemini
+  author: Andrew Williams
+  description: Installs and configures a Gemini server using Molly Brown
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: RedHat
+      versions:
+        - 8
+
+  collections:
+    - ansible.posix
+
+dependencies:
+  - gantsign.golang

@@ -1,0 +1,19 @@
+---
+allow_duplicates: false
+
+galaxy_info:
+  role_name: cis
+  author: Andrew Williams
+  description: Configures a RHEL systems to CIS specs
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: RedHat
+      versions:
+        - 8
+
+  collections:
+    - ansible.posix
+    - community.general
