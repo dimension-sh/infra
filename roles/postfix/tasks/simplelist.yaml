@@ -5,7 +5,7 @@
     state: present
 
 - name: Configure simplelist
-  file:
+  copy:
     dest: /etc/postfix/simplelist.yaml
     owner: root
     group: root
@@ -18,5 +18,5 @@
     regexp: "^{{ item }}:.*"
     line: "{{ item }}: \"|/usr/bin/simplelist.py {{ item }}\""
     state: present
-  loop: "{{ postfix_simplelist_config }}"
+  loop: "{{ postfix_simplelist_config.lists.keys() }}"
   notify: new aliases
