@@ -4,6 +4,12 @@
     name: "simplelist"
     state: present
 
+- name: Set SELinux context so Postfix can run Simplelist
+  sefcontext:
+    target: /usr/bin/simplelist.py
+    setype: postfix_local_exec_t
+    state: present
+
 - name: Configure simplelist
   copy:
     dest: /etc/postfix/simplelist.yaml
@@ -16,7 +22,7 @@
   lineinfile:
     dest: "/etc/aliases"
     regexp: "^{{ item }}:.*"
-    line: "{{ item }}: \"|/usr/bin/simplelist.py {{ item }}\""
+    line: '{{ item }}: "|/usr/bin/simplelist.py {{ item }}"'
     state: present
   loop: "{{ postfix_simplelist_config.lists.keys() | list }}"
   notify: new aliases
