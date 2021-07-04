@@ -32,6 +32,20 @@ postfix_smtpd_recipient_restrictions:
   - permit
 
 postfix_opendkim_enable: false
+postfix_opendkim_config:
+  - Mode: sv
+  - ReportAddress: "Postmaster <postmaster@{{ ansible_domain}}>"
+  - KeyTable: /etc/opendkim/KeyTable
+  - SigningTable: /etc/opendkim/SigningTable
+  - ExternalIgnoreList: refile:/etc/opendkim/TrustedHosts
+  - InternalHosts: refile:/etc/opendkim/TrustedHosts
+postfix_opendkim_keys: []
+postfix_opendkim_keylength: 2048
+postfix_opendkim_trustedhosts:
+  - 127.0.0.1
+  - ::1
+postfix_opendkim_signingtable: []
+
 postfix_pflogsumm_enable: true
 postfix_simplelist_enable: false
 postfix_simplelist_config:

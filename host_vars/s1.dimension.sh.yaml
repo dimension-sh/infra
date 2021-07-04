@@ -14,6 +14,16 @@ certbot_certs:
     sans:
       - "*.dimension.sh"
 
+postfix_opendkim_keys:
+  - "20200628"
+postfix_opendkim_trustedhosts:
+  - 127.0.0.1
+  - ::1
+  - "*.{{ ansible_domain }}"
+postfix_opendkim_signingtable:
+  - match: "*.{{ ansible_domain }}"
+    key: "20200628"
+
 postfix_simplelist_enable: true
 postfix_simplelist_config:
   domain: "{{ ansible_domain }}"
@@ -21,6 +31,6 @@ postfix_simplelist_config:
     announce:
       gid: 100
       allowed_senders:
-        - nikdoof@dimension.sh
+        - "nikdoof@{{ ansible_domain }}"
     sysops:
       gid: 1000

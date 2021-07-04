@@ -1,9 +1,75 @@
 ---
-# install opendkim
+# install OpenDKIM
 - name: Install OpenDKIM
   ansible.builtin.package:
-    name: "opendkim"
+    name: "{{ packages }}"
     state: present
+  var:
+    packages:
+      - opendkim
+
+# Configure opendkim.conf
+- name: Configure OpenDKIM opendkim.conf
+  ansible.builtin.lineinfile:
+    dest: "/etc/opendkim.conf"
+    regexp: "^(# )?{{ item.key }}"
+    line: "{{ item.key }}\t{{ item.value }}"
+    owner: root
+    group: root
+    mode: 0644
+    create: true
+    state: present
+  loop: "{{ postfix_opendkim_config | dict2items }}"
+  notify: restart opendkim
+
+# Generate DKIM keys
+- name: "Generate DKIM Key {{ item }}"
+  ansible.builtin.command: "/sbin/opendkim-genkey -b {{ postfix_opendkim_keylength }} -s {{ item }} -d {{ ansible_domain }} -D /etc/opendkim/keys/{{ ansible_domain }}"
+    creates: "/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
+  loop: "{{ postfix_opendkim_keys }}"
+
+# Configure KeyTable
+- name: "Add {{ item }} key to KeyTable"
+  ansible.builtin.lineinfile:
+    dest: "/etc/opendkim/KeyTable"
+    regexp: "^{{ item }}._domainkey.{{ ansible_domain }}"
+    line: "{{ item }}._domainkey.{{ ansible_domain }}\t{{ ansible_domain }}:{{ item }}:/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
+    owner: opendkim
+    group: opendkim
+    mode: 0640
+    create: true
+    state: present
+  loop: "{{ postfix_opendkim_keys }}"
+  notify: restart opendkim
+
+# Configure SigningTable
+- name: Configure the SigningTable
+  ansible.builtin.lineinfile:
+    dest: "/etc/opendkim/SigningTable"
+    regexp: "^{{ item.match }}$"
+    line: "{{ item.match }}\t{{ item.key }}._domainkey.{{ ansible_domain }}"
+    owner: opendkim
+    group: opendkim
+    mode: 0640
+    create: true
+    state: present
+  loop: "{{ postfix_opendkim_signingtable }}"
+  notify: restart opendkim
+
+# Configure TrustedHosts
+- name: Configure the TrustedHosts
+  ansible.builtin.lineinfile:
+    dest: "/etc/opendkim/TrustedHosts"
+    regexp: "^{{ item }}"
+    line: "{{ item }}"
+    owner: opendkim
+    group: opendkim
+    mode: 0640
+    create: true
+    state: present
+  loop: "{{ postfix_opendkim_trustedhosts }}"
+  notify: restart opendkim
+
 - name: Set postfix DKIM options
   postconf:
     name: "{{ item.name }}"
