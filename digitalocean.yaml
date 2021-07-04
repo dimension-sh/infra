@@ -8,6 +8,7 @@
         cmd: "openssl rsa -in /etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private -pubout -outform der 2>/dev/null | openssl base64 -A"
       register: keys
       loop: "{{ postfix_opendkim_keys }}"
+      changed_when: False
       when: postfix_opendkim_enable
     - name: Set DKIM records
       community.digitalocean.digital_ocean_domain_record:
