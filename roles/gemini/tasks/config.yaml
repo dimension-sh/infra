@@ -4,12 +4,6 @@
     path: /etc/molly
     state: directory
     mode: "0755"
-- name: Create /var/log/molly
-  ansible.builtin.file:
-    path: /var/log/molly
-    state: directory
-    owner: molly
-    mode: "0755"
 - name: Copy molly.conf
   ansible.builtin.copy:
     src: "molly.conf"
@@ -17,12 +11,6 @@
     owner: molly
     group: molly
     mode: "0644"
-  notify: restart molly
-- name: Generate a certificate
-  command:
-    cmd: "/usr/local/bin/gemcert -server -domain {{ ansible_fqdn }}"
-    creates: "/etc/molly/{{ ansible_fqdn }}.crt"
-    chdir: /etc/molly/
   notify: restart molly
 - name: Start Molly Brown
   ansible.builtin.systemd:
