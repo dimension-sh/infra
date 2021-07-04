@@ -36,3 +36,5 @@ postfix_simplelist_config:
         - "nikdoof@{{ ansible_domain }}"
     sysops:
       gid: 1000
+    alerts:
+      gid: 1000
