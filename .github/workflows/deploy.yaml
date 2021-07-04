@@ -1,0 +1,46 @@
+'on':
+  push:
+    branches:
+    - master
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Lint Ansible Playbook
+        uses: ansible/ansible-lint-action@master
+        with:
+          targets: |
+            main.yaml
+          args: "-p --parseable-severity"
+  deploy:
+    name: Deploy
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: start deployment
+        uses: bobheadxi/deployments@v0.4.3
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: production
+
+      - name: do my deploy
+        uses: vortegon/github-action-ansible-tower@v1
+        with:
+          ansible-tower-user: ${{ secrets.DIMENSION_TOWER_USER }}
+          ansible-tower-pass: ${{ secrets.DIMENSION_TOWER_PASSWORD }}
+          ansible-tower-url: ${{ secrets.DIMENSION_TOWER_URL }}
+          template-id: ${{ secrets.DIMENSION_TOWER_TEMPLATEID }}
+
+      - name: update deployment status
+        uses: bobheadxi/deployments@v0.4.3
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
