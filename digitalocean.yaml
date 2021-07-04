@@ -19,4 +19,4 @@
         data: "v=DKIM1; k=rsa; p={{ item.stdout }}"
         ttl: 3600
       loop: "{{ keys.results }}"
-      when: postfix_opendkim_enable
+      when: postfix_opendkim_enable and item.stdout
