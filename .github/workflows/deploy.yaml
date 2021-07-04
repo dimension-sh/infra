@@ -1,7 +1,8 @@
-'on':
+name: Deploy Production
+"on":
   push:
     branches:
-    - master
+      - master
 jobs:
   lint:
     name: Lint
