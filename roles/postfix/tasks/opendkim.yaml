@@ -61,7 +61,7 @@
 - name: Configure the TrustedHosts
   ansible.builtin.lineinfile:
     dest: "/etc/opendkim/TrustedHosts"
-    regexp: "^{{ item }}$"
+    regexp: "^{{ item | regex_escape() }}$"
     line: "{{ item }}"
     owner: opendkim
     group: opendkim
