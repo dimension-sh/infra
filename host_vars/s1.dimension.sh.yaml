@@ -17,7 +17,7 @@ certbot_certs:
 postfix_opendkim_enable: true
 postfix_opendkim_keys:
   - "20200628"
-  - "20200704"
+  - "20210704"
 postfix_opendkim_trustedhosts:
   - 127.0.0.1
   - ::1
