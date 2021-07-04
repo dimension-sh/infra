@@ -13,7 +13,7 @@
   ansible.builtin.lineinfile:
     dest: "/etc/opendkim.conf"
     regexp: "^(# )?{{ item.key }}"
-    line: "{{ item.key }}\t{{ item.value }}"
+    line: "{{ item.key }}\t{{ item.value }}"  # noqa no-tabs
     owner: root
     group: root
     mode: 0644
@@ -25,7 +25,7 @@
 # Generate DKIM keys
 - name: "Generate DKIM Key {{ item }}"
   ansible.builtin.command:
-    cmd: "/sbin/opendkim-genkey -b {{ postfix_opendkim_keylength }} -s {{ item }} -d {{ ansible_domain }} -D /etc/opendkim/keys/{{ ansible_domain }}"
+    cmd: "/sbin/opendkim-genkey -b {{ postfix_opendkim_keylength }} -s {{ item }} -d {{ ansible_domain }} -D /etc/opendkim/keys/{{ ansible_domain }}"  # noqa no-tabs
     creates: "/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
   loop: "{{ postfix_opendkim_keys }}"
 
@@ -34,7 +34,7 @@
   ansible.builtin.lineinfile:
     dest: "/etc/opendkim/KeyTable"
     regexp: "^{{ item }}._domainkey.{{ ansible_domain }}"
-    line: "{{ item }}._domainkey.{{ ansible_domain }}\t{{ ansible_domain }}:{{ item }}:/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
+    line: "{{ item }}._domainkey.{{ ansible_domain }}\t{{ ansible_domain }}:{{ item }}:/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"  # noqa no-tabs
     owner: opendkim
     group: opendkim
     mode: 0640
@@ -48,7 +48,7 @@
   ansible.builtin.lineinfile:
     dest: "/etc/opendkim/SigningTable"
     regexp: "^{{ item.match }}$"
-    line: "{{ item.match }}\t{{ item.key }}._domainkey.{{ ansible_domain }}"
+    line: "{{ item.match }}\t{{ item.key }}._domainkey.{{ ansible_domain }}"  # noqa no-tabs
     owner: opendkim
     group: opendkim
     mode: 0640
