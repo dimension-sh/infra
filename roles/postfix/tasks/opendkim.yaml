@@ -47,7 +47,7 @@
 - name: Configure the SigningTable
   ansible.builtin.lineinfile:
     dest: "/etc/opendkim/SigningTable"
-    regexp: "^{{ item.match }}$"
+    regexp: "^{{ item.match | regex_escape() }}"
     line: "{{ item.match }}\t{{ item.key }}._domainkey.{{ ansible_domain }}"  # noqa no-tabs
     owner: opendkim
     group: opendkim
@@ -61,7 +61,7 @@
 - name: Configure the TrustedHosts
   ansible.builtin.lineinfile:
     dest: "/etc/opendkim/TrustedHosts"
-    regexp: "^{{ item }}"
+    regexp: "^{{ item }}$"
     line: "{{ item }}"
     owner: opendkim
     group: opendkim
