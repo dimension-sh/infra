@@ -4,7 +4,7 @@ allow_duplicates: false
 galaxy_info:
   role_name: postfix
   author: Andrew Williams
-  description: Installs and configures Postfix
+  description: Installs and configures Postfix, OpenDKIM, Simplelist, and pflogsumm
   license: MIT
 
   min_ansible_version: 2.4
