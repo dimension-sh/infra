@@ -17,6 +17,7 @@
     - role: efingerd
     - role: news
     - role: frp
+      when: frps_enable
     - role: www
       tags:
         - www
