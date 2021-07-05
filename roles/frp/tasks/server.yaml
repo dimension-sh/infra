@@ -10,7 +10,7 @@
     dest: /tmp/
     remote_src: true
     mode: 0600
-  when: frps_exec.stat.exists == False
+  when: not frps_exec.stat.exists
 
 - name: Copy FRPS Executable
   copy:
@@ -20,7 +20,7 @@
     group: root
     mode: 0755
     remote_src: true
-  when: frps_exec.stat.exists == False
+  when: not frps_exec.stat.exists
   notify: restart frps
 
 - name: Install FRPS systemd service
@@ -32,7 +32,7 @@
     mode: 0644
   register: frps_systemd
 
-- name: Reload systemd
+- name: Reload systemd  # noqa 503
   ansible.builtin.systemd:
     daemon_reload: yes
   when: frps.systemd.changed
@@ -81,3 +81,11 @@
   service:
     name: frps@default.service
     state: started
+
+- name: Add firewall rule for FRPS bind port
+  ansible.posix.firewalld:
+    zone: public
+    port: "{{ frps_config.common.bind_port }}/tcp"
+    permanent: yes
+    state: enabled
+    immediate: yes
