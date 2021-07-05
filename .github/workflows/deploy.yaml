@@ -16,21 +16,13 @@ jobs:
           targets: |
             main.yaml
           args: "-p --parseable-severity"
-  deploy:
-    name: Deploy
+  deploy-production:
+    name: Deploy - Production
     environment: production
     runs-on: ubuntu-latest
     needs:
       - lint
     steps:
-      - name: start deployment
-        uses: bobheadxi/deployments@v0.4.3
-        id: deployment
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: production
-
       - name: Call Dimension Tower to Deploy
         uses: informaticsmatters/trigger-awx-action@v1
         with:
@@ -38,12 +30,3 @@ jobs:
           template-host: ${{ secrets.DIMENSION_TOWER_URL }}
           template-user: ${{ secrets.DIMENSION_TOWER_USER }}
           template-user-password: ${{ secrets.DIMENSION_TOWER_PASSWORD }}
-
-      - name: update deployment status
-        uses: bobheadxi/deployments@v0.4.3
-        if: always()
-        with:
-          step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
