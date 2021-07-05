@@ -23,7 +23,7 @@ postfix_opendkim_trustedhosts:
   - ::1
   - "*.{{ ansible_domain }}"
 postfix_opendkim_signingtable:
-  - match: "*.{{ ansible_domain }}"
+  - match: "{{ ansible_domain }}"
     key: "20200628"
 
 postfix_simplelist_enable: true

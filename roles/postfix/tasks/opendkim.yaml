@@ -28,6 +28,13 @@
     cmd: "/sbin/opendkim-genkey -b {{ postfix_opendkim_keylength }} -s {{ item }} -d {{ ansible_domain }} -D /etc/opendkim/keys/{{ ansible_domain }}"  # noqa no-tabs
     creates: "/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
   loop: "{{ postfix_opendkim_keys }}"
+- name: Change DKIM Key owner to opendkim
+  file:
+    path: "/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
+    owner: opendkim
+    group: opendkim
+    mode: "0600"
+  loop: "{{ postfix_opendkim_keys }}"
 
 # Configure KeyTable
 - name: "Add {{ item }} key to KeyTable"
