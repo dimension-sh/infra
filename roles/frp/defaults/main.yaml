@@ -1,0 +1,7 @@
+---
+frp_version: 0.37.0
+frps_config:
+  common:
+    bind_port: 7000
+    admin_addr: 127.0.0.1
+    admin_port: 7400

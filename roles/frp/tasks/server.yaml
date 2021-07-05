@@ -1,0 +1,80 @@
+---
+- name: Check FRPS executable exists
+  stat:
+    path: /usr/local/sbin/frps
+  register: frps_exec
+
+- name: Download FRP Release
+  unarchive:
+    src: https://github.com/fatedier/frp/releases/download/v{{ frp_version }}/frp_{{ frp_version }}_linux_amd64.tar.gz
+    dest: /tmp/
+    remote_src: true
+    mode: 0600
+  when: frps_exec.stat.exists == False
+
+- name: Copy FRPS Executable
+  copy:
+    src: /tmp/frp_{{ frp_version }}_linux_amd64/frps
+    dest: /usr/local/sbin/frps
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: true
+  when: frps_exec.stat.exists == False
+  notify: restart frps
+
+- name: Install FRPS systemd service
+  copy:
+    src: frps@.service
+    dest: /etc/systemd/system/frps@.service
+  register: frps_systemd
+
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: yes
+  when: frps.systemd.changed
+
+- name: Generate list of FRPS config
+  set_fact:
+    frps_config_items: |
+      {% set res = [] -%}
+      {% for section in frps_config.keys() -%}
+          {% for key, value in frps_config[section].items() -%}
+          {% set ignored = res.extend([{'section': section, 'key': key, 'value': value}]) -%}
+          {%- endfor %}
+      {%- endfor %}
+      {{ res }}
+
+- name: "Set server config values"
+  community.general.ini_file:
+    path: /etc/frps/default.ini
+    section: "{{ item.section }}"
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+    mode: "0644"
+  notify: restart frps
+  loop: "{{ frps_config_items }}"
+
+- name: Set authentication method
+  community.general.ini_file:
+    path: /etc/frps/default.ini
+    section: "common"
+    option: "authentication_method"
+    value: "token"
+    mode: "0644"
+  notify: restart frps
+  when: frps_token
+- name: Set authentication token
+  community.general.ini_file:
+    path: /etc/frps/default.ini
+    section: "common"
+    option: "token"
+    value: "{{ frps_token }}"
+    mode: "0644"
+  notify: restart frps
+  when: frps_token
+
+- name: Start FRPS
+  service:
+    name: frps@default.service
+    state: started

@@ -16,6 +16,7 @@
     - role: shell
     - role: efingerd
     - role: news
+    - role: frp
     - role: www
       tags:
         - www

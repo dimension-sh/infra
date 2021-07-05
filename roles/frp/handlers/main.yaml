@@ -1,0 +1,5 @@
+---
+- name: Restart FRPS
+  service:
+    name: frps@default.service
+    state: restarted

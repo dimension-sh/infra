@@ -1,0 +1,19 @@
+---
+allow_duplicates: false
+
+galaxy_info:
+  role_name: frp
+  author: Andrew Williams
+  description: Installs and configures a FRP
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: RedHat
+      versions:
+        - 8
+
+  collections:
+    - ansible.posix
+
