@@ -27,6 +27,9 @@
   copy:
     src: frps@.service
     dest: /etc/systemd/system/frps@.service
+    owner: root
+    group: root
+    mode: 0644
   register: frps_systemd
 
 - name: Reload systemd
