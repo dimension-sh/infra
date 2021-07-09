@@ -15,3 +15,4 @@
   when: postfix_pflogsumm_enable
 - include: simplelist.yaml
   when: postfix_simplelist_enable
+- include: procmail.yaml
