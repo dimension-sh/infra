@@ -8,6 +8,14 @@
   ansible.builtin.package:
     name: "dovecot"
     state: present
+- name: Deploy 00-protocols.conf
+  copy:
+    src: dovecot/00-protocols.conf
+    dest: /etc/dovecot/conf.d/10-protocols.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart dovecot
 - name: Deploy updated 10-master.conf
   copy:
     src: dovecot/10-master.conf
