@@ -4,7 +4,7 @@
     name: procmail
     state: installed
 - name: Create basic procmail config
-  file:
+  copy:
     dest: /etc/procmailrc
     mode: 0644
     owner: root
