@@ -24,3 +24,16 @@
     owner: root
     group: root
     mode: "0700"
+
+- name: Check if mkuser post.d exists
+  stat:
+    path: /etc/mkuser/post.d
+  register: post_d_folder
+- name: Setup link-gemini for mkuser post actions
+  copy:
+    src: scripts/link-gemini
+    dest: /etc/mkuser/post.d/link-gemini
+    owner: root
+    group: root
+    mode: "0700"
+  when: post_d_folder.stat.exists and post_d_folder.stat.isdir

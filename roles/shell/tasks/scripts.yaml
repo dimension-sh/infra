@@ -12,7 +12,7 @@
 - name: Install mkuser
   ansible.builtin.package:
     name: mkuser
-    state: installed
+    state: latest
 - name: Copy mkuser template
   copy:
     src: mail.tmpl
