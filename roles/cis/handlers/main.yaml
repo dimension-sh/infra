@@ -13,3 +13,11 @@
   ansible.posix.mount:
     path: /proc
     state: remount
+- name: restart journald
+  service:
+    name: systemd-journald
+    state: restarted
+- name: restart rsyslog
+  service:
+    name: rsyslog
+    state: restarted

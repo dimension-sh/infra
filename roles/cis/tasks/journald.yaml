@@ -1,0 +1,31 @@
+---
+- name: Forward journald to syslog
+  ini_file:
+    path: /etc/systemd/journald.conf
+    section: Journal
+    option: ForwardToSyslog
+    value: "yes"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart journald
+- name: Compress journald logs
+  ini_file:
+    path: /etc/systemd/journald.conf
+    section: Journal
+    option: Compress
+    value: "yes"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart journald
+- name: Ensure logs are wrote to persistent disk
+  ini_file:
+    path: /etc/systemd/journald.conf
+    section: Journal
+    option: Storage
+    value: persistent
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart journald

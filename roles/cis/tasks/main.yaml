@@ -4,7 +4,10 @@
 - include: proc.yaml
 - include: sudo.yaml
 - include: file_security.yaml
+- include: cron.yaml
 - include: ssh.yaml
 - include: sysctl.yaml
 - include: logindefs.yaml
+- include: journald.yaml
+- include: rsyslog.yaml
 - include: aide.yaml
