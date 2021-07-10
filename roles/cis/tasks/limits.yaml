@@ -1,6 +1,6 @@
 ---
 - name: Add core limits
-  pam_limits:
+  community.general.pam_limits:
     dest: /etc/security/limits.d/core.conf
     domain: "*"
     limit_type: hard
