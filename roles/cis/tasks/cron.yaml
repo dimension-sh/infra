@@ -1,7 +1,7 @@
 ---
 - name: Enable crond
   service:
-    name: cron
+    name: crond
     state: started
     enabled: yes
 - name: Set cron file security
