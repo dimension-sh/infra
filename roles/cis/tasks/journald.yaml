@@ -1,6 +1,6 @@
 ---
 - name: Forward journald to syslog
-  ini_file:
+  community.general.ini_file:
     path: /etc/systemd/journald.conf
     section: Journal
     option: ForwardToSyslog
@@ -10,7 +10,7 @@
     mode: "0644"
   notify: restart journald
 - name: Compress journald logs
-  ini_file:
+  community.general.ini_file:
     path: /etc/systemd/journald.conf
     section: Journal
     option: Compress
@@ -20,7 +20,7 @@
     mode: "0644"
   notify: restart journald
 - name: Ensure logs are wrote to persistent disk
-  ini_file:
+  community.general.ini_file:
     path: /etc/systemd/journald.conf
     section: Journal
     option: Storage

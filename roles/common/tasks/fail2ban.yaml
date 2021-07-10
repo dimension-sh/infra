@@ -8,7 +8,7 @@
       - fail2ban
       - fail2ban-selinux
 - name: Set ignoreip
-  ini_file:
+  community.general.ini_file:
     path: /etc/fail2ban/jail.local
     section: DEFAULT
     option: ignoreip
@@ -17,7 +17,7 @@
     backup: yes
   notify: restart fail2ban
 - name: Set default ban time
-  ini_file:
+  community.general.ini_file:
     path: /etc/fail2ban/jail.local
     section: DEFAULT
     option: bantime
@@ -26,7 +26,7 @@
     backup: yes
   notify: restart fail2ban
 - name: Enable sshd jail
-  ini_file:
+  community.general.ini_file:
     path: /etc/fail2ban/jail.local
     section: sshd
     option: enabled

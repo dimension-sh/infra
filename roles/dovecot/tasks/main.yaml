@@ -59,7 +59,7 @@
     path: "/etc/fail2ban/jail.local"
   register: fail2ban_jail_file
 - name: Enable dovecot jail
-  ini_file:
+  community.general.ini_file:
     path: /etc/fail2ban/jail.local
     section: dovecot
     option: enabled
