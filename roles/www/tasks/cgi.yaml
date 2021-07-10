@@ -2,8 +2,8 @@
 - name: Enable httpd_enable_cgi
   ansible.posix.seboolean:
     name: httpd_enable_cgi
-    persistent: yes
-    state: yes
+    persistent: true
+    state: true
 
 - name: Install fcgiwrap
   ansible.builtin.package:
@@ -13,7 +13,7 @@
 - name: Enable fcgiwrap
   ansible.builtin.service:
     name: fcgiwrap@nginx.socket
-    enabled: yes
+    enabled: true
     state: started
 
 # Install python dependencies

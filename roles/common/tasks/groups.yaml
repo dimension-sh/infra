@@ -10,5 +10,5 @@
     line: "%sysops ALL=(ALL) NOPASSWD: ALL"
     state: present
     mode: 0440
-    create: yes
+    create: true
     validate: "visudo -cf %s"

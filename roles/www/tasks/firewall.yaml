@@ -3,13 +3,13 @@
   ansible.posix.firewalld:
     zone: public
     service: http
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true
 - name: Add firewall rule for https
   ansible.posix.firewalld:
     zone: public
     service: https
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true

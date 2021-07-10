@@ -2,7 +2,7 @@
 - name: Include golang role
   import_role:
     name: gantsign.golang
-    allow_duplicates: no
+    allow_duplicates: false
 - name: Build molly-brown
   ansible.builtin.command: "{{ ansible_local.golang.general.home }}/bin/go get tildegit.org/solderpunk/molly-brown"
   args:
@@ -13,19 +13,19 @@
     dest: /usr/local/bin/molly-brown
     mode: "0755"
     setype: bin_t
-    remote_src: yes
+    remote_src: true
 - name: Create molly group
   ansible.builtin.group:
     name: molly
-    system: yes
+    system: true
 - name: Create molly user
   ansible.builtin.user:
     name: molly
     group: molly
     home: /var/gemini
-    create_home: no
+    create_home: false
     shell: /bin/false
-    system: yes
+    system: true
 - name: Copy molly-brown.service
   ansible.builtin.copy:
     src: "molly-brown.service"

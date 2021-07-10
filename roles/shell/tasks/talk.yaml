@@ -12,11 +12,11 @@
   ansible.builtin.service:
     name: ntalk.socket
     state: started
-    enabled: yes
+    enabled: true
 - name: Add firewall rule for ntalk
   ansible.posix.firewalld:
     zone: public
     port: 518/tcp
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true

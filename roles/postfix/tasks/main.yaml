@@ -2,7 +2,7 @@
 - name: Include certbot role
   import_role:
     name: certbot
-    allow_duplicates: no
+    allow_duplicates: false
 - include: install.yaml
 - include: config.yaml
 - include: aliases.yaml

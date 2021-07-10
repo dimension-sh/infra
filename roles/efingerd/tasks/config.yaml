@@ -21,5 +21,5 @@
 - name: Start finger socket
   ansible.builtin.systemd:
     name: finger.socket
-    enabled: yes
+    enabled: true
     state: started

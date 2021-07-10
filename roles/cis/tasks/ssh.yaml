@@ -12,11 +12,11 @@
     line: "{{ item.key }} {{ item.value }}"
   notify: restart sshd
   loop:
-    - { key: 'X11Forwarding', value: 'no'}
-    - { key: 'MaxAuthTries', value: '4'}
-    - { key: 'PermitRootLogin', value: 'no'}
-    - { key: 'PasswordAuthentication', value: 'no'}
-    - { key: 'PermitEmptyPasswords', value: 'no'}
-    - { key: 'PermitUserEnvironment', value: 'no'}
-    - { key: 'AllowTcpForwarding', value: 'yes'}
-    - { key: 'StreamLocalBindUnlink', value: 'yes'}
+    - { key: "X11Forwarding", value: "no" }
+    - { key: "MaxAuthTries", value: "4" }
+    - { key: "PermitRootLogin", value: "no" }
+    - { key: "PasswordAuthentication", value: "no" }
+    - { key: "PermitEmptyPasswords", value: "no" }
+    - { key: "PermitUserEnvironment", value: "no" }
+    - { key: "AllowTcpForwarding", value: "yes" }
+    - { key: "StreamLocalBindUnlink", value: "yes" }

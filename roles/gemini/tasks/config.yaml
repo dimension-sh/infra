@@ -15,7 +15,7 @@
 - name: Start Molly Brown
   ansible.builtin.systemd:
     name: molly-brown.service
-    enabled: yes
+    enabled: true
     state: started
 - name: Setup crontab to link users to the gemsite
   ansible.builtin.copy:

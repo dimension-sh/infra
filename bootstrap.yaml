@@ -1,7 +1,7 @@
 ---
 - name: Bootstrap new VM/Host
   hosts: all
-  gather_facts: no
+  gather_facts: false
   tasks:
     - include: roles/common/tasks/ansible_user.yaml
     - name: Add nikdoof user
@@ -10,7 +10,7 @@
         shell: /bin/bash
         group: 100
         groups: wheel
-        append: yes
+        append: true
     - name: Install ssh pubkey into nikdoof user
       ansible.posix.authorized_key:
         user: root

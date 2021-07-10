@@ -2,6 +2,6 @@
   ansible.posix.firewalld:
     zone: public
     port: 70/tcp
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true

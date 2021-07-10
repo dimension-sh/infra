@@ -8,6 +8,6 @@
   ansible.posix.firewalld:
     zone: public
     service: ssh
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true

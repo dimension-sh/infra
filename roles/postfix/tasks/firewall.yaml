@@ -3,13 +3,13 @@
   ansible.posix.firewalld:
     zone: public
     service: smtp
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true
 - name: Add firewall rule for smtp-submission
   ansible.posix.firewalld:
     zone: public
     service: smtp-submission
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true

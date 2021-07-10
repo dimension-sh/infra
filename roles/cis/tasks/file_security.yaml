@@ -6,7 +6,7 @@
   loop:
     - /boot/grub2/grub.cfg
     - /boot/grub2/grubenv
-  ignore_errors: True
+  ignore_errors: true
 - name: Change grub file modes
   ansible.builtin.file:
     path: "{{ item.item }}"

@@ -42,8 +42,8 @@
     name: sonar
     description: do agent
     baseurl: https://repos.insights.digitalocean.com/yum/do-agent/$basearch
-    gpgcheck: yes
+    gpgcheck: true
     gpgkey: https://repos.insights.digitalocean.com/sonar-agent.asc
-    enabled: yes
+    enabled: true
     state: present
   when: ansible_system_vendor == 'DigitalOcean'

@@ -12,11 +12,11 @@
 - name: Create ansible group
   ansible.builtin.group:
     name: ansible
-    system: yes
+    system: true
 - name: Create ansible user
   ansible.builtin.user:
     name: ansible
-    system: yes
+    system: true
     group: ansible
     shell: /bin/bash
     home: /var/lib/ansible
@@ -32,7 +32,7 @@
     line: "ansible ALL=(ALL) NOPASSWD: ALL"
     state: present
     mode: 0440
-    create: yes
+    create: true
     validate: "visudo -cf %s"
 - name: Remove all SSH keys from root
   ansible.builtin.file:

@@ -6,18 +6,18 @@
 - name: Enable httpd_read_user_content
   ansible.posix.seboolean:
     name: httpd_read_user_content
-    persistent: yes
-    state: yes
+    persistent: true
+    state: true
 - name: Enable httpd_enable_homedirs
   ansible.posix.seboolean:
     name: httpd_enable_homedirs
-    persistent: yes
-    state: yes
+    persistent: true
+    state: true
 - name: Start nginx
   ansible.builtin.service:
     name: nginx
     state: started
-    enabled: yes
+    enabled: true
 - name: Install nginx.conf
   ansible.builtin.copy:
     src: config/nginx.conf

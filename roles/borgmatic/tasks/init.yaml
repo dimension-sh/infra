@@ -1,12 +1,12 @@
 ---
 - name: Initialize borg check_repositories
-  ansible.builtin.command: "/usr/local/bin/borgmatic init --encryption {{ borgmatic_config['storage']['encryption_passphrase'] }}" # noqa 301
+  ansible.builtin.command: "/usr/local/bin/borgmatic init --encryption {{ borgmatic_config['storage']['encryption_passphrase'] }}"  # noqa 301
   no_log: true
   async: 300
   poll: 0
 - name: Enable borgmatic.timer
   ansible.builtin.systemd:
     name: borgmatic.timer
-    enabled: yes
-    masked: no
+    enabled: true
+    masked: false
     state: started
