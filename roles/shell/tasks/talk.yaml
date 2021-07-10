@@ -14,7 +14,7 @@
     state: started
     enabled: yes
 - name: Add firewall rule for ntalk
-  firewalld:
+  ansible.posix.firewalld:
     zone: public
     port: 518/tcp
     permanent: yes

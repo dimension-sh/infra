@@ -1,6 +1,6 @@
 ---
 - name: Add firewall rule for gemini
-  firewalld:
+  ansible.posix.firewalld:
     zone: public
     port: 1965/tcp
     permanent: yes

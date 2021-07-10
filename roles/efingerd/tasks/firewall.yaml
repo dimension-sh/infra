@@ -1,6 +1,6 @@
 ---
 - name: Add firewall rule for finger (port 79)
-  firewalld:
+  ansible.posix.firewalld:
     zone: public
     service: finger
     permanent: yes

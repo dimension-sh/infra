@@ -1,5 +1,5 @@
 - name: Add firewall rule for gopher
-  firewalld:
+  ansible.posix.firewalld:
     zone: public
     port: 70/tcp
     permanent: yes

@@ -1,13 +1,13 @@
 ---
 - name: Add firewall rule for smtp
-  firewalld:
+  ansible.posix.firewalld:
     zone: public
     service: smtp
     permanent: yes
     state: enabled
     immediate: yes
 - name: Add firewall rule for smtp-submission
-  firewalld:
+  ansible.posix.firewalld:
     zone: public
     service: smtp-submission
     permanent: yes

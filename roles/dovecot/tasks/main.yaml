@@ -75,7 +75,7 @@
     enabled: yes
 
 - name: Add firewall rule for imaps
-  firewalld:
+  ansible.posix.firewalld:
     zone: public
     service: imaps
     permanent: yes
