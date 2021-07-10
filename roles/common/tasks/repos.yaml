@@ -25,7 +25,7 @@
   register: powertools_repo_file
 
 - name: Enable PowerTools repo
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: "/etc/yum.repos.d/{{ powertools_repofile }}"
     regexp: "^enabled="
     line: "enabled=1"

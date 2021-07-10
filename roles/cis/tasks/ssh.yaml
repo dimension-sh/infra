@@ -6,7 +6,7 @@
     group: root
     mode: "0600"
 - name: Set SSHD configuration values
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: "^{{ item.key }}"
     line: "{{ item.key }} {{ item.value }}"

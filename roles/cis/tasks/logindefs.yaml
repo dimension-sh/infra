@@ -1,19 +1,19 @@
 ---
 # Modify login.defs
 - name: Set Default umask for Users
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/etc/login.defs"
     regexp: "UMASK"
     line: "UMASK 077"
     state: present
 - name: Set Home filemode
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/etc/login.defs"
     regexp: "HOME_MODE"
     line: "HOME_MODE 0701"
     state: present
 - name: Disable user groups
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/etc/login.defs"
     regexp: "USERGROUPS_ENAB"
     line: "USERGROUPS_ENAB no"

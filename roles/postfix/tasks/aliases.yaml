@@ -1,6 +1,6 @@
 ---
 - name: configure virtual aliases
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "/etc/postfix/virtual"
     regexp: "^{{ item.virtual | regex_escape }}.*"
     line: "{{ item.virtual }} {{ item.alias }}"
