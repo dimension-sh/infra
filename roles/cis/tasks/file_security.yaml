@@ -1,6 +1,6 @@
 ---
 - name: Check if grub file exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ item }}"
   register: grub_results
   loop:
@@ -8,7 +8,7 @@
     - /boot/grub2/grubenv
   ignore_errors: True
 - name: Change grub file modes
-  file:
+  ansible.builtin.file:
     path: "{{ item.item }}"
     owner: root
     group: root
@@ -16,7 +16,7 @@
   loop: "{{ grub_results.results }}"
   when: item.stat.exists
 - name: Change MOTD files security
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     owner: root
     group: root

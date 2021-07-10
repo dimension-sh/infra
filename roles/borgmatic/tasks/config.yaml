@@ -7,7 +7,7 @@
     group: root
     mode: "0600"
 - name: "Copy SSH key {{ item }} to borgmatic config folder"
-  copy:
+  ansible.builtin.copy:
     src: "ssh_keys/{{ item }}"
     dest: "/etc/borgmatic/{{ item }}"
     owner: root

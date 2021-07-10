@@ -1,6 +1,6 @@
 ---
 - name: Initialize borg check_repositories
-  command: "/usr/local/bin/borgmatic init --encryption {{ borgmatic_config['storage']['encryption_passphrase'] }}" # noqa 301
+  ansible.builtin.command: "/usr/local/bin/borgmatic init --encryption {{ borgmatic_config['storage']['encryption_passphrase'] }}" # noqa 301
   no_log: true
   async: 300
   poll: 0

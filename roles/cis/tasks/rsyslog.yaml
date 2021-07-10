@@ -4,7 +4,7 @@
     name: rsyslog
     state: present
 - name: Set FileCreateMode for rsyslog
-  copy:
+  ansible.builtin.copy:
     dest: /etc/rsyslog.d/00-filecreatemode.conf
     owner: root
     group: root
@@ -12,7 +12,7 @@
     content: "$FileCreateMode 0640\n"
   notify: restart rsyslog
 - name: Start rsyslog
-  service:
+  ansible.builtin.service:
     name: rsyslog
     state: started
     enabled: yes

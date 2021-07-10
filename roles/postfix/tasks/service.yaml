@@ -1,6 +1,6 @@
 ---
 - name: Start postfix
-  service:
+  ansible.builtin.service:
     name: postfix
     state: started
     enabled: yes

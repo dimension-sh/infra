@@ -5,14 +5,14 @@
     name: lowdown
     state: present
 - name: Deploy news
-  copy:
+  ansible.builtin.copy:
     src: news
     dest: /usr/local/bin/news
     owner: root
     group: root
     mode: "0755"
 - name: Deploy news2md
-  copy:
+  ansible.builtin.copy:
     src: news2md
     dest: /usr/local/bin/news2md
     owner: root

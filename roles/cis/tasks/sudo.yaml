@@ -1,6 +1,6 @@
 ---
 - name: Ensure sudo access is logged
-  copy:
+  ansible.builtin.copy:
     dest: /etc/sudoers.d/logfile.conf
     owner: root
     group: root

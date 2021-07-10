@@ -9,7 +9,7 @@
       - talk-server
       - ytalk
 - name: Start ntalk.socket
-  service:
+  ansible.builtin.service:
     name: ntalk.socket
     state: started
     enabled: yes

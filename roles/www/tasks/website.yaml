@@ -1,11 +1,11 @@
 ---
 - name: Deploy website files
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/dimension-sh/www-site-v2.git"
     dest: /usr/local/src/www-site
     version: main
 - name: Deploy wiki files
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/dimension-sh/wiki.git"
     separate_git_dir: /usr/local/src/wiki
     dest: /srv/wiki/

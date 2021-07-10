@@ -3,6 +3,10 @@
 A collection Ansible playbooks and roles to manage the [dimension.sh](https://dimension.sh)
 infrastructure and system configuration.
 
+## Requirements
+
+Ansible 2.11+, and collections specified in `collections/requirements.yaml`.
+
 ## Playbooks
 
 * `main.yaml` - Run everything playbook.

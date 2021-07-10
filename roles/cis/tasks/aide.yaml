@@ -5,7 +5,7 @@
     state: installed
   notify: init aide
 - name: Install AIDE crontab
-  copy:
+  ansible.builtin.copy:
     dest: /etc/cron.d/aide
     owner: root
     group: root

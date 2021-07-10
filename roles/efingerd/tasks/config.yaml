@@ -1,12 +1,12 @@
 ---
 # Config
 - name: Create efingerd config directory
-  file:
+  ansible.builtin.file:
     path: /etc/efingerd
     state: directory
     mode: "0755"
 - name: Copy efingerd scripts
-  copy:
+  ansible.builtin.copy:
     src: "scripts/{{ item }}"
     dest: "/etc/efingerd/{{ item }}"
     owner: root

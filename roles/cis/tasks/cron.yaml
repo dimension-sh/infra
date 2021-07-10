@@ -1,11 +1,11 @@
 ---
 - name: Enable crond
-  service:
+  ansible.builtin.service:
     name: crond
     state: started
     enabled: yes
 - name: Set cron file security
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     owner: root
     group: root
@@ -13,7 +13,7 @@
   loop:
     - /etc/crontab
 - name: Set cron.* directory security
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     owner: root
     group: root

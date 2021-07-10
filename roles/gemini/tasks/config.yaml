@@ -18,7 +18,7 @@
     enabled: yes
     state: started
 - name: Setup crontab to link users to the gemsite
-  copy:
+  ansible.builtin.copy:
     src: scripts/link-gemini
     dest: /etc/cron.hourly/link-gemini
     owner: root
@@ -26,11 +26,11 @@
     mode: "0700"
 
 - name: Check if mkuser post.d exists
-  stat:
+  ansible.builtin.stat:
     path: /etc/mkuser/post.d
   register: post_d_folder
 - name: Setup link-gemini for mkuser post actions
-  copy:
+  ansible.builtin.copy:
     src: scripts/link-gemini
     dest: /etc/mkuser/post.d/link-gemini
     owner: root

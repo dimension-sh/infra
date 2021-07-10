@@ -1,13 +1,13 @@
 ---
 - name: Copy main CIS benchmark ruleset
-  copy:
+  ansible.builtin.copy:
     src: auditd/cis-hardening.rules
     dest: /etc/audit/rules.d/cis-hardening.rules
     owner: root
     group: root
     mode: "0600"
 - name: Copy privileged commands ruleset
-  copy:
+  ansible.builtin.copy:
     src: auditd/privileged.rules
     dest: /etc/audit/rules.d/privileged.rules
     owner: root

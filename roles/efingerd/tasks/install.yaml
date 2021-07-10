@@ -4,14 +4,14 @@
     name: efingerd
     state: installed
 - name: create override folder for finger@.service
-  file:
+  ansible.builtin.file:
     path: /etc/systemd/system/finger@.service.d
     state: directory
     owner: root
     group: root
     mode: "0755"
 - name: Install systemd overrides
-  copy:
+  ansible.builtin.copy:
     src: override.conf
     dest: /etc/systemd/system/finger@.service.d/override.conf
     owner: root

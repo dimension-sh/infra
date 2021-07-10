@@ -1,18 +1,18 @@
 ---
 - name: Create /etc/motd.d
-  file:
+  ansible.builtin.file:
     path: /etc/motd.d
     state: directory
     mode: "0755"
 - name: Add MOTD Logo
-  copy:
+  ansible.builtin.copy:
     src: motd/00-logo
     dest: /etc/motd.d/00-logo
     owner: root
     group: root
     mode: "0644"
 - name: Add system message
-  copy:
+  ansible.builtin.copy:
     content: "Welcome to {{ ansible_fqdn }}\n\n"
     dest: /etc/motd.d/01-system
     owner: root

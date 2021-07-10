@@ -4,14 +4,14 @@
     name: tildejsongen
     state: installed
 - name: Copy tildejsongen config
-  copy:
+  ansible.builtin.copy:
     src: tildejsongen.ini
     dest: /etc/tildejsongen.ini
     owner: root
     group: root
     mode: "0600"
 - name: Install tilejsongen crontab
-  copy:
+  ansible.builtin.copy:
     dest: /etc/cron.d/tildejsongen
     owner: root
     group: root

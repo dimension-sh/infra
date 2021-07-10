@@ -24,7 +24,7 @@
     - { name: "smtpd_recipient_restrictions", value: "{{ postfix_smtpd_recipient_restrictions | join(',') }}" }
 
 - name: Check if TLS cert for host exists
-  stat:
+  ansible.builtin.stat:
     path: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem"
   register: lets_cert
 - name: Set postfix TLS configuration options
@@ -39,7 +39,7 @@
     - { name: "smtpd_tls_security_level", value: "may" }
     - { name: "smtpd_tls_auth_only", value: "yes" }
 - name: Install postfix restart deploy-hook for certbot
-  copy:
+  ansible.builtin.copy:
     dest: /etc/letsencrypt/renewal-hooks/deploy/postfix
     mode: "0755"
     owner: root
@@ -50,11 +50,11 @@
   when: lets_cert.stat.exists
 
 - name: Check if Dovecot is installed
-  stat:
+  ansible.builtin.stat:
     path: "/etc/dovecot/dovecot.conf"
   register: dovecot_conf
 - name: Copy submission master.cf
-  copy:
+  ansible.builtin.copy:
     src: master.cf
     dest: /etc/postfix/master.cf
     owner: root
@@ -63,7 +63,7 @@
   when: dovecot_conf.stat.exists
   notify: restart postfix
 - name: Copy sender_login_maps.pcre
-  copy:
+  ansible.builtin.copy:
     src: sender_login_maps.pcre
     dest: /etc/postfix/sender_login_maps.pcre
     owner: root

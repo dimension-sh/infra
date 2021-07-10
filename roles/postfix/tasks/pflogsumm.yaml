@@ -4,7 +4,7 @@
     name: "pflogsumm"
     state: present
 - name: Install pflogsumm crontab
-  copy:
+  ansible.builtin.copy:
     dest: /etc/cron.d/pflogsumm
     owner: root
     group: root

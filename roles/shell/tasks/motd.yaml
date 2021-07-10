@@ -1,6 +1,6 @@
 ---
 - name: Add MOTD guide
-  copy:
+  ansible.builtin.copy:
     src: motd/01-guide
     dest: /etc/motd.d/01-guide
     owner: root

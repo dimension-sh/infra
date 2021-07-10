@@ -1,6 +1,6 @@
 ---
 - name: restart molly
-  service:
+  ansible.builtin.service:
     name: molly-brown
     state: restarted
 - name: reload systemd

@@ -7,13 +7,13 @@
     packages:
       - borgbackup
 - name: Install Borgmatic
-  pip:
+  ansible.builtin.pip:
     name: "{{ packages }}"
   vars:
     packages:
       - borgmatic
 - name: Add borgmatic systemd units
-  copy:
+  ansible.builtin.copy:
     src: "systemd/{{ item }}"
     dest: "/etc/systemd/system/{{ item }}"
     owner: root

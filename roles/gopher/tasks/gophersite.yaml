@@ -1,15 +1,15 @@
 ---
 - name: Check if /var/gopher is checkout from git
-  stat:
+  ansible.builtin.stat:
     path: /var/gopher/.git
   register: gopher_result_git
 - name: Remove /var/gopher dir if not a git repo
-  file:
+  ansible.builtin.file:
     path: /var/gopher
     state: absent
   when: not gopher_result_git.stat.exists
 - name: Deploy gophersite files
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/dimension-sh/gopher-site.git"
     separate_git_dir: /usr/local/src/gopher-site
     dest: /var/gopher/

@@ -29,7 +29,7 @@
     creates: "/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
   loop: "{{ postfix_opendkim_keys }}"
 - name: Change DKIM Key owner to opendkim
-  file:
+  ansible.builtin.file:
     path: "/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
     owner: opendkim
     group: opendkim

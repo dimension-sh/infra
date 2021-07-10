@@ -14,12 +14,12 @@
     persistent: yes
     state: yes
 - name: Start nginx
-  service:
+  ansible.builtin.service:
     name: nginx
     state: started
     enabled: yes
 - name: Install nginx.conf
-  copy:
+  ansible.builtin.copy:
     src: config/nginx.conf
     dest: /etc/nginx/nginx.conf
     owner: root
@@ -27,7 +27,7 @@
     mode: "0644"
   notify: restart nginx
 - name: Copy redirect http config to nginx
-  copy:
+  ansible.builtin.copy:
     src: "config/sites/http-redirect.conf"
     dest: "/etc/nginx/conf.d/http-redirect.conf"
     owner: root
@@ -35,7 +35,7 @@
     mode: "0644"
   notify: restart nginx
 - name: Copy ip redirect config to nginx
-  copy:
+  ansible.builtin.copy:
     src: "config/sites/ip-redirect.conf"
     dest: "/etc/nginx/conf.d/ip-redirect.conf"
     owner: root
@@ -43,7 +43,7 @@
     mode: "0644"
   notify: restart nginx
 - name: Create well-known folder for certbot
-  file:
+  ansible.builtin.file:
     path: /var/www/acme-challenge
     state: directory
     owner: root
@@ -53,7 +53,7 @@
 - name: Restart nginx now, if needed
   meta: flush_handlers
 - name: Install nginx restart deploy-hook for certbot
-  copy:
+  ansible.builtin.copy:
     dest: /etc/letsencrypt/renewal-hooks/deploy/nginx
     mode: "0755"
     owner: root

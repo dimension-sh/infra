@@ -1,7 +1,7 @@
 ---
 # DCSS
 - name: Deploy dcss
-  copy:
+  ansible.builtin.copy:
     src: scripts/dcss
     dest: /usr/local/bin/dcss
     owner: root
@@ -14,14 +14,14 @@
     name: mkuser
     state: latest
 - name: Copy mkuser template
-  copy:
+  ansible.builtin.copy:
     src: mail.tmpl
     dest: /etc/mkuser/mail.tmpl
     owner: root
     group: root
     mode: "0600"
 - name: Copy mkuser config
-  copy:
+  ansible.builtin.copy:
     src: mkuser.yaml
     dest: /etc/mkuser/mkuser.yaml
     owner: root

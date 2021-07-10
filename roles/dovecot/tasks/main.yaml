@@ -9,7 +9,7 @@
     name: "dovecot"
     state: present
 - name: Deploy 00-protocols.conf
-  copy:
+  ansible.builtin.copy:
     src: dovecot/00-protocols.conf
     dest: /etc/dovecot/conf.d/10-protocols.conf
     owner: root
@@ -17,7 +17,7 @@
     mode: "0644"
   notify: restart dovecot
 - name: Deploy updated 10-master.conf
-  copy:
+  ansible.builtin.copy:
     src: dovecot/10-master.conf
     dest: /etc/dovecot/conf.d/10-master.conf
     owner: root
@@ -26,12 +26,12 @@
   notify: restart dovecot
 
 - name: Create dhparam for Dovecot
-  command: /usr/bin/openssl dhparam -out /etc/dovecot/dh.pem 4096
+  ansible.builtin.command: /usr/bin/openssl dhparam -out /etc/dovecot/dh.pem 4096
   args:
     creates: /etc/dovecot/dh.pem
 
 - name: Check if TLS cert for host exists
-  stat:
+  ansible.builtin.stat:
     path: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem"
   register: lets_cert
 - name: Deploy updated 10-ssl.conf
@@ -44,7 +44,7 @@
   when: lets_cert.stat.exists
   notify: restart dovecot
 - name: Install dovecot restart deploy-hook for certbot
-  copy:
+  ansible.builtin.copy:
     dest: /etc/letsencrypt/renewal-hooks/deploy/dovecot
     mode: "0755"
     owner: root
@@ -55,7 +55,7 @@
   when: lets_cert.stat.exists
 
 - name: Check if fail2ban is installed
-  stat:
+  ansible.builtin.stat:
     path: "/etc/fail2ban/jail.local"
   register: fail2ban_jail_file
 - name: Enable dovecot jail
@@ -69,7 +69,7 @@
   notify: restart fail2ban
 
 - name: Start dovecot
-  service:
+  ansible.builtin.service:
     name: dovecot
     state: started
     enabled: yes

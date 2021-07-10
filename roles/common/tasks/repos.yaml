@@ -5,22 +5,22 @@
     state: present
 
 - name: Install Dimension RPMs repo
-  command: yum-config-manager --add-repo http://dimension-sh.github.io/dimension-rpms/dimension-rpms.repo
+  ansible.builtin.command: yum-config-manager --add-repo http://dimension-sh.github.io/dimension-rpms/dimension-rpms.repo
   args:
     creates: /etc/yum.repos.d/dimension-rpms.repo
 
 - name: Set Powertools repo name for RedHat
-  set_fact:
+  ansible.builtin.set_fact:
     powertools_repofile: CentOS-PowerTools.repo
   when: ansible_facts['os_family'] == "RedHat"
 
 - name: Set Powertools repo name for Rocky
-  set_fact:
+  ansible.builtin.set_fact:
     powertools_repofile: Rocky-PowerTools.repo
   when: ansible_facts['os_family'] == "Rocky"
 
 - name: Check if PowerTools Repo exists
-  stat:
+  ansible.builtin.stat:
     path: "/etc/yum.repos.d/{{ powertools_repofile }}"
   register: powertools_repo_file
 
@@ -37,7 +37,7 @@
     state: present
 
 - name: Add DO Agent repository
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: digitalocean-agent
     name: sonar
     description: do agent

@@ -1,6 +1,6 @@
 ---
 - name: Install disk-usage cronjob
-  copy:
+  ansible.builtin.copy:
     dest: /etc/cron.d/disk-usage
     owner: root
     group: root

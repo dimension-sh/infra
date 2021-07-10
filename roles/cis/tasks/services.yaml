@@ -1,6 +1,6 @@
 ---
 - name: Disable services
-  service:
+  ansible.builtin.service:
     name: "{{ item }}"
     state: stopped
     enabled: false

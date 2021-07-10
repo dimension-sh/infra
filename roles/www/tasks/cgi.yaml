@@ -11,14 +11,14 @@
     state: installed
 
 - name: Enable fcgiwrap
-  service:
+  ansible.builtin.service:
     name: fcgiwrap@nginx.socket
     enabled: yes
     state: started
 
 # Install python dependencies
 - name: Install Python packages for CGI scripts
-  pip:
+  ansible.builtin.pip:
     name: "{{ packages }}"
   vars:
     packages:

@@ -1,16 +1,16 @@
 ---
 - name: restart postfix
-  service:
+  ansible.builtin.service:
     name: postfix
     state: reloaded
 
 - name: restart opendkim
-  service:
+  ansible.builtin.service:
     name: opendkim
     state: restarted
 
 - name: new virtual aliases
-  command: postmap /etc/postfix/virtual
+  ansible.builtin.command: postmap /etc/postfix/virtual
 
 - name: new aliases
-  command: newaliases
+  ansible.builtin.command: newaliases

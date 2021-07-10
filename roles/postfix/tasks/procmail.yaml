@@ -1,10 +1,10 @@
 ---
 - name: Install procmail
-  package:
+  ansible.builtin.package:
     name: procmail
     state: installed
 - name: Create basic procmail config
-  copy:
+  ansible.builtin.copy:
     dest: /etc/procmailrc
     mode: 0644
     owner: root
