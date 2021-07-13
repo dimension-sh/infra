@@ -12,12 +12,6 @@
     name: "{{ remove_packages }}"
     state: absent
 
-- name: Install Digital Ocean Agent
-  ansible.builtin.package:
-    name: do-agent
-    state: installed
-  when: ansible_system_vendor == 'DigitalOcean'
-
 - name: Install VMware Tools
   ansible.builtin.package:
     name: open-vm-tools

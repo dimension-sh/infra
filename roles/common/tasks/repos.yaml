@@ -35,15 +35,3 @@
   ansible.builtin.package:
     name: epel-release
     state: present
-
-- name: Add DO Agent repository
-  ansible.builtin.yum_repository:
-    file: digitalocean-agent
-    name: sonar
-    description: do agent
-    baseurl: https://repos.insights.digitalocean.com/yum/do-agent/$basearch
-    gpgcheck: true
-    gpgkey: https://repos.insights.digitalocean.com/sonar-agent.asc
-    enabled: true
-    state: present
-  when: ansible_system_vendor == 'DigitalOcean'

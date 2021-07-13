@@ -22,6 +22,7 @@ common_packages:
 remove_packages:
   - cockpit
   - cockpit-ws
+  - do-agent
 
 certbot_certs_email: sysops@dimension.sh
 
