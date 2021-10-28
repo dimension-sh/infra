@@ -2,8 +2,11 @@
 - name: Bootstrap new VM/Host
   hosts: all
   gather_facts: false
+  become: true
   tasks:
-    - include: roles/common/tasks/ansible_user.yaml
+    - include_role:
+      name: common
+      tasks_from: ansible_user
     - name: Add nikdoof user
       ansible.builtin.user:
         name: nikdoof
