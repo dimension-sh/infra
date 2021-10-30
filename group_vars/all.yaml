@@ -1,4 +1,8 @@
 ---
+bootstrap_users:
+  - name: nikdoof
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJPCxgs8vZbjm6ktpf9Jr3sLoKfMQJ6DT1/20wNq9RQe
+
 common_packages:
   - ansible
   - bind-utils

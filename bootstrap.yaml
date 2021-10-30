@@ -4,17 +4,23 @@
   gather_facts: false
   become: true
   tasks:
+    - name: Install sudo
+      ansible.builtin.package:
+        name: sudo
+        state: installed
     - include_role:
       name: common
       tasks_from: ansible_user
-    - name: Add nikdoof user
+    - name: Add bootstrap bootstrap users
       ansible.builtin.user:
-        name: nikdoof
+        name: "{{ item.name }}"
         shell: /bin/bash
-        group: 100
+        group: users
         groups: wheel
         append: true
-    - name: Install ssh pubkey into nikdoof user
+      loop: "{{ bootstrap_users }}"
+    - name: Install ssh pubkey into bootstrap users
       ansible.posix.authorized_key:
-        user: root
-        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJPCxgs8vZbjm6ktpf9Jr3sLoKfMQJ6DT1/20wNq9RQe"
+        user: "{{ item.name }}"
+        key: "{{ item.key }}"
+      loop: "{{ bootstrap_users }}"
