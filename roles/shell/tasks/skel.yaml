@@ -14,4 +14,4 @@
   ansible.builtin.git:
     repo: "https://github.com/dimension-sh/skel.git"
     dest: /etc/skel
-    version: master
+    version: main

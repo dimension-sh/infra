@@ -13,4 +13,4 @@
     repo: "https://github.com/dimension-sh/gemini-site.git"
     separate_git_dir: /usr/local/src/gemini-site
     dest: /var/gemini/
-    version: master
+    version: main
