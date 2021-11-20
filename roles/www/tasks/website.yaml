@@ -9,4 +9,4 @@
     repo: "https://github.com/dimension-sh/wiki.git"
     separate_git_dir: /usr/local/src/wiki
     dest: /srv/wiki/
-    version: master
+    version: main
