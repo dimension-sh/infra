@@ -34,5 +34,14 @@
     group: root
     mode: "0644"
   notify: reload systemd
+- name: Install molly-brown restart deploy-hook for certbot
+  ansible.builtin.copy:
+    dest: /etc/letsencrypt/renewal-hooks/deploy/molly-brown
+    mode: "0755"
+    owner: root
+    group: root
+    content: |
+      #!/bin/sh
+      /bin/systemctl restart molly-brown
 - name: Refresh systemd now
   meta: flush_handlers
