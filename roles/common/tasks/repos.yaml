@@ -11,7 +11,7 @@
 
 - name: Set Powertools repo name for RedHat
   ansible.builtin.set_fact:
-    powertools_repofile: CentOS-PowerTools.repo
+    powertools_repofile: CentOS-Linux-PowerTools.repo
   when: ansible_facts['os_family'] == "RedHat"
 
 - name: Set Powertools repo name for Rocky
