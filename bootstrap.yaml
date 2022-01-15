@@ -9,8 +9,8 @@
         name: sudo
         state: installed
     - include_role:
-      name: common
-      tasks_from: ansible_user
+        name: common
+        tasks_from: ansible_user
     - name: Add bootstrap bootstrap users
       ansible.builtin.user:
         name: "{{ item.name }}"
@@ -19,6 +19,14 @@
         groups: wheel
         append: true
       loop: "{{ bootstrap_users }}"
+    - name: Add user to sudo
+      ansible.builtin.lineinfile:
+        path: "/etc/sudoers.d/{{ item.name }}"
+        line: "{{ item.name }} ALL=(ALL) NOPASSWD: ALL"
+        state: present
+        mode: 0440
+        create: true
+        validate: "visudo -cf %s"
     - name: Install ssh pubkey into bootstrap users
       ansible.posix.authorized_key:
         user: "{{ item.name }}"
