@@ -6,8 +6,6 @@ jobs:
     name: Deploy - Production
     environment: production
     runs-on: ubuntu-latest
-    needs:
-      - lint
     steps:
       - name: Call Dimension Tower to Deploy
         uses: informaticsmatters/trigger-awx-action@v1
