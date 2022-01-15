@@ -1,23 +1,7 @@
 name: Deploy Production
 "on":
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Lint Ansible Playbook
-        uses: ansible/ansible-lint-action@master
-        with:
-          override-deps: |
-            ansible-lint==5.3.2
-          targets: |
-            main.yaml
-          args: "-p --parseable-severity"
   deploy-production:
     name: Deploy - Production
     environment: production
