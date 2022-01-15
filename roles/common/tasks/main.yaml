@@ -4,5 +4,6 @@
 - include: groups.yaml
 - include: firewall.yaml
 - include: fail2ban.yaml
+- include: node_exporter.yaml
 - include: motd.yaml
 - include: packages.yaml

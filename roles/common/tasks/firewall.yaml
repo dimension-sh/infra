@@ -10,4 +10,8 @@
     service: ssh
     permanent: true
     state: enabled
-    immediate: true
+
+- name: Start Firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: started

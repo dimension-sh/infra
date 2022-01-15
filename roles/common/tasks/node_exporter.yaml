@@ -1,0 +1,20 @@
+---
+- name: Install and configure node_exporter
+  tags:
+    - node_exporter
+  block:
+    - name: Install node_exporter
+      ansible.builtin.package:
+        name: golang-github-prometheus-node-exporter
+        state: installed
+    - name: Start node_exporter
+      ansible.builtin.service:
+        name: node_exporter
+        state: started
+        enabled: true
+    - name: Add firewall rule for node_exporter
+      ansible.posix.firewalld:
+        zone: public
+        rich_rule: rule family="ipv4" source address="81.187.48.147/32" port protocol="tcp" port="9100" accept
+        permanent: yes
+        state: enabled
