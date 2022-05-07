@@ -12,6 +12,7 @@
     "suppressNotifications": [
         "prIgnoreNotification"
     ],
+    "assigneesFromCodeOwners": true,
     "rebaseWhen": "conflicted",
     "stabilityDays": 3
 }
