@@ -1,16 +1,14 @@
-name: Deploy Production
+name: Deploy
 "on":
   workflow_dispatch:
 jobs:
-  deploy-production:
-    name: Deploy - Production
-    environment: production
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Call Dimension Tower to Deploy
-        uses: informaticsmatters/trigger-awx-action@v1
-        with:
-          template: ${{ secrets.DIMENSION_TOWER_TEMPLATEID }}
-          template-host: ${{ secrets.DIMENSION_TOWER_URL }}
-          template-user: ${{ secrets.DIMENSION_TOWER_USER }}
-          template-user-password: ${{ secrets.DIMENSION_TOWER_PASSWORD }}
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/ansible
+      env:
+        VAULT_PASS: ${{ secrets.VAULT_PASS }}
+        SSH_USER: ${{ secrets.DIMENSION_DEPLOYMENT_USER }}
+        SSH_KEY: ${{ secrets.DIMENSION_DEPLOYMENT_SSH_KEY }}
+        TARGET_HOST: ${{ secrets.TARGET_HOST }}
