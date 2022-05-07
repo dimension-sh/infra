@@ -3,7 +3,7 @@
         ":enableRenovate",
         "config:base",
         ":enablePreCommit",
-        ":disableRateLimiting",
+        ":disableRateLimiting"
     ],
     "timezone": "UTC",
     "dependencyDashboard": true,
