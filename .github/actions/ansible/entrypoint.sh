@@ -16,4 +16,4 @@ ansible-galaxy collection install -r collections/requirements.yml
 ansible-galaxy role install -r roles/requirements.yaml
 
 # Run playbook
-ansible-playbook --vault-password-file ~/.vault_pass.txt -u "$SSH_USER" -i inventory.yaml -l "$TARGET_HOST" --check main.yaml
+ansible-playbook --vault-password-file ~/.vault_pass.txt -u "$SSH_USER" --private-key ~/.ssh/id_rsa -i inventory.yaml -l "$TARGET_HOST" --check main.yaml
