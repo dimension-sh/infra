@@ -1,3 +1,8 @@
 ---
 - name: gantsign.golang
   version: 2.10.1
+
+# nikdoof roles
+- name: borgmatic
+  src: https://github.com/nikdoof/ansible-borgmatic
+  version: main
