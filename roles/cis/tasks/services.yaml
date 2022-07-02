@@ -1,9 +1,0 @@
----
-- name: Disable services
-  ansible.builtin.service:
-    name: "{{ item }}"
-    state: stopped
-    enabled: false
-  loop:
-    - rpcbind.socket
-    - rpcbind.service

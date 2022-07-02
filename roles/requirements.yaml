@@ -6,3 +6,6 @@
 - name: borgmatic
   src: https://github.com/nikdoof/ansible-borgmatic
   version: main
+- name: cis
+  src: https://github.com/nikdoof/ansible-cis.git
+  version: main
