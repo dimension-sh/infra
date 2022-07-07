@@ -16,5 +16,5 @@
       ansible.posix.firewalld:
         zone: public
         rich_rule: rule family="ipv4" source address="81.187.48.147/32" port protocol="tcp" port="9100" accept
-        permanent: yes
+        permanent: true
         state: enabled

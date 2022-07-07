@@ -1,2 +1,6 @@
 skip_list:
-  - '204' # Lines should be no longer than 160 chars
+    - "204" # Lines should be no longer than 160 chars
+
+warn_list:
+    - fqcn-builtins # Use FQCN for builtin actions.
+    - schema

@@ -34,7 +34,7 @@ postfix_smtpd_recipient_restrictions:
 postfix_opendkim_enable: false
 postfix_opendkim_config:
   Mode: sv
-  ReportAddress: "Postmaster <postmaster@{{ ansible_domain}}>"
+  ReportAddress: "Postmaster <postmaster@{{ ansible_domain }}>"
   KeyTable: /etc/opendkim/KeyTable
   SigningTable: /etc/opendkim/SigningTable
   ExternalIgnoreList: refile:/etc/opendkim/TrustedHosts
