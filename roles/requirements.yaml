@@ -1,6 +1,6 @@
 ---
 - name: gantsign.golang
-  version: 2.10.4
+  version: 2.11.0
 
 # nikdoof roles
 - name: borgmatic
