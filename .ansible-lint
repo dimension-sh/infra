@@ -1,6 +1,21 @@
+---
+mock_modules:
+  - postconf
+
 skip_list:
-    - "204" # Lines should be no longer than 160 chars
+  - yaml[line-length]
+  - name[missing]
 
 warn_list:
-    - fqcn-builtins # Use FQCN for builtin actions.
-    - schema
+  - ignore-errors
+  - yaml
+  - fqcn-builtins
+  - schema
+  - meta-no-info
+  - no-changed-when
+  - name[casing]
+  - name[missing]
+  - name[template]
+  - jinja[spacing]
+  - deprecated-module
+  - name[play]

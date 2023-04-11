@@ -1,0 +1,20 @@
+---
+collections:
+  - name: ansible.posix
+    version: 1.5.2
+  - name: community.general
+    version: 6.5.0
+  - name: community.crypto
+    version: 2.11.1
+  - name: community.digitalocean
+    version: 1.23.0
+
+roles:
+  - name: gantsign.golang
+    version: 3.1.2
+  - name: borgmatic
+    src: https://github.com/nikdoof/ansible-borgmatic
+    version: main
+  - name: cis
+    src: https://github.com/nikdoof/ansible-cis.git
+    version: main

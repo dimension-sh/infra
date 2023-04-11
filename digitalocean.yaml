@@ -3,7 +3,7 @@
   hosts: mail
   become: true
   tasks:
-    - name: "Generate DNS record for {{ item }} DKIM key"
+    - name: "Generate DNS record for {{ item }} DKIM key"  # noqa risky-shell-pipe
       ansible.builtin.shell:
         cmd: "openssl rsa -in /etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private -pubout -outform der 2>/dev/null | openssl base64 -A"
       register: keys
