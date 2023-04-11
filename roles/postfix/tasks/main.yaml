@@ -1,18 +1,18 @@
 ---
 - name: Include certbot role
-  import_role:
+  ansible.builtin.import_role:
     name: certbot
     allow_duplicates: false
-- include: install.yaml
-- include: config.yaml
-- include: aliases.yaml
-- include: service.yaml
-- include: firewall.yaml
+- ansible.builtin.include_tasks: install.yaml
+- ansible.builtin.include_tasks: config.yaml
+- ansible.builtin.include_tasks: aliases.yaml
+- ansible.builtin.include_tasks: service.yaml
+- ansible.builtin.include_tasks: firewall.yaml
 
-- include: opendkim.yaml
+- ansible.builtin.include_tasks: opendkim.yaml
   when: postfix_opendkim_enable
-- include: pflogsumm.yaml
+- ansible.builtin.include_tasks: pflogsumm.yaml
   when: postfix_pflogsumm_enable
-- include: simplelist.yaml
+- ansible.builtin.include_tasks: simplelist.yaml
   when: postfix_simplelist_enable
-- include: procmail.yaml
+- ansible.builtin.include_tasks: procmail.yaml

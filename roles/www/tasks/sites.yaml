@@ -13,7 +13,7 @@
     www_site_files: ['http-redirect.conf', 'ip-redirect.conf']
 - name: Build a list of all site files.
   ansible.builtin.set_fact:
-    www_site_files: "{{ www_site_files|default(['http-redirect.conf', 'ip-redirect.conf']) }} + [ '{{ item }}.conf' ]"
+    www_site_files: "{{ www_site_files | default(['http-redirect.conf', 'ip-redirect.conf']) }} + [ '{{ item }}.conf' ]"
   loop: "{{ www_sites }}"
 - name: Get a list of all files in /etc/nginx/conf.d/
   ansible.builtin.command: /bin/ls -1 /etc/nginx/conf.d/

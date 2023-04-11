@@ -1,9 +1,9 @@
 ---
-- include: repos.yaml
-- include: ansible_user.yaml
-- include: groups.yaml
-- include: firewall.yaml
-- include: fail2ban.yaml
-- include: node_exporter.yaml
-- include: motd.yaml
-- include: packages.yaml
+- ansible.builtin.include_tasks: repos.yaml
+- ansible.builtin.include_tasks: ansible_user.yaml
+- ansible.builtin.include_tasks: groups.yaml
+- ansible.builtin.include_tasks: firewall.yaml
+- ansible.builtin.include_tasks: fail2ban.yaml
+- ansible.builtin.include_tasks: node_exporter.yaml
+- ansible.builtin.include_tasks: motd.yaml
+- ansible.builtin.include_tasks: packages.yaml

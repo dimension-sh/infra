@@ -1,11 +1,11 @@
 ---
 - name: Include certbot role
-  import_role:
+  ansible.builtin.import_role:
     name: certbot
     allow_duplicates: false
-- include: install.yaml
-- include: firewall.yaml
-- include: sites.yaml
-- include: cgi.yaml
-- include: website.yaml
-- include: tildejsongen.yaml
+- ansible.builtin.include_tasks: install.yaml
+- ansible.builtin.include_tasks: firewall.yaml
+- ansible.builtin.include_tasks: sites.yaml
+- ansible.builtin.include_tasks: cgi.yaml
+- ansible.builtin.include_tasks: website.yaml
+- ansible.builtin.include_tasks: tildejsongen.yaml

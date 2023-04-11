@@ -7,12 +7,9 @@ galaxy_info:
   description: Installs and configures a Gopher server using Gophernicus
   license: MIT
 
-  min_ansible_version: 2.4
+  min_ansible_version: "2.4"
 
   platforms:
-    - name: RedHat
+    - name: EL
       versions:
-        - 8
-
-  collections:
-    - ansible.posix
+        - "8"

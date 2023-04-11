@@ -5,6 +5,7 @@ mock_modules:
 skip_list:
   - yaml[line-length]
   - name[missing]
+  - name[template]
 
 warn_list:
   - ignore-errors

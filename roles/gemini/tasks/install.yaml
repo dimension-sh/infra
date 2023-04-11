@@ -1,6 +1,6 @@
 ---
 - name: Include golang role
-  import_role:
+  ansible.builtin.import_role:
     name: gantsign.golang
     allow_duplicates: false
 - name: Build molly-brown
@@ -44,4 +44,4 @@
       #!/bin/sh
       /bin/systemctl restart molly-brown
 - name: Refresh systemd now
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers

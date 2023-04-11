@@ -1,16 +1,23 @@
 ---
-- hosts: all
+- name: Common roles to all hostgroups
+  hosts: all
   become: true
   roles:
     - role: common
     - role: cis
     - role: certbot
     - role: borgmatic
-- hosts: build
+
+- name: Build hostgroup roles
+  hosts: build
   become: true
-- hosts: dev
+
+- name: Dev hostgroup roles
+  hosts: dev
   become: true
-- hosts: shell
+
+- name: Shell hostgroup roles
+  hosts: shell
   become: true
   roles:
     - role: shell
@@ -25,7 +32,9 @@
     - role: gemini
       tags:
         - www
-- hosts: mail
+
+- name: Mail hostgroup roles
+  hosts: mail
   become: true
   roles:
     - role: postfix
@@ -34,5 +43,7 @@
     - role: dovecot
       tags:
         - mail
-- hosts: services
+
+- name: Services hostgroup roles
+  hosts: services
   become: true

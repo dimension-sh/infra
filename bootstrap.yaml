@@ -8,7 +8,7 @@
       ansible.builtin.package:
         name: sudo
         state: installed
-    - include_role:
+    - ansible.builtin.include_role:
         name: common
         tasks_from: ansible_user
     - name: Add bootstrap bootstrap users

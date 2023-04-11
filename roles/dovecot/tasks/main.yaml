@@ -1,6 +1,6 @@
 ---
 - name: Include certbot role
-  import_role:
+  ansible.builtin.import_role:
     name: certbot
     allow_duplicates: false
 
@@ -35,7 +35,7 @@
     path: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem"
   register: lets_cert
 - name: Deploy updated 10-ssl.conf
-  template:
+  ansible.builtin.template:
     src: dovecot/10-ssl.conf.j2
     dest: /etc/dovecot/conf.d/10-ssl.conf
     owner: root

@@ -1,10 +1,10 @@
 ---
-- include: packages.yaml
-- include: limits.yaml
-- include: scripts.yaml
-- include: skel.yaml
-- include: motd.yaml
-- include: mail.yaml
-- include: profile.yaml
-- include: talk.yaml
-- include: cron.yaml
+- ansible.builtin.include_tasks: packages.yaml
+- ansible.builtin.include_tasks: limits.yaml
+- ansible.builtin.include_tasks: scripts.yaml
+- ansible.builtin.include_tasks: skel.yaml
+- ansible.builtin.include_tasks: motd.yaml
+- ansible.builtin.include_tasks: mail.yaml
+- ansible.builtin.include_tasks: profile.yaml
+- ansible.builtin.include_tasks: talk.yaml
+- ansible.builtin.include_tasks: cron.yaml

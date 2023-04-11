@@ -1,3 +1,4 @@
+---
 - name: Add firewall rule for gopher
   ansible.posix.firewalld:
     zone: public

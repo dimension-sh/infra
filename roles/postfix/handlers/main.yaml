@@ -9,8 +9,8 @@
     name: opendkim
     state: restarted
 
-- name: new virtual aliases
+- name: new virtual aliases  # noqa no-changed-when
   ansible.builtin.command: postmap /etc/postfix/virtual
 
-- name: new aliases
+- name: new aliases  # noqa no-changed-when
   ansible.builtin.command: newaliases

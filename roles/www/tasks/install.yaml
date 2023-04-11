@@ -51,7 +51,7 @@
     mode: "0755"
     setype: httpd_sys_content_t
 - name: Restart nginx now, if needed
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 - name: Install nginx restart deploy-hook for certbot
   ansible.builtin.copy:
     dest: /etc/letsencrypt/renewal-hooks/deploy/nginx

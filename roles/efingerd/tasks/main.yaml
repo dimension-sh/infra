@@ -1,4 +1,4 @@
 ---
-- include: install.yaml
-- include: config.yaml
-- include: firewall.yaml
+- ansible.builtin.include_tasks: install.yaml
+- ansible.builtin.include_tasks: config.yaml
+- ansible.builtin.include_tasks: firewall.yaml
