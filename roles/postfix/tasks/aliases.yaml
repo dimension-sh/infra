@@ -1,5 +1,5 @@
 ---
-- name: configure virtual aliases
+- name: Configure virtual aliases
   ansible.builtin.lineinfile:
     dest: "/etc/postfix/virtual"
     regexp: "^{{ item.virtual | regex_escape }}.*"
@@ -11,4 +11,4 @@
     state: present
   loop: "{{ postfix_virtual_aliases }}"
   notify:
-    - new virtual aliases
+    - New virtual aliases

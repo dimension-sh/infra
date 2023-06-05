@@ -15,7 +15,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: restart dovecot
+  notify: Restart Dovecot
 - name: Deploy updated 10-master.conf
   ansible.builtin.copy:
     src: dovecot/10-master.conf
@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: restart dovecot
+  notify: Restart Dovecot
 
 - name: Create dhparam for Dovecot
   ansible.builtin.command: /usr/bin/openssl dhparam -out /etc/dovecot/dh.pem 4096
@@ -42,7 +42,7 @@
     group: root
     mode: "0644"
   when: lets_cert.stat.exists
-  notify: restart dovecot
+  notify: Restart Dovecot
 - name: Install dovecot restart deploy-hook for certbot
   ansible.builtin.copy:
     dest: /etc/letsencrypt/renewal-hooks/deploy/dovecot
@@ -51,13 +51,13 @@
     group: root
     content: |
       #!/bin/sh
-      /bin/systemctl restart dovecot
+      /bin/systemctl Restart Dovecot
   when: lets_cert.stat.exists
 
 - name: Check if fail2ban is installed
   ansible.builtin.stat:
     path: "/etc/fail2ban/jail.local"
-  register: fail2ban_jail_file
+  register: dovecot_fail2ban_jail_file
 - name: Enable dovecot jail
   community.general.ini_file:
     path: /etc/fail2ban/jail.local
@@ -65,8 +65,8 @@
     option: enabled
     value: "true"
     mode: "0644"
-  when: fail2ban_jail_file.stat.exists
-  notify: restart fail2ban
+  when: dovecot_fail2ban_jail_file.stat.exists
+  notify: Restart Fail2Ban
 
 - name: Start dovecot
   ansible.builtin.service:

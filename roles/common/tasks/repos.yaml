@@ -11,25 +11,25 @@
 
 - name: Set Powertools repo name for RedHat
   ansible.builtin.set_fact:
-    powertools_repofile: CentOS-Linux-PowerTools.repo
+    common_powertools_repofile: CentOS-Linux-PowerTools.repo
   when: ansible_facts['os_family'] == "RedHat"
 
 - name: Set Powertools repo name for Rocky
   ansible.builtin.set_fact:
-    powertools_repofile: Rocky-PowerTools.repo
+    common_powertools_repofile: Rocky-PowerTools.repo
   when: ansible_facts['os_family'] == "Rocky"
 
 - name: Check if PowerTools Repo exists
   ansible.builtin.stat:
-    path: "/etc/yum.repos.d/{{ powertools_repofile }}"
-  register: powertools_repo_file
+    path: "/etc/yum.repos.d/{{ common_powertools_repofile }}"
+  register: common_powertools_repofile_stat
 
 - name: Enable PowerTools repo
   ansible.builtin.lineinfile:
-    path: "/etc/yum.repos.d/{{ powertools_repofile }}"
+    path: "/etc/yum.repos.d/{{ common_powertools_repofile }}"
     regexp: "^enabled="
     line: "enabled=1"
-  when: powertools_repo_file.stat.exists
+  when: common_powertools_repofile_stat.stat.exists
 
 - name: Install epel-release Packages
   ansible.builtin.package:

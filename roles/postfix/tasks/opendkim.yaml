@@ -20,7 +20,7 @@
     create: true
     state: present
   loop: "{{ postfix_opendkim_config | dict2items }}"
-  notify: restart opendkim
+  notify: Restart OpenDKIM
 
 # Generate DKIM keys
 - name: "Generate DKIM Key {{ item }}"
@@ -48,7 +48,7 @@
     create: true
     state: present
   loop: "{{ postfix_opendkim_keys }}"
-  notify: restart opendkim
+  notify: Restart OpenDKIM
 
 # Configure SigningTable
 - name: Configure the SigningTable
@@ -62,7 +62,7 @@
     create: true
     state: present
   loop: "{{ postfix_opendkim_signingtable }}"
-  notify: restart opendkim
+  notify: Restart OpenDKIM
 
 # Configure TrustedHosts
 - name: Configure the TrustedHosts
@@ -76,13 +76,13 @@
     create: true
     state: present
   loop: "{{ postfix_opendkim_trustedhosts }}"
-  notify: restart opendkim
+  notify: Restart OpenDKIM
 
 - name: Set postfix DKIM options
   postconf:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
-  notify: restart postfix
+  notify: Restart Postfix
   loop:
     - { name: "milter_default_action", value: "accept" }
     - { name: "milter_protocol", value: "6" }

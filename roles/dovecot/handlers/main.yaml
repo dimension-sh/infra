@@ -1,9 +1,9 @@
 ---
-- name: restart dovecot
+- name: Restart Dovecot
   ansible.builtin.service:
     name: dovecot
     state: reloaded
-- name: restart fail2ban
+- name: Restart Fail2Ban
   ansible.builtin.service:
     name: fail2ban
     state: restarted

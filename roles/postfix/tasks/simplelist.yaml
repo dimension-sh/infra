@@ -25,4 +25,4 @@
     line: '{{ item }}: "|/usr/bin/simplelist.py {{ item }}"'
     state: present
   loop: "{{ postfix_simplelist_config.lists.keys() | list }}"
-  notify: new aliases
+  notify: New aliases

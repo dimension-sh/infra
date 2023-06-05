@@ -3,7 +3,7 @@
   ansible.builtin.package:
     name: gophernicus
     state: installed
-- name: create override folder for gophernicus@.service
+- name: Create override folder for gophernicus@.service
   ansible.builtin.file:
     path: /etc/systemd/system/gophernicus@.service.d
     state: directory
@@ -17,4 +17,4 @@
     owner: root
     group: root
     mode: "0644"
-  notify: reload systemd
+  notify: Reload Systemd

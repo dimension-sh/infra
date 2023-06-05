@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: restart nginx
+  notify: Restart Nginx
   loop: "{{ www_sites }}"
 - name: Set default www_site_files fact.
   ansible.builtin.set_fact:
@@ -17,12 +17,12 @@
   loop: "{{ www_sites }}"
 - name: Get a list of all files in /etc/nginx/conf.d/
   ansible.builtin.command: /bin/ls -1 /etc/nginx/conf.d/
-  register: contents
+  register: www_nginx_confd_contents
   changed_when: false
 - name: Remove unmanaged files
   ansible.builtin.file:
     path: "/etc/nginx/conf.d/{{ item }}"
     state: absent
-  notify: restart nginx
-  loop: "{{ contents.stdout_lines }}"
+  notify: Restart Nginx
+  loop: "{{ www_nginx_confd_contents.stdout_lines }}"
   when: item not in www_site_files

@@ -1,3 +1,4 @@
+---
 name: Deploy
 "on":
   workflow_dispatch:
@@ -5,10 +6,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: ./.github/actions/ansible
-      env:
-        VAULT_PASS: ${{ secrets.VAULT_PASS }}
-        SSH_USER: ${{ secrets.DIMENSION_DEPLOYMENT_USER }}
-        SSH_KEY: ${{ secrets.DIMENSION_DEPLOYMENT_SSH_KEY }}
-        TARGET_HOST: ${{ secrets.TARGET_HOST }}
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/ansible
+        env:
+          VAULT_PASS: ${{ secrets.VAULT_PASS }}
+          SSH_USER: ${{ secrets.DIMENSION_DEPLOYMENT_USER }}
+          SSH_KEY: ${{ secrets.DIMENSION_DEPLOYMENT_SSH_KEY }}
+          TARGET_HOST: ${{ secrets.TARGET_HOST }}

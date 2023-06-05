@@ -20,3 +20,4 @@ warn_list:
   - jinja[spacing]
   - deprecated-module
   - name[play]
+  - var-naming[no-role-prefix]

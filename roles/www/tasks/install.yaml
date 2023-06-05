@@ -25,7 +25,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: restart nginx
+  notify: Restart Nginx
 - name: Copy redirect http config to nginx
   ansible.builtin.copy:
     src: "config/sites/http-redirect.conf"
@@ -33,7 +33,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: restart nginx
+  notify: Restart Nginx
 - name: Copy ip redirect config to nginx
   ansible.builtin.copy:
     src: "config/sites/ip-redirect.conf"
@@ -41,7 +41,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: restart nginx
+  notify: Restart Nginx
 - name: Create well-known folder for certbot
   ansible.builtin.file:
     path: /var/www/acme-challenge
@@ -50,7 +50,7 @@
     group: root
     mode: "0755"
     setype: httpd_sys_content_t
-- name: Restart nginx now, if needed
+- name: Restart Nginx now, if needed
   ansible.builtin.meta: flush_handlers
 - name: Install nginx restart deploy-hook for certbot
   ansible.builtin.copy:
@@ -60,4 +60,4 @@
     group: root
     content: |
       #!/bin/sh
-      /bin/systemctl restart nginx
+      /bin/systemctl Restart Nginx

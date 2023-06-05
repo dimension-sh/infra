@@ -1,8 +1,8 @@
 ---
-- name: restart molly
+- name: Restart Molly
   ansible.builtin.service:
     name: molly-brown
     state: restarted
-- name: reload systemd
+- name: Reload Systemd
   ansible.builtin.systemd:
     daemon_reload: true

@@ -15,7 +15,7 @@
     value: "{{ fail2ban_ignoreip | join(' ') }}"
     mode: "0644"
     backup: true
-  notify: restart fail2ban
+  notify: Restart Fail2Ban
 - name: Set default ban time
   community.general.ini_file:
     path: /etc/fail2ban/jail.local
@@ -24,7 +24,7 @@
     value: "600"
     mode: "0644"
     backup: true
-  notify: restart fail2ban
+  notify: Restart Fail2Ban
 - name: Enable sshd jail
   community.general.ini_file:
     path: /etc/fail2ban/jail.local
@@ -32,7 +32,7 @@
     option: enabled
     value: "true"
     mode: "0644"
-  notify: restart fail2ban
+  notify: Restart Fail2Ban
 - name: Start fail2ban
   ansible.builtin.service:
     name: fail2ban

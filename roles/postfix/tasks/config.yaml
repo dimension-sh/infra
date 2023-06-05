@@ -3,7 +3,7 @@
   postconf:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
-  notify: restart postfix
+  notify: Restart Postfix
   loop:
     - { name: "inet_interfaces", value: "all" }
     - { name: "myhostname", value: "{{ ansible_fqdn }}" }
@@ -31,7 +31,7 @@
   postconf:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
-  notify: restart postfix
+  notify: Restart Postfix
   when: lets_cert.stat.exists
   loop:
     - { name: "smtpd_tls_cert_file", value: "/etc/letsencrypt/live/{{ ansible_fqdn }}/fullchain.pem" }
@@ -46,13 +46,13 @@
     group: root
     content: |
       #!/bin/sh
-      /bin/systemctl restart postfix
+      /bin/systemctl Restart Postfix
   when: lets_cert.stat.exists
 
 - name: Check if Dovecot is installed
   ansible.builtin.stat:
     path: "/etc/dovecot/dovecot.conf"
-  register: dovecot_conf
+  register: postfix_dovecot_conf_stat
 - name: Copy submission master.cf
   ansible.builtin.copy:
     src: master.cf
@@ -60,8 +60,8 @@
     owner: root
     group: root
     mode: "0644"
-  when: dovecot_conf.stat.exists
-  notify: restart postfix
+  when: postfix_dovecot_conf_stat.stat.exists
+  notify: Restart Postfix
 - name: Copy sender_login_maps.pcre
   ansible.builtin.copy:
     src: sender_login_maps.pcre
@@ -69,4 +69,4 @@
     owner: root
     group: root
     mode: "0644"
-  when: dovecot_conf.stat.exists
+  when: postfix_dovecot_conf_stat.stat.exists

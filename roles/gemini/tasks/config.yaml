@@ -11,7 +11,7 @@
     owner: molly
     group: molly
     mode: "0644"
-  notify: restart molly
+  notify: Restart Molly
 - name: Start Molly Brown
   ansible.builtin.systemd:
     name: molly-brown.service
