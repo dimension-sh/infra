@@ -11,7 +11,7 @@ collections:
 
 roles:
   - name: gantsign.golang
-    version: 3.2.5
+    version: 3.2.6
   - name: borgmatic
     src: https://github.com/nikdoof/ansible-borgmatic
     version: main
