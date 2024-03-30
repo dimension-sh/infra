@@ -4,9 +4,11 @@
   become: true
   roles:
     - role: common
-    - role: cis
-    - role: certbot
-    - role: borgmatic
+    - role: nikdoof.cis
+    - role: nikdoof.certbot
+      tags:
+        - certbot
+    - role: nikdoof.borgmatic
 
 - name: Build hostgroup roles
   hosts: build

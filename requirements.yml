@@ -12,9 +12,12 @@ collections:
 roles:
   - name: gantsign.golang
     version: 3.3.1
-  - name: borgmatic
+  - name: nikdoof.borgmatic
     src: https://github.com/nikdoof/ansible-borgmatic
     version: main
-  - name: cis
+  - name: nikdoof.cis
     src: https://github.com/nikdoof/ansible-cis.git
+    version: main
+  - name: nikdoof.certbot
+    src: https://github.com/nikdoof/ansible-certbot.git
     version: main
