@@ -1,0 +1,16 @@
+---
+name: Ansible - Lint
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint Ansible Playbook
+        uses: ansible/ansible-lint@v24.2.0
