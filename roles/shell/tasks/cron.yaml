@@ -10,3 +10,15 @@
       PATH=/sbin:/bin:/usr/sbin:/usr/bin
       MAILTO=root
       @daily root du -xsh /home/* | sort -hr
+
+- name: Install reboot-notification cronjob
+  ansible.builtin.copy:
+    dest: /etc/cron.d/reboot-notification
+    owner: root
+    group: root
+    mode: "0600"
+    content: |
+      SHELL=/bin/bash
+      PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
+      MAILTO=root
+      @reboot root toot post "$(hostname) has rebooted and is now available." > /dev/null 2>&1
