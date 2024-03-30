@@ -21,6 +21,8 @@
   become: true
   roles:
     - role: shell
+      tags:
+        - shell
     - role: efingerd
     - role: news
     - role: www
@@ -29,9 +31,11 @@
     - role: gopher
       tags:
         - www
+        - gopher
     - role: gemini
       tags:
         - www
+        - gemini
 
 - name: Mail hostgroup roles
   hosts: mail
