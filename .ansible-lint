@@ -5,7 +5,6 @@ mock_modules:
 skip_list:
   - yaml[line-length]
   - name[missing]
-  - name[template]
 
 warn_list:
   - ignore-errors
@@ -18,6 +17,8 @@ warn_list:
   - name[missing]
   - name[template]
   - jinja[spacing]
-  - deprecated-module
-  - name[play]
   - var-naming[no-role-prefix]
+
+exclude_paths:
+  - ./.venv
+  - ~/.ansible/roles
