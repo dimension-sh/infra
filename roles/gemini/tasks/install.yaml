@@ -3,10 +3,12 @@
   ansible.builtin.import_role:
     name: gantsign.golang
     allow_duplicates: false
+
 - name: Build molly-brown
-  ansible.builtin.command: "{{ ansible_local.golang.general.home }}/bin/go get tildegit.org/solderpunk/molly-brown"
+  ansible.builtin.command: "{{ ansible_local.golang.general.home }}/bin/go install tildegit.org/solderpunk/molly-brown@bb0a04d2c7f8bbca1fae930f2db90c48158ba4d9"
   args:
     creates: "/root/go/bin/molly-brown"
+
 - name: Copy molly-brown executable
   ansible.builtin.copy:
     src: /root/go/bin/molly-brown
@@ -14,10 +16,14 @@
     mode: "0755"
     setype: bin_t
     remote_src: true
+  notify:
+    - Restart Molly
+
 - name: Create molly group
   ansible.builtin.group:
     name: molly
     system: true
+
 - name: Create molly user
   ansible.builtin.user:
     name: molly
@@ -26,6 +32,7 @@
     create_home: false
     shell: /bin/false
     system: true
+
 - name: Copy molly-brown.service
   ansible.builtin.copy:
     src: "molly-brown.service"
@@ -33,7 +40,10 @@
     owner: root
     group: root
     mode: "0644"
-  notify: Reload Systemd
+  notify:
+    - Reload Systemd
+    - Restart Molly
+
 - name: Install molly-brown restart deploy-hook for certbot
   ansible.builtin.copy:
     dest: /etc/letsencrypt/renewal-hooks/deploy/molly-brown
@@ -42,6 +52,22 @@
     group: root
     content: |
       #!/bin/sh
-      /bin/systemctl Restart Molly-brown
+      /bin/systemctl restart molly-brown
+
+- name: Create logrotate rule for molly-brown
+  ansible.builtin.copy:
+    dest: /etc/logrotate.d/molly-brown
+    owner: root
+    group: root
+    mode: 0644
+    content: |
+      /var/log/molly-brown/*.log {
+        rotate 12
+        weekly
+        compress
+        missingok
+      }
+
+
 - name: Refresh systemd now
   ansible.builtin.meta: flush_handlers
