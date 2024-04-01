@@ -1,5 +1,7 @@
 # infra
 
+[![Liberapay logo](https://img.shields.io/liberapay/receives/dimension.sh.svg?logo=liberapay)](https://liberapay.com/dimension.sh/)
+
 A collection Ansible playbooks and roles to manage the [dimension.sh](https://dimension.sh)
 infrastructure and system configuration.
 
