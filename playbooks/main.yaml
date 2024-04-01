@@ -10,14 +10,6 @@
         - certbot
     - role: nikdoof.borgmatic
 
-- name: Build hostgroup roles
-  hosts: build
-  become: true
-
-- name: Dev hostgroup roles
-  hosts: dev
-  become: true
-
 - name: Shell hostgroup roles
   hosts: shell
   become: true
@@ -49,7 +41,3 @@
     - role: dovecot
       tags:
         - mail
-
-- name: Services hostgroup roles
-  hosts: services
-  become: true

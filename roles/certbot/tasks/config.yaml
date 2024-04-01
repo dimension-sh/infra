@@ -1,8 +1,0 @@
----
-- name: Write out DigitalOcean auth key
-  ansible.builtin.template:
-    src: do_secrets.j2
-    dest: /root/do_secrets.ini
-    mode: "0600"
-    owner: root
-    group: root

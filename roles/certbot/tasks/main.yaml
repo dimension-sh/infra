@@ -1,5 +1,0 @@
----
-- ansible.builtin.include_tasks: install_el.yaml
-  when: ansible_os_family == 'RedHat' or ansible_os_family == 'Rocky'
-- ansible.builtin.include_tasks: config.yaml
-- ansible.builtin.include_tasks: request_certs.yaml

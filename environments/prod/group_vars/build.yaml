@@ -1,7 +1,0 @@
----
-group_packages:
-  - automake
-  - gcc
-  - nmap-ncat
-  - rpm-build
-  - rpmdevtools

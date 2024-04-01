@@ -3,8 +3,8 @@ mock_modules:
   - postconf
 
 skip_list:
-  - yaml[line-length]
-  - name[missing]
+  - yaml[line-length]   # 80 chars? nope...
+  - yaml[octal-values]  # Sorry yamllint, octal is clearer than 'u+rwx,g+rx,o+rx'
 
 warn_list:
   - ignore-errors
@@ -17,8 +17,7 @@ warn_list:
   - name[missing]
   - name[template]
   - jinja[spacing]
-  - var-naming[no-role-prefix]
+  - deprecated-module
+  - name[play]
+  - meta-incorrect
 
-exclude_paths:
-  - ./.venv
-  - ~/.ansible/roles
