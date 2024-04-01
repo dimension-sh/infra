@@ -1,7 +1,7 @@
 ---
 - name: Include certbot role
   ansible.builtin.import_role:
-    name: certbot
+    name: nikdoof.certbot
     allow_duplicates: false
 - ansible.builtin.include_tasks: install.yaml
 - ansible.builtin.include_tasks: firewall.yaml

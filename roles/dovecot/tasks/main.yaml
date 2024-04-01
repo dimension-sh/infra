@@ -1,7 +1,7 @@
 ---
 - name: Include certbot role
   ansible.builtin.import_role:
-    name: certbot
+    name: nikdoof.certbot
     allow_duplicates: false
 
 - name: Install Dovecot

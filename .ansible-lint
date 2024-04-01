@@ -21,3 +21,5 @@ warn_list:
   - name[play]
   - meta-incorrect
 
+exclude_paths:
+  - .venv
