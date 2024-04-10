@@ -1,4 +1,4 @@
-FROM python:3.12.2-alpine3.18 AS base
+FROM python:3.12.3-alpine3.18 AS base
 
 ### Build the Ansible runtime
 FROM base AS builder
