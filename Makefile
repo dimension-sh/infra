@@ -1,23 +1,16 @@
-playbook   ?= playbooks/main
-env        ?= environments/prod
+.venv:
+	virtualenv .venv
+	.venv/bin/pip3 install poetry
 
-.PHONY: prereq
-prereq: ## Install any pre-req roles and collections
-	ansible-galaxy collection install -r collections/requirements.yml
-	ansible-galaxy role install -r roles/requirements.yml
+PHONY: prereqs
+prereqs: .venv
+	.venv/bin/python3 -m poetry install --no-root
+	.venv/bin/python3 -m poetry run ansible-galaxy install -r requirements.yml
 
-.PHONY: deploy
-deploy: ## Run the main.yaml playbook against the inventory
-	@env=$(env) ansible-playbook --inventory-file="$(env)" --diff "$(playbook).yaml" $(ARGS)
+PHONY: lint
+lint: prereqs
+	.venv/bin/python3 -m poetry run ansible-lint
 
-.PHONY: ping
-ping: ## Ping all hosts in the inventory file
-	@env=$(env) ansible -i $(env) -m ping all
-
-.PHONY: lint
-lint: ## lint the ansible playbooks
-	ansible-lint
-
-.PHONY: build-container
-build-container: ## Build the docker container version of the playbook
-	docker build .
+PHONY: deploy
+deploy: prereqs
+	.venv/bin/python3 -m poetry run ansible-playbook -i environments/prod playbooks/main.yaml --vault-password-file .pass --diff --check $(extra_args)
