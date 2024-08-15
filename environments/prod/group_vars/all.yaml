@@ -34,11 +34,14 @@ ansible_keys:
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIORyJ0195AyNxsTxQpucXuz1460x/2SphPi8dYxMzoRU Doofnet AWX"
   - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIALZxAIQwODgToet5E1ya5x6jsQYdZHhNlWrs8Ed6voO Dimension Github Key"
 
-fail2ban_ignoreip:
+admin_ip_src:
   - "81.187.48.147"
   - "217.169.25.8/29"
   - "2001:8b0:bd9::/48"
   - "2001:470:1f1d:79c::/64"
+
+fail2ban_ignoreip: "{{ admin_ip_src }}"
+node_exporter_source_ips: "{{ admin_ip_src }}"
 
 digitalocean_token: !vault |
           $ANSIBLE_VAULT;1.2;AES256;dimension-vault
