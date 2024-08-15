@@ -13,4 +13,4 @@ lint: prereqs
 
 PHONY: deploy
 deploy: prereqs
-	.venv/bin/python3 -m poetry run ansible-playbook -i environments/prod playbooks/main.yaml --vault-password-file .pass --diff --check $(extra_args)
+	.venv/bin/python3 -m poetry run ansible-playbook -i environments/prod playbooks/main.yaml --vault-password-file .pass --diff $(extra_args)
