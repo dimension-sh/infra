@@ -10,7 +10,7 @@
 
     - name: Start node_exporter
       ansible.builtin.service:
-        name: node_exporter
+        name: prometheus-node-exporter
         state: started
         enabled: true
 
