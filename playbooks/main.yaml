@@ -5,10 +5,14 @@
   roles:
     - role: common
     - role: nikdoof.cis
+      tags:
+        - cis
     - role: nikdoof.certbot
       tags:
         - certbot
     - role: nikdoof.borgmatic
+      tags:
+        - borgmatic
 
 - name: Shell hostgroup roles
   hosts: shell
@@ -18,7 +22,11 @@
       tags:
         - shell
     - role: efingerd
+      tags:
+        - efingerd
     - role: news
+      tags:
+        - news
     - role: www
       tags:
         - www
