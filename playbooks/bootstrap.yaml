@@ -27,6 +27,7 @@
         mode: 0440
         create: true
         validate: "visudo -cf %s"
+      loop: "{{ bootstrap_users }}"
     - name: Install ssh pubkey into bootstrap users
       ansible.posix.authorized_key:
         user: "{{ item.name }}"
