@@ -5,3 +5,7 @@
   vars:
     packages:
       - toot
+
+- name: Install group packages
+  ansible.builtin.package:
+    name: "{{ shell_group_packages }}"
