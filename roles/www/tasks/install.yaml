@@ -13,11 +13,6 @@
     name: httpd_enable_homedirs
     persistent: true
     state: true
-- name: Start nginx
-  ansible.builtin.service:
-    name: nginx
-    state: started
-    enabled: true
 - name: Install nginx.conf
   ansible.builtin.copy:
     src: config/nginx.conf
@@ -50,6 +45,18 @@
     group: root
     mode: "0755"
     setype: httpd_sys_content_t
+- name: Create cache folder for fastcgi
+  ansible.builtin.file:
+    path: /var/cache/nginx/dimension-sh
+    state: directory
+    owner: nginx
+    group: root
+    mode: "0700"
+- name: Start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
 - name: Restart Nginx now, if needed
   ansible.builtin.meta: flush_handlers
 - name: Install nginx restart deploy-hook for certbot
