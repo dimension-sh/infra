@@ -13,6 +13,7 @@
   ansible.builtin.package:
     name: mkuser
     state: latest
+
 - name: Copy mkuser template
   ansible.builtin.copy:
     src: mail.tmpl
@@ -20,10 +21,11 @@
     owner: root
     group: root
     mode: "0600"
+
 - name: Copy mkuser config
   ansible.builtin.copy:
-    src: mkuser.yaml
     dest: /etc/mkuser/mkuser.yaml
     owner: root
     group: root
     mode: "0600"
+    content: "{{ shell_mkuser_config | to_nice_yaml( width=50, explicit_start=True, explicit_end=True) }}"

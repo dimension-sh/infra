@@ -1,22 +1,27 @@
 ---
 - name: Set WWW homepage (bash)
   ansible.builtin.copy:
-    src: lynx-homepage.sh
     dest: /etc/profile.d/lynx-homepage.sh
     owner: root
     group: root
     mode: "0644"
+    content: |
+      export WWW_HOME="{{ shell_default_homepage }}"
+
 - name: Set WWW homepage (csh)
   ansible.builtin.copy:
-    src: lynx-homepage.csh
     dest: /etc/profile.d/lynx-homepage.csh
     owner: root
     group: root
     mode: "0644"
+    content: |
+      setenv WWW_HOME "{{ shell_default_homepage }}"
+
 - name: Set NNTP Server (bash)
   ansible.builtin.copy:
-    src: nntpserver.sh
     dest: /etc/profile.d/nntpserver.sh
     owner: root
     group: root
     mode: "0644"
+    content: |
+      export NNTPSERVER={{ shell_default_nntp_server }}

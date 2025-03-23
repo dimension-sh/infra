@@ -1,18 +1,22 @@
 ---
-- name: Add Bash config for Maildr
+- name: Set Maildir (bash)
   ansible.builtin.copy:
-    src: mail/mail.sh
     dest: /etc/profile.d/mail.sh
     owner: root
     group: root
     mode: "0644"
-- name: Add csh config for Maildr
+    content: |
+      export MAILPATH="$HOME/Maildir/new"
+
+- name: Set Maildir (csh)
   ansible.builtin.copy:
-    src: mail/mail.csh
     dest: /etc/profile.d/mail.csh
     owner: root
     group: root
     mode: "0644"
+    content: |
+      setenv MAILPATH "$HOME/Maildir/new"
+
 - name: Copy mutt defaults
   ansible.builtin.copy:
     src: mail/Muttrc.local
