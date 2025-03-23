@@ -1,3 +1,4 @@
 .pass
-
+.ansible
+.lock
 *.retry
