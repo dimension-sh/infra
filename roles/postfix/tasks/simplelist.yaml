@@ -5,7 +5,7 @@
     state: present
 
 - name: Set SELinux context so Postfix can run Simplelist
-  community.general.system.sefcontext:
+  community.general.sefcontext:
     target: /usr/bin/simplelist.py
     setype: postfix_local_exec_t
     state: present
