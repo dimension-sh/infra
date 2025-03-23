@@ -7,6 +7,7 @@
   vars:
     packages:
       - opendkim
+      - opendkim-tools
 
 # Configure opendkim.conf
 - name: Configure OpenDKIM opendkim.conf
@@ -22,10 +23,18 @@
   loop: "{{ postfix_opendkim_config | dict2items }}"
   notify: Restart OpenDKIM
 
+- name: Create domain key folder
+  ansible.builtin.file:
+    path: "/etc/opendkim/keys/{{ ansible_domain }}"
+    state: directory
+    owner: opendkim
+    group: opendkim
+    mode: "0770"
+
 # Generate DKIM keys
 - name: "Generate DKIM Key {{ item }}"
   ansible.builtin.command:
-    cmd: "/sbin/opendkim-genkey -b {{ postfix_opendkim_keylength }} -s {{ item }} -d {{ ansible_domain }} -D /etc/opendkim/keys/{{ ansible_domain }}"  # noqa no-tabs
+    cmd: "/usr/sbin/opendkim-genkey -b {{ postfix_opendkim_keylength }} -s {{ item }} -d {{ ansible_domain }} -D /etc/opendkim/keys/{{ ansible_domain }}"  # noqa no-tabs
     creates: "/etc/opendkim/keys/{{ ansible_domain }}/{{ item }}.private"
   loop: "{{ postfix_opendkim_keys }}"
 - name: Change DKIM Key owner to opendkim
