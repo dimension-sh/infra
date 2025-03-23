@@ -46,6 +46,8 @@
     - role: postfix
       tags:
         - mail
+        - postfix
     - role: dovecot
       tags:
         - mail
+        - dovecot
