@@ -1,5 +1,5 @@
 ---
-shell_group_packages:
+group_packages:
   - alpine-maildir
   - bombadillo
   - catgirl

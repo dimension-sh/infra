@@ -5,7 +5,7 @@
     state: present
 - name: Install Group Packages
   ansible.builtin.package:
-    name: "{{ common_packages }}"
+    name: "{{ group_packages }}"
     state: present
 - name: Remove unneeded Packages
   ansible.builtin.package:
