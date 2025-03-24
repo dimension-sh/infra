@@ -73,7 +73,7 @@ borgmatic_config:
       - /etc
       - /var/log/*
     repositories:
-      - "11755@ch-s011.rsync.net:{{ ansible_fqdn }}.borg"
+      - "zh5231@zh5231.rsync.net:{{ ansible_fqdn }}.borg"
     remote_path: borg1
   storage:
     encryption_passphrase: "{{ borgmatic_encryption_passphrase }}"
